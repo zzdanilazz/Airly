@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 sealed interface Config {
 
     @Serializable
-    data object Dashboard : Config
+    data object Tab : Config
 }

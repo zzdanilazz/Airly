@@ -6,15 +6,21 @@ import dagger.Module
 import dagger.Provides
 import ru.health.airly.AirlyApp
 import ru.health.airly.root.api.AppComponent
+import ru.health.airly.tab.impl.TabModule
 import ru.health.featureapprove.ApproveFeatureModule
 import ru.health.featuredashboard.DashboardFeatureModule
+import ru.health.featurestatistics.StatisticsFeatureModule
+import ru.health.inputliquid.InputLiquidFeatureModule
 
 @Module(
     includes = [
         DataModule::class,
         DomainModule::class,
+        TabModule::class,
         ApproveFeatureModule::class,
-        DashboardFeatureModule::class
+        DashboardFeatureModule::class,
+        InputLiquidFeatureModule::class,
+        StatisticsFeatureModule::class
     ]
 )
 interface AppModule {

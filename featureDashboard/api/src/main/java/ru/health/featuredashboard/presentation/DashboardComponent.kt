@@ -9,7 +9,6 @@ interface DashboardComponent : RenderComponent {
     fun interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
-            onBack: () -> Unit
         ) : DashboardComponent
     }
 }

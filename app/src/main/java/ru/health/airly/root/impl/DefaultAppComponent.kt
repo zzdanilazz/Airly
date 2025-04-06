@@ -14,7 +14,6 @@ import com.arkivanov.decompose.router.slot.childSlot
 import com.arkivanov.decompose.router.slot.dismiss
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.childStack
-import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.value.Value
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -24,14 +23,14 @@ import ru.health.airly.root.api.Child
 import ru.health.airly.root.api.SlotChild
 import ru.health.airly.root.impl.config.Config
 import ru.health.airly.root.impl.config.SlotConfig
-import ru.health.airly.root.impl.ui.StackContent
 import ru.health.airly.root.impl.ui.SlotContent
+import ru.health.airly.root.impl.ui.StackContent
+import ru.health.airly.tab.api.TabComponent
 import ru.health.core.presentation.component.SlotRootComponent
 import ru.health.featureapprove.presentation.ApproveComponent
-import ru.health.featuredashboard.presentation.DashboardComponent
 
 class DefaultAppComponent @AssistedInject internal constructor(
-    private val dashboardFactory: DashboardComponent.Factory,
+    private val tabFactory: TabComponent.Factory,
     private val approveFactory: ApproveComponent.Factory,
     @Assisted componentContext: ComponentContext,
 ) : SlotRootComponent<Config, Child, SlotConfig, SlotChild>(componentContext), AppComponent {
@@ -39,7 +38,7 @@ class DefaultAppComponent @AssistedInject internal constructor(
     override val stack: Value<ChildStack<*, Child>> =
         childStack(
             source = navigation,
-            initialConfiguration = Config.Dashboard,
+            initialConfiguration = Config.Tab,
             serializer = Config.serializer(),
             handleBackButton = true,
             childFactory = ::child,
@@ -54,7 +53,7 @@ class DefaultAppComponent @AssistedInject internal constructor(
         )
 
     override fun child(config: Config, context: ComponentContext): Child = when(config) {
-        is Config.Dashboard -> Child.Dashboard(dashboard(context))
+        is Config.Tab -> Child.Tab(tab(context))
     }
 
     override fun slotChild(slotConfig: SlotConfig, context: ComponentContext): SlotChild =
@@ -62,9 +61,8 @@ class DefaultAppComponent @AssistedInject internal constructor(
             is SlotConfig.Approve -> SlotChild.Approve(approve(context))
         }
 
-    private fun dashboard(context: ComponentContext) = dashboardFactory(
-        componentContext = context,
-        onBack = { navigation.pop() }
+    private fun tab(context: ComponentContext) = tabFactory(
+        componentContext = context
     )
 
     private fun approve(context: ComponentContext) = approveFactory(

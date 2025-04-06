@@ -51,6 +51,12 @@ dependencies {
     implementation(project(":featureDashboard:api"))
     implementation(project(":featureDashboard:impl"))
 
+    implementation(project(":featureInputLiquid:api"))
+    implementation(project(":featureInputLiquid:impl"))
+
+    implementation(project(":featureStatistics:api"))
+    implementation(project(":featureStatistics:impl"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.process)
@@ -60,6 +66,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.material.icons.extended)
 
     implementation(libs.decompose)
     implementation(libs.decompose.extensions.compose)

@@ -9,15 +9,13 @@ import dagger.assisted.AssistedInject
 import ru.health.featuredashboard.presentation.ui.DashboardContent
 
 internal class DefaultDashboardComponent @AssistedInject internal constructor(
-    @Assisted componentContext: ComponentContext,
-    @Assisted private val onBack: () -> Unit,
+    @Assisted componentContext: ComponentContext
 ) : DashboardComponent, ComponentContext by componentContext {
 
     @Composable
     override fun Render(modifier: Modifier) {
         DashboardContent(
-            modifier = modifier,
-            onBack = onBack
+            modifier = modifier
         )
     }
 
@@ -25,7 +23,6 @@ internal class DefaultDashboardComponent @AssistedInject internal constructor(
     interface Factory : DashboardComponent.Factory {
         override fun invoke(
             @Assisted componentContext: ComponentContext,
-            @Assisted onBack: () -> Unit,
         ): DefaultDashboardComponent
     }
 }

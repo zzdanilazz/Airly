@@ -6,7 +6,6 @@ import androidx.compose.ui.Modifier
 @Composable
 internal fun DashboardContent(
     modifier: Modifier = Modifier,
-    onBack: () -> Unit
 ) {
 
 }
