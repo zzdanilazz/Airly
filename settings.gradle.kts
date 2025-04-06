@@ -21,8 +21,15 @@ dependencyResolutionManagement {
 
 rootProject.name = "Airly"
 include(":app")
-include(":featureDashboard")
-include(":featureInputLiquid")
-include(":featureStatistics")
+
 include(":core:api")
 include(":core:impl")
+
+include(":featureApprove:api")
+include(":featureApprove:impl")
+
+include(":featureInputLiquid")
+include(":featureStatistics")
+
+include(":featureDashboard:api")
+include(":featureDashboard:impl")

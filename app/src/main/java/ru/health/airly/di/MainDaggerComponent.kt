@@ -5,6 +5,7 @@ import dagger.Component
 import ru.health.airly.AirlyApp
 import ru.health.airly.MainActivity
 import ru.health.airly.root.impl.AppModule
+import ru.health.airly.root.impl.DefaultAppComponent
 import javax.inject.Singleton
 
 @Singleton

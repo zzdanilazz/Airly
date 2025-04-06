@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -43,6 +45,12 @@ dependencies {
     implementation(project(":core:api"))
     implementation(project(":core:impl"))
 
+    implementation(project(":featureApprove:api"))
+    implementation(project(":featureApprove:impl"))
+
+    implementation(project(":featureDashboard:api"))
+    implementation(project(":featureDashboard:impl"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.process)
@@ -58,7 +66,7 @@ dependencies {
     implementation(libs.decompose.extensions.compose.experimental)
 
     implementation(libs.dagger)
-    implementation(libs.dagger.compiler)
+    ksp(libs.dagger.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

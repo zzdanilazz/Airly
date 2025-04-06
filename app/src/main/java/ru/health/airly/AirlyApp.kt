@@ -2,6 +2,7 @@ package ru.health.airly
 
 import android.app.Application
 import androidx.lifecycle.ProcessLifecycleOwner
+import ru.health.airly.di.DaggerMainDaggerComponent
 import ru.health.airly.di.MainDaggerComponent
 import ru.health.core.AppLifecycleObserver
 
