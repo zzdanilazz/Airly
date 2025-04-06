@@ -4,12 +4,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import ru.health.airly.root.api.Child
-import ru.health.airly.tab.impl.ui.TabContent
+import ru.health.airly.tab.impl.ui.TabScaffold
 
 @Composable
 internal fun StackContent(child: Child) {
     when (child) {
-        is Child.Tab -> TabContent(
+        is Child.Tab -> TabScaffold(
             modifier = Modifier.fillMaxSize(),
             component = child.component
         )

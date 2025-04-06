@@ -1,8 +1,13 @@
 package ru.health.airly.tab.impl.ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -14,16 +19,29 @@ import ru.health.core.presentation.ui.theme.AirlyTheme
 import ru.health.featuredashboard.presentation.DashboardComponent
 
 @Composable
-internal fun TabContent(
+internal fun TabScaffold(
     modifier: Modifier = Modifier,
     component: TabComponent
 ) {
-    Column(modifier = modifier) {
+    Scaffold(
+        modifier = modifier,
+        contentWindowInsets = ScaffoldDefaults.contentWindowInsets.only(
+            sides = WindowInsetsSides.Horizontal
+        ),
+        bottomBar = {
+            BottomBar(
+                modifier = Modifier,
+                component = component
+            )
+        }
+    ) { padding ->
         TabChildren(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier
+                .padding(padding)
+                .background(MaterialTheme.colorScheme.surface)
+                .fillMaxSize(),
             component = component
         )
-        BottomBar(modifier = Modifier, component = component)
     }
 }
 
@@ -52,7 +70,7 @@ internal val tabComponentPreview = object : TabComponent {
 @PreviewLightDark
 private fun TabContentPreview() {
     AirlyTheme {
-        TabContent(
+        TabScaffold(
             modifier = Modifier.background(MaterialTheme.colorScheme.background),
             component = tabComponentPreview
         )

@@ -1,3 +1,4 @@
 <resources>
     <string name="dashboard">Главная</string>
+    <string name="settings">Настройки</string>
 </resources>

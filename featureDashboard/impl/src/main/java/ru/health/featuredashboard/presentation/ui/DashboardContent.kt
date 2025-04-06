@@ -7,5 +7,7 @@ import androidx.compose.ui.Modifier
 internal fun DashboardContent(
     modifier: Modifier = Modifier,
 ) {
-
+    DashboardScaffold(
+        modifier = modifier
+    )
 }

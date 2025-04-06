@@ -34,17 +34,13 @@ internal fun RowScope.BottomTabItem(
         onClick = onClick,
         alwaysShowLabel = true,
         label = {
-            Text(
-                text = stringResource(id = labelRes),
-                color = MaterialTheme.colorScheme.primary
-            )
+            Text(text = stringResource(id = labelRes))
         },
         icon = {
             Icon(
                 modifier = Modifier.size(24.dp),
                 imageVector = imageVector,
                 contentDescription = stringResource(id = labelRes),
-                tint = MaterialTheme.colorScheme.primary
             )
         }
     )

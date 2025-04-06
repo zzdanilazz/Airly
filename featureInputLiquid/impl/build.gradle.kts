@@ -36,6 +36,7 @@ android {
 dependencies {
     implementation(project(":featureInputLiquid:api"))
     implementation(project(":core:api"))
+    implementation(project(":core:impl"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
