@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.MutableValue
@@ -28,6 +29,7 @@ internal fun TabScaffold(
         contentWindowInsets = ScaffoldDefaults.contentWindowInsets.only(
             sides = WindowInsetsSides.Horizontal
         ),
+        containerColor = Color.Transparent,
         bottomBar = {
             BottomBar(
                 modifier = Modifier,
@@ -38,14 +40,13 @@ internal fun TabScaffold(
         TabChildren(
             modifier = Modifier
                 .padding(padding)
-                .background(MaterialTheme.colorScheme.surface)
                 .fillMaxSize(),
             component = component
         )
     }
 }
 
-private val dashboardComponentPreview = TabChild.Dashboard(
+private val dashboardTabComponentPreview = TabChild.DashboardTab(
     object : DashboardComponent {
         @Composable
         override fun Render(modifier: Modifier) = Unit
@@ -57,12 +58,13 @@ internal val tabComponentPreview = object : TabComponent {
         get() = MutableValue(
             ChildStack<Any, TabChild>(
                 configuration = "configuration",
-                instance = dashboardComponentPreview
+                instance = dashboardTabComponentPreview
             )
         )
 
     override fun onDashboardTabClicked() = Unit
     override fun onInputLiquidTabClicked() = Unit
+    override fun onAchievementTabClicked() = Unit
     override fun onStatisticsTabClicked() = Unit
 }
 

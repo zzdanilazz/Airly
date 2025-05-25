@@ -1,14 +1,17 @@
 package ru.health.airly.tab.api
 
+import ru.health.featurenotifications.presentation.AchievementComponent
 import ru.health.featuredashboard.presentation.DashboardComponent
 import ru.health.featurestatistics.presentation.StatisticsComponent
 import ru.health.inputliquid.presentation.InputLiquidComponent
 
 sealed interface TabChild {
 
-    class Dashboard(val component: DashboardComponent) : TabChild
+    class DashboardTab(val component: DashboardComponent) : TabChild
 
-    class InputLiquid(val component: InputLiquidComponent) : TabChild
+    class InputLiquidTab(val component: InputLiquidComponent) : TabChild
 
-    class Statistics(val component: StatisticsComponent) : TabChild
+    class AchievementTab(val component: AchievementComponent) : TabChild
+
+    class StatisticsTab(val component: StatisticsComponent) : TabChild
 }

@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.serialization)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.firebase)
 }
 
 android {
@@ -54,8 +55,14 @@ dependencies {
     implementation(project(":featureInputLiquid:api"))
     implementation(project(":featureInputLiquid:impl"))
 
+    implementation(project(":featureAchievement:api"))
+    implementation(project(":featureAchievement:impl"))
+
     implementation(project(":featureStatistics:api"))
     implementation(project(":featureStatistics:impl"))
+
+    implementation(project(":featureNotifications:api"))
+    implementation(project(":featureNotifications:impl"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -74,6 +81,9 @@ dependencies {
 
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging.ktx)
+    implementation(libs.firebase.analytics.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

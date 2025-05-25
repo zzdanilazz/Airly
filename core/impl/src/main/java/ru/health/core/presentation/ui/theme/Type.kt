@@ -2,9 +2,15 @@ package ru.health.core.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import ru.health.core.impl.R
+
+val rubikOneFamily = FontFamily(
+    Font(R.font.rubikone_regular)
+)
 
 // Set of Material typography styles to start with
 val Typography = Typography(

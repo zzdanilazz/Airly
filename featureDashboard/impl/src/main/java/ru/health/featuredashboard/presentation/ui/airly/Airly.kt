@@ -1,0 +1,24 @@
+package ru.health.featuredashboard.presentation.ui.airly
+
+import androidx.compose.foundation.Image
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import ru.health.core.presentation.ui.theme.AirlyTheme
+import ru.health.featuredashboard.impl.R
+
+@Composable
+internal fun Airly(health: Int) {
+    Image(
+        painter = painterResource(R.drawable.ic_airly),
+        contentDescription = null
+    )
+}
+
+@PreviewLightDark
+@Composable
+private fun AirlyPreview() {
+    AirlyTheme {
+        Airly(health = 86)
+    }
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "314628278091",
+    "project_id": "airly-391f8",
+    "storage_bucket": "airly-391f8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314628278091:android:11eb24d06c69fadc218ace",
+        "android_client_info": {
+          "package_name": "ru.health.airly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuRIiiPqauUCQTa9w3jwp6DohO-cNsh4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

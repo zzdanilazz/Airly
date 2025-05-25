@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.serialization)
 }
 
 android {
@@ -37,6 +38,9 @@ dependencies {
     implementation(project(":featureDashboard:api"))
     implementation(project(":core:api"))
     implementation(project(":core:impl"))
+    implementation(project(":featureAchievement:api"))
+    //todo убратт
+    implementation(project(":featureAchievement:impl"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -56,4 +60,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+    androidTestImplementation("com.atiurin:ultron-compose:2.5.6")
+    androidTestImplementation("com.atiurin:ultron-android:2.5.6")
+    androidTestImplementation("com.atiurin:ultron-allure:2.5.6")
+    androidTestImplementation("io.mockk:mockk-android:1.12.3")
 }

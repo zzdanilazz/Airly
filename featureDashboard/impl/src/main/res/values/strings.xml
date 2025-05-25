@@ -1,4 +1,7 @@
 <resources>
     <string name="dashboard">Главная</string>
-    <string name="settings">Настройки</string>
+    <string name="upload">Выгрузка</string>
+    <string name="notifications">Уведомления</string>
+    <string name="abstinence_title">Вы не парите уже</string>
+    <string name="saved_money_title">Сэкономлено</string>
 </resources>

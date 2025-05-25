@@ -9,12 +9,15 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import ru.health.airly.tab.api.TabChild
-import ru.health.airly.tab.api.TabChild.Dashboard
-import ru.health.airly.tab.api.TabChild.InputLiquid
-import ru.health.airly.tab.api.TabChild.Statistics
+import ru.health.airly.tab.api.TabChild.AchievementTab
+import ru.health.airly.tab.api.TabChild.DashboardTab
+import ru.health.airly.tab.api.TabChild.InputLiquidTab
+import ru.health.airly.tab.api.TabChild.StatisticsTab
 import ru.health.airly.tab.api.TabComponent
 import ru.health.airly.tab.impl.config.TabConfig
 import ru.health.core.presentation.component.RootComponent
+import ru.health.featurenotifications.domain.Achievement
+import ru.health.featurenotifications.presentation.AchievementComponent
 import ru.health.featuredashboard.presentation.DashboardComponent
 import ru.health.featurestatistics.presentation.StatisticsComponent
 import ru.health.inputliquid.presentation.InputLiquidComponent
@@ -22,46 +25,64 @@ import ru.health.inputliquid.presentation.InputLiquidComponent
 internal class DefaultTabComponent @AssistedInject internal constructor(
     private val dashboardFactory: DashboardComponent.Factory,
     private val inputLiquidFactory: InputLiquidComponent.Factory,
+    private val achievementFactory: AchievementComponent.Factory,
     private val statisticsFactory: StatisticsComponent.Factory,
-    @Assisted componentContext: ComponentContext
+    @Assisted componentContext: ComponentContext,
+    @Assisted(ON_ACHIEVEMENT_DETAIL) private val onAchievementDetail: (achievement: Achievement) -> Unit,
+    @Assisted(ON_NOTIFICATIONS) private val onNotifications: () -> Unit,
+    @Assisted(ON_UPLOAD_DETAIL) private val onUploadDetail: () -> Unit,
 ) : TabComponent, RootComponent<TabConfig, TabChild>(componentContext) {
 
     override val stack: Value<ChildStack<*, TabChild>> =
         childStack(
             source = navigation,
-            initialConfiguration = TabConfig.Dashboard,
+            initialConfiguration = TabConfig.DashboardTab,
             serializer = TabConfig.serializer(),
             handleBackButton = true,
             childFactory = ::child,
         )
 
     override fun child(config: TabConfig, context: ComponentContext): TabChild = when (config) {
-        is TabConfig.Dashboard -> Dashboard(dashboardComponent(context))
-        is TabConfig.InputLiquid -> InputLiquid(inputLiquidComponent(context))
-        is TabConfig.Statistics -> Statistics(statisticsComponent(context))
+        TabConfig.DashboardTab -> DashboardTab(dashboardComponent(context))
+        TabConfig.InputLiquidTab -> InputLiquidTab(inputLiquidComponent(context))
+        TabConfig.AchievementTab -> AchievementTab(achievementComponent(context))
+        TabConfig.StatisticsTab -> StatisticsTab(statisticsComponent(context))
     }
 
     override fun onDashboardTabClicked() {
-        navigation.bringToFront(TabConfig.Dashboard)
+        navigation.bringToFront(TabConfig.DashboardTab)
     }
 
     override fun onInputLiquidTabClicked() {
-        navigation.bringToFront(TabConfig.InputLiquid)
+        navigation.bringToFront(TabConfig.InputLiquidTab)
+    }
+
+    override fun onAchievementTabClicked() {
+        navigation.bringToFront(TabConfig.AchievementTab)
     }
 
     override fun onStatisticsTabClicked() {
-        navigation.bringToFront(TabConfig.Statistics)
+        navigation.bringToFront(TabConfig.StatisticsTab)
     }
 
     private fun dashboardComponent(
         context: ComponentContext
     ): DashboardComponent = dashboardFactory(
-        componentContext = context
+        componentContext = context,
+        onAchievementDetail = onAchievementDetail,
+        onNotifications = onNotifications,
+        onUploadDetail = onUploadDetail,
     )
 
     private fun inputLiquidComponent(
         context: ComponentContext
     ): InputLiquidComponent = inputLiquidFactory(
+        componentContext = context
+    )
+
+    private fun achievementComponent(
+        context: ComponentContext
+    ): AchievementComponent = achievementFactory(
         componentContext = context
     )
 
@@ -75,6 +96,15 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
     interface Factory : TabComponent.Factory {
         override fun invoke(
             componentContext: ComponentContext,
+            @Assisted(ON_ACHIEVEMENT_DETAIL) onAchievementDetail: (achievement: Achievement) -> Unit,
+            @Assisted(ON_NOTIFICATIONS) onNotifications: () -> Unit,
+            @Assisted(ON_UPLOAD_DETAIL) onUploadDetail: () -> Unit,
         ): DefaultTabComponent
+    }
+
+    companion object {
+        private const val ON_ACHIEVEMENT_DETAIL = "ON_ACHIEVEMENT_DETAIL"
+        private const val ON_NOTIFICATIONS = "ON_NOTIFICATIONS"
+        private const val ON_UPLOAD_DETAIL = "ON_UPLOAD_DETAIL"
     }
 }

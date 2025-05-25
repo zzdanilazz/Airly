@@ -6,11 +6,14 @@ import kotlinx.serialization.Serializable
 sealed interface TabConfig {
 
     @Serializable
-    data object Dashboard : TabConfig
+    data object DashboardTab : TabConfig
 
     @Serializable
-    data object InputLiquid : TabConfig
+    data object InputLiquidTab : TabConfig
 
     @Serializable
-    data object Statistics : TabConfig
+    data object AchievementTab : TabConfig
+
+    @Serializable
+    data object StatisticsTab : TabConfig
 }

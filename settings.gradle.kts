@@ -36,3 +36,9 @@ include(":featureStatistics:impl")
 
 include(":featureDashboard:api")
 include(":featureDashboard:impl")
+
+include(":featureAchievement:api")
+include(":featureAchievement:impl")
+
+include(":featureNotifications:api")
+include(":featureNotifications:impl")

@@ -20,6 +20,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import ru.health.airly.root.api.AppComponent
 import ru.health.airly.root.api.Child
+import ru.health.airly.root.api.Child.Tab
 import ru.health.airly.root.api.SlotChild
 import ru.health.airly.root.impl.config.Config
 import ru.health.airly.root.impl.config.SlotConfig
@@ -27,7 +28,7 @@ import ru.health.airly.root.impl.ui.SlotContent
 import ru.health.airly.root.impl.ui.StackContent
 import ru.health.airly.tab.api.TabComponent
 import ru.health.core.presentation.component.SlotRootComponent
-import ru.health.featureapprove.presentation.ApproveComponent
+import ru.health.featurenotifications.presentation.ApproveComponent
 
 class DefaultAppComponent @AssistedInject internal constructor(
     private val tabFactory: TabComponent.Factory,
@@ -53,7 +54,11 @@ class DefaultAppComponent @AssistedInject internal constructor(
         )
 
     override fun child(config: Config, context: ComponentContext): Child = when(config) {
-        is Config.Tab -> Child.Tab(tab(context))
+        is Config.Tab -> Tab(tab(context))
+        //todo
+        is Config.AchievementDetail -> Tab(tab(context))
+        Config.NotificationList -> Tab(tab(context))
+        Config.UploadDetail -> Tab(tab(context))
     }
 
     override fun slotChild(slotConfig: SlotConfig, context: ComponentContext): SlotChild =
@@ -62,7 +67,10 @@ class DefaultAppComponent @AssistedInject internal constructor(
         }
 
     private fun tab(context: ComponentContext) = tabFactory(
-        componentContext = context
+        componentContext = context,
+        onAchievementDetail = {},
+        onNotifications = {},
+        onUploadDetail = {},
     )
 
     private fun approve(context: ComponentContext) = approveFactory(

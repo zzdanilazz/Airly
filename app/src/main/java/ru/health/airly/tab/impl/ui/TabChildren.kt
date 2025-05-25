@@ -24,9 +24,10 @@ internal fun TabChildren(
         animation = stackAnimation(fade()),
     ) {
         when (val child = it.instance) {
-            is TabChild.Dashboard -> child.component.Render(modifier = Modifier.fillMaxSize())
-            is TabChild.InputLiquid -> child.component.Render(modifier = Modifier.fillMaxSize())
-            is TabChild.Statistics -> child.component.Render(modifier = Modifier.fillMaxSize())
+            is TabChild.DashboardTab -> child.component.Render(modifier = Modifier.fillMaxSize())
+            is TabChild.InputLiquidTab -> child.component.Render(modifier = Modifier.fillMaxSize())
+            is TabChild.AchievementTab -> child.component.Render(modifier = Modifier.fillMaxSize())
+            is TabChild.StatisticsTab -> child.component.Render(modifier = Modifier.fillMaxSize())
         }
     }
 }
