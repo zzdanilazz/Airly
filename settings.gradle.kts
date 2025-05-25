@@ -28,8 +28,8 @@ include(":core:impl")
 include(":featureApprove:api")
 include(":featureApprove:impl")
 
-include(":featureInputLiquid:api")
-include(":featureInputLiquid:impl")
+include(":featureLiquid:api")
+include(":featureLiquid:impl")
 
 include(":featureStatistics:api")
 include(":featureStatistics:impl")

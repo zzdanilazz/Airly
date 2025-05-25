@@ -25,7 +25,7 @@ internal fun TabChildren(
     ) {
         when (val child = it.instance) {
             is TabChild.DashboardTab -> child.component.Render(modifier = Modifier.fillMaxSize())
-            is TabChild.InputLiquidTab -> child.component.Render(modifier = Modifier.fillMaxSize())
+            is TabChild.LiquidTab -> child.component.Render(modifier = Modifier.fillMaxSize())
             is TabChild.AchievementTab -> child.component.Render(modifier = Modifier.fillMaxSize())
             is TabChild.StatisticsTab -> child.component.Render(modifier = Modifier.fillMaxSize())
         }

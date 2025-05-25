@@ -11,7 +11,7 @@ import ru.health.featurenotifications.AchievementFeatureModule
 import ru.health.featurenotifications.ApproveFeatureModule
 import ru.health.featuredashboard.DashboardFeatureModule
 import ru.health.featurestatistics.StatisticsFeatureModule
-import ru.health.inputliquid.InputLiquidFeatureModule
+import ru.health.liquid.LiquidFeatureModule
 
 @Module(
     includes = [
@@ -20,7 +20,7 @@ import ru.health.inputliquid.InputLiquidFeatureModule
         TabModule::class,
         ApproveFeatureModule::class,
         DashboardFeatureModule::class,
-        InputLiquidFeatureModule::class,
+        LiquidFeatureModule::class,
         AchievementFeatureModule::class,
         StatisticsFeatureModule::class
     ]

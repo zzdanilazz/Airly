@@ -3,6 +3,7 @@ agp = "8.9.3"
 decompose = "3.3.0"
 firebaseBom = "33.13.0"
 googleDagger = "2.56"
+graphicsShapesVersion = "1.0.1"
 haze = "1.6.0"
 kotlin = "2.1.20"
 serialization = "1.9.23"
@@ -23,6 +24,7 @@ material = "1.12.0"
 [libraries]
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-graphics-shapes = { module = "androidx.graphics:graphics-shapes", version.ref = "graphicsShapesVersion" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 

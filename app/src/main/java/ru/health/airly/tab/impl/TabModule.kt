@@ -7,13 +7,13 @@ import dagger.Module
 import ru.health.airly.tab.api.TabComponent
 import ru.health.featuredashboard.DashboardFeatureModule
 import ru.health.featurestatistics.StatisticsFeatureModule
-import ru.health.inputliquid.InputLiquidFeatureModule
+import ru.health.liquid.LiquidFeatureModule
 
 @Module(
     includes = [
         DashboardFeatureModule::class,
         StatisticsFeatureModule::class,
-        InputLiquidFeatureModule::class,
+        LiquidFeatureModule::class,
     ]
 )
 internal interface TabModule {

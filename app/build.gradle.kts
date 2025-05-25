@@ -52,8 +52,8 @@ dependencies {
     implementation(project(":featureDashboard:api"))
     implementation(project(":featureDashboard:impl"))
 
-    implementation(project(":featureInputLiquid:api"))
-    implementation(project(":featureInputLiquid:impl"))
+    implementation(project(":featureLiquid:api"))
+    implementation(project(":featureLiquid:impl"))
 
     implementation(project(":featureAchievement:api"))
     implementation(project(":featureAchievement:impl"))
@@ -74,6 +74,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.graphics.shapes)
 
     implementation(libs.haze)
 

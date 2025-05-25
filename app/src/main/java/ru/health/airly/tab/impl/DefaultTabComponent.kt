@@ -11,7 +11,7 @@ import dagger.assisted.AssistedInject
 import ru.health.airly.tab.api.TabChild
 import ru.health.airly.tab.api.TabChild.AchievementTab
 import ru.health.airly.tab.api.TabChild.DashboardTab
-import ru.health.airly.tab.api.TabChild.InputLiquidTab
+import ru.health.airly.tab.api.TabChild.LiquidTab
 import ru.health.airly.tab.api.TabChild.StatisticsTab
 import ru.health.airly.tab.api.TabComponent
 import ru.health.airly.tab.impl.config.TabConfig
@@ -20,11 +20,11 @@ import ru.health.featuredashboard.presentation.DashboardComponent
 import ru.health.featurenotifications.domain.Achievement
 import ru.health.featurenotifications.presentation.AchievementComponent
 import ru.health.featurestatistics.presentation.StatisticsComponent
-import ru.health.inputliquid.presentation.InputLiquidComponent
+import ru.health.liquid.presentation.LiquidDetailComponent
 
 internal class DefaultTabComponent @AssistedInject internal constructor(
     private val dashboardFactory: DashboardComponent.Factory,
-    private val inputLiquidFactory: InputLiquidComponent.Factory,
+    private val inputLiquidFactory: LiquidDetailComponent.Factory,
     private val achievementFactory: AchievementComponent.Factory,
     private val statisticsFactory: StatisticsComponent.Factory,
     @Assisted componentContext: ComponentContext,
@@ -44,7 +44,7 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
 
     override fun child(config: TabConfig, context: ComponentContext): TabChild = when (config) {
         TabConfig.DashboardTab -> DashboardTab(dashboardComponent(context))
-        TabConfig.InputLiquidTab -> InputLiquidTab(inputLiquidComponent(context))
+        TabConfig.InputLiquidTab -> LiquidTab(inputLiquidComponent(context))
         TabConfig.AchievementTab -> AchievementTab(achievementComponent(context))
         TabConfig.StatisticsTab -> StatisticsTab(statisticsComponent(context))
     }
@@ -75,7 +75,7 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
 
     private fun inputLiquidComponent(
         context: ComponentContext
-    ): InputLiquidComponent = inputLiquidFactory(
+    ): LiquidDetailComponent = inputLiquidFactory(
         componentContext = context
     )
 

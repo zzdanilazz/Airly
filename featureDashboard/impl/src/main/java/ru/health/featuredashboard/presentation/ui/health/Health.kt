@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.health.core.presentation.ui.theme.AirlyTheme
 import ru.health.core.presentation.ui.theme.LightRed
-import ru.health.core.presentation.ui.theme.rubikOneFamily
+import ru.health.core.presentation.ui.theme.RubikOneFamily
 
 @Composable
 internal fun Health(
@@ -42,14 +42,14 @@ internal fun Health(
             Text(
                 text = value.toString(),
                 color = Color.White,
-                fontFamily = rubikOneFamily,
+                fontFamily = RubikOneFamily,
                 fontSize = 36.sp
             )
             Spacer(modifier = Modifier.width(5.dp))
             Text(
                 text = "+",
                 color = LightRed,
-                fontFamily = rubikOneFamily,
+                fontFamily = RubikOneFamily,
                 fontSize = 48.sp
             )
         }

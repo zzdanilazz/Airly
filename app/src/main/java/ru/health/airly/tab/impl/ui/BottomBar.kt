@@ -19,7 +19,7 @@ import ru.health.airly.tab.api.TabComponent
 import ru.health.core.presentation.ui.theme.AirlyTheme
 import ru.health.featureachievement.impl.R as AchievementR
 import ru.health.featuredashboard.impl.R as DashboardR
-import ru.health.featureinputliquid.impl.R as InputLiquidR
+import ru.health.featureliquid.impl.R as LiquidR
 import ru.health.featurestatistics.impl.R as StatisticsR
 
 @Composable
@@ -42,9 +42,9 @@ internal fun BottomBar(modifier: Modifier = Modifier, component: TabComponent) {
             onClick = component::onDashboardTabClicked
         )
         BottomTabItem(
-            isSelected = activeComponent is TabChild.InputLiquidTab,
-            painter = painterResource(InputLiquidR.drawable.ic_input_liquid),
-            contentDescription = stringResource(InputLiquidR.string.input_liquid),
+            isSelected = activeComponent is TabChild.LiquidTab,
+            painter = painterResource(LiquidR.drawable.ic_liquid),
+            contentDescription = stringResource(LiquidR.string.input_liquid),
             onClick = component::onInputLiquidTabClicked
         )
         BottomTabItem(

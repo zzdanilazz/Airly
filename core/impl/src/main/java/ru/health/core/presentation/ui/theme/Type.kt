@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import ru.health.core.impl.R
 
-val rubikOneFamily = FontFamily(
+val RubikOneFamily = FontFamily(
     Font(R.font.rubikone_regular)
 )
 

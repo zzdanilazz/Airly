@@ -1,6 +1,8 @@
 package ru.health.core.presentation.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
@@ -100,26 +102,18 @@ private val LightColorScheme = lightColorScheme(
     scrim = Color.Black
 )
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AirlyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-//    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-//        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-//            val context = LocalContext.current
-//            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-//        }
-
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
-    content()
 
-//    MaterialTheme(
-//        colorScheme = colorScheme,
-//        typography = Typography,
-//        content = content
-//    )
+    MaterialTheme {
+        content()
+    }
 }

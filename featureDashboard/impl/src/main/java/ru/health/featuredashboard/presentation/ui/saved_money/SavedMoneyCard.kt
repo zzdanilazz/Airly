@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.health.core.presentation.ui.card.GlassmorphismCard
 import ru.health.core.presentation.ui.theme.AirlyTheme
-import ru.health.core.presentation.ui.theme.rubikOneFamily
+import ru.health.core.presentation.ui.theme.RubikOneFamily
 import ru.health.featuredashboard.impl.R
 import ru.health.featuredashboard.presentation.ui.dashboardUiStatePreview
 
@@ -45,7 +45,7 @@ internal fun SavedMoneyCard(
                 text = "$value ₽",
                 color = Color.White,
                 fontSize = 24.sp,
-                fontFamily = rubikOneFamily
+                fontFamily = RubikOneFamily
             )
         }
     }

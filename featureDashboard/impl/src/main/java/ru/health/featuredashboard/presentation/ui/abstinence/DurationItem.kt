@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.sp
 import ru.health.core.presentation.ui.theme.AirlyTheme
-import ru.health.core.presentation.ui.theme.rubikOneFamily
+import ru.health.core.presentation.ui.theme.RubikOneFamily
 import ru.health.featuredashboard.presentation.ui.dashboardUiStatePreview
 
 @Composable
@@ -26,7 +26,7 @@ internal fun DurationItem(
             text = value.toString(),
             color = Color.White,
             fontSize = 24.sp,
-            fontFamily = rubikOneFamily
+            fontFamily = RubikOneFamily
         )
         Text(
             text = name,
