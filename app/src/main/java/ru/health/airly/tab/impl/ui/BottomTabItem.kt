@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import ru.health.core.presentation.ui.theme.AirlyTheme
+import ru.health.core.presentation.ui.theme.MostlyDesaturatedDarkBlue
 
 @Composable
 internal fun RowScope.BottomTabItem(
@@ -39,6 +40,7 @@ internal fun RowScope.BottomTabItem(
             Icon(
                 modifier = Modifier.size(30.dp),
                 painter = painter,
+                tint = if (isSelected) Color.White else MostlyDesaturatedDarkBlue,
                 contentDescription = contentDescription,
             )
         }
