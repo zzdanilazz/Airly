@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.health.core.presentation.ui.card.SemitransparentCard
+import ru.health.core.presentation.ui.card.GlassmorphismCard
 import ru.health.core.presentation.ui.theme.AirlyTheme
 import ru.health.featuredashboard.impl.R
 import ru.health.featuredashboard.presentation.model.AbstinencePeriod
@@ -26,7 +26,7 @@ internal fun AbstinencePeriodCard(
     modifier: Modifier = Modifier,
     abstinencePeriod: AbstinencePeriod
 ) {
-    SemitransparentCard(modifier = modifier) {
+    GlassmorphismCard(modifier = modifier) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()

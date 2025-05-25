@@ -16,9 +16,9 @@ import ru.health.airly.tab.api.TabChild.StatisticsTab
 import ru.health.airly.tab.api.TabComponent
 import ru.health.airly.tab.impl.config.TabConfig
 import ru.health.core.presentation.component.RootComponent
+import ru.health.featuredashboard.presentation.DashboardComponent
 import ru.health.featurenotifications.domain.Achievement
 import ru.health.featurenotifications.presentation.AchievementComponent
-import ru.health.featuredashboard.presentation.DashboardComponent
 import ru.health.featurestatistics.presentation.StatisticsComponent
 import ru.health.inputliquid.presentation.InputLiquidComponent
 
@@ -69,7 +69,6 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
         context: ComponentContext
     ): DashboardComponent = dashboardFactory(
         componentContext = context,
-        onAchievementDetail = onAchievementDetail,
         onNotifications = onNotifications,
         onUploadDetail = onUploadDetail,
     )

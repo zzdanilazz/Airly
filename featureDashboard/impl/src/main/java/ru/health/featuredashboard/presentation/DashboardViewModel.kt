@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.health.core.presentation.component.ComponentViewModel
-import ru.health.featurenotifications.domain.Achievement
 import ru.health.featuredashboard.domain.GetDashboardInfoUseCase
 
 internal class DashboardViewModel @AssistedInject constructor(
@@ -29,7 +28,6 @@ internal class DashboardViewModel @AssistedInject constructor(
             DashboardAction.OnAddActionClick -> onAddActionClick()
             DashboardAction.OnNotificationsClick -> onNotificationsClick()
             DashboardAction.OnUploadClick -> onUploadClick()
-            is DashboardAction.OnAchievementClick -> onAchievementClick(action.achievement)
         }
     }
 
@@ -52,10 +50,6 @@ internal class DashboardViewModel @AssistedInject constructor(
     }
 
     private suspend fun onUploadClick() {
-
-    }
-
-    private suspend fun onAchievementClick(achievement: Achievement) {
 
     }
 

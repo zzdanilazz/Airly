@@ -2,6 +2,7 @@ package ru.health.featuredashboard.presentation.ui.saved_money
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.health.core.presentation.ui.card.SemitransparentCard
+import ru.health.core.presentation.ui.card.GlassmorphismCard
 import ru.health.core.presentation.ui.theme.AirlyTheme
 import ru.health.core.presentation.ui.theme.rubikOneFamily
 import ru.health.featuredashboard.impl.R
@@ -25,13 +26,13 @@ internal fun SavedMoneyCard(
     modifier: Modifier = Modifier,
     value: Float
 ) {
-    SemitransparentCard(modifier = modifier) {
+    GlassmorphismCard(modifier = modifier) {
         Column(
             modifier = Modifier
-                .height(105.dp)
+                .height(150.dp)
                 .fillMaxWidth()
                 .padding(16.dp),
-            verticalArrangement = Arrangement.SpaceAround,
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
@@ -39,6 +40,7 @@ internal fun SavedMoneyCard(
                 fontSize = 16.sp,
                 color = Color.White
             )
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "$value ₽",
                 color = Color.White,

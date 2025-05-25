@@ -39,8 +39,6 @@ dependencies {
     implementation(project(":core:api"))
     implementation(project(":core:impl"))
     implementation(project(":featureAchievement:api"))
-    //todo убратт
-    implementation(project(":featureAchievement:impl"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

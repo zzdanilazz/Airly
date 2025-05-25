@@ -75,6 +75,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.material.icons.extended)
 
+    implementation(libs.haze)
+
     implementation(libs.decompose)
     implementation(libs.decompose.extensions.compose)
     implementation(libs.decompose.extensions.compose.experimental)
