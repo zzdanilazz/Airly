@@ -1,13 +1,24 @@
 package ru.health.featuredashboard.presentation.ui.saved_money
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.KeyboardArrowDown
+import androidx.compose.material.icons.rounded.KeyboardArrowUp
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,10 +40,23 @@ internal fun SavedMoneyCard(
     modifier: Modifier = Modifier,
     hazeState: HazeState = LocalHazeState.current,
     value: Float,
-    topSpacerHeight: Dp = 0.dp
+    topSpacerHeight: Dp = 0.dp,
+    onClick: () -> Unit = {}
 ) {
+    var iconImageVector by remember {
+        mutableStateOf(Icons.Rounded.KeyboardArrowDown)
+    }
+
+    LaunchedEffect(topSpacerHeight) {
+        iconImageVector = if (topSpacerHeight > 0.dp) {
+            Icons.Rounded.KeyboardArrowUp
+        } else Icons.Rounded.KeyboardArrowDown
+    }
+
     GlassmorphismCard(
-        modifier = modifier,
+        modifier = modifier.clickable {
+            onClick()
+        },
         hazeState = hazeState
     ) {
         Column(
@@ -54,6 +78,12 @@ internal fun SavedMoneyCard(
                 color = Color.White,
                 fontSize = 24.sp,
                 fontFamily = RubikOneFamily
+            )
+            Icon(
+                modifier = Modifier.size(30.dp),
+                imageVector = iconImageVector,
+                tint = Color.White,
+                contentDescription = null
             )
         }
     }
