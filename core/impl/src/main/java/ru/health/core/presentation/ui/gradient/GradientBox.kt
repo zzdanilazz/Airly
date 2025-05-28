@@ -41,6 +41,6 @@ fun GradientBox(
                 }
             )
         }
+        content()
     }
-    content()
 }

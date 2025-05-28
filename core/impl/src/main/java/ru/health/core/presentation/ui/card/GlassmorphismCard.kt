@@ -25,8 +25,8 @@ fun GlassmorphismCard(
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(16.dp))
-            .background(Color.White.copy(alpha = 0.3f))
-            .hazeEffect(hazeState),
+            .hazeEffect(state = hazeState)
+            .background(Color.White.copy(alpha = 0.3f)),
         content = content
     )
 }

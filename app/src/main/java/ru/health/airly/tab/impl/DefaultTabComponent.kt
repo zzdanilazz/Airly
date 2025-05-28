@@ -43,17 +43,17 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
         )
 
     override fun child(config: TabConfig, context: ComponentContext): TabChild = when (config) {
-        TabConfig.DashboardTab -> DashboardTab(dashboardComponent(context))
-        TabConfig.InputLiquidTab -> LiquidTab(inputLiquidComponent(context))
-        TabConfig.AchievementTab -> AchievementTab(achievementComponent(context))
-        TabConfig.StatisticsTab -> StatisticsTab(statisticsComponent(context))
+        TabConfig.DashboardTab -> DashboardTab(component = dashboardComponent(context))
+        TabConfig.InputLiquidTab -> LiquidTab(component = inputLiquidComponent(context))
+        TabConfig.AchievementTab -> AchievementTab(component = achievementComponent(context))
+        TabConfig.StatisticsTab -> StatisticsTab(component = statisticsComponent(context))
     }
 
     override fun onDashboardTabClicked() {
         navigation.bringToFront(TabConfig.DashboardTab)
     }
 
-    override fun onInputLiquidTabClicked() {
+    override fun onLiquidTabClicked() {
         navigation.bringToFront(TabConfig.InputLiquidTab)
     }
 

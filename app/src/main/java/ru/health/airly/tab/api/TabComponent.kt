@@ -11,7 +11,7 @@ interface TabComponent {
 
     fun onDashboardTabClicked()
 
-    fun onInputLiquidTabClicked()
+    fun onLiquidTabClicked()
 
     fun onAchievementTabClicked()
 
