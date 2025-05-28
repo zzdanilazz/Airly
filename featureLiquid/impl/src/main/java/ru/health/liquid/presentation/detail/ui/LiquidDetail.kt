@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import ru.health.core.presentation.ui.theme.AirlyTheme
 import ru.health.liquid.domain.model.BottleType
@@ -45,7 +45,7 @@ internal val liquidDetailUiStatePreview = LiquidDetailUiState(
     vapeProduct = liquidPreview
 )
 
-@Preview
+@PreviewLightDark
 @Composable
 private fun LiquidDetailPreview() {
     AirlyTheme {

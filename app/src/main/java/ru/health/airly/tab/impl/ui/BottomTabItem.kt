@@ -4,6 +4,7 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,14 +20,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import ru.health.core.presentation.ui.theme.AirlyTheme
+import ru.health.core.presentation.ui.theme.LightRed
 import ru.health.core.presentation.ui.theme.MostlyDesaturatedDarkBlue
+import ru.health.core.presentation.ui.theme.VerySoftBlue
 
 @Composable
 internal fun RowScope.BottomTabItem(
@@ -66,7 +68,11 @@ internal fun RowScope.BottomTabItem(
         Icon(
             modifier = Modifier.size(30.dp),
             painter = painter,
-            tint = if (isSelected) Color.White else MostlyDesaturatedDarkBlue,
+            tint = if (isSelected) {
+                LightRed
+            } else {
+                if (isSystemInDarkTheme()) VerySoftBlue else MostlyDesaturatedDarkBlue
+            },
             contentDescription = contentDescription,
         )
     }

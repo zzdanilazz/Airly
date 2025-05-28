@@ -39,9 +39,8 @@ class DashboardGetDashboardInfoTest {
                 DashboardInfo(
                     hasNotifications = hasNotifications,
                     health = health,
-                    abstinenceDuration = abstinencePeriod.duration,
-                    savedMoney = savedMoney,
-                    achievements = achievements
+                    startAbstinenceTimeMillis = abstinencePeriod.duration,
+                    savedMoney = savedMoney
                 )
             }
 
@@ -55,7 +54,7 @@ class DashboardGetDashboardInfoTest {
             }
             Column {
                 Health(value = state.health)
-                AbstinencePeriodCard(abstinencePeriod = state.abstinencePeriod)
+                AbstinencePeriodCard(startAbstinenceTimeMillis = state.abstinencePeriod)
                 Spacer(modifier = Modifier.height(6.dp))
                 SavedMoneyCard(value = state.savedMoney)
             }

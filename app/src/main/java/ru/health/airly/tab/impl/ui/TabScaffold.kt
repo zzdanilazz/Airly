@@ -10,15 +10,12 @@ import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.Preview
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.MutableValue
-import dev.chrisbanes.haze.hazeSource
 import ru.health.airly.tab.api.TabChild
 import ru.health.airly.tab.api.TabComponent
-import ru.health.core.presentation.ui.gradient.GradientBox
 import ru.health.core.presentation.ui.theme.AirlyTheme
-import ru.health.core.presentation.ui.theme.LocalHazeState
 import ru.health.featuredashboard.presentation.DashboardComponent
 
 @Composable
@@ -36,17 +33,11 @@ internal fun TabScaffold(
             BottomBar(component = component)
         },
     ) { padding ->
-        GradientBox(
-            modifier = Modifier
-                .fillMaxSize()
-                .hazeSource(LocalHazeState.current)
-        ) {
-            TabChildren(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = padding,
-                component = component
-            )
-        }
+        TabChildren(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = padding,
+            component = component
+        )
     }
 }
 
@@ -73,7 +64,7 @@ internal val tabComponentPreview = object : TabComponent {
 }
 
 @Composable
-@PreviewLightDark
+@Preview
 private fun TabContentPreview() {
     AirlyTheme {
         TabScaffold(

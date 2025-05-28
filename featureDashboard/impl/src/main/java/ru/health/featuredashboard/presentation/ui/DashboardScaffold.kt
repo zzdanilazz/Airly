@@ -1,6 +1,10 @@
 package ru.health.featuredashboard.presentation.ui
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -10,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.dp
 import ru.health.core.presentation.ui.theme.AirlyTheme
 import ru.health.featuredashboard.presentation.DashboardAction
 import ru.health.featuredashboard.presentation.DashboardUiState
@@ -21,10 +26,13 @@ internal fun DashboardScaffold(
     state: DashboardUiState,
     onAction: (action: DashboardAction) -> Unit = {}
 ) {
+    val systemBarHeight = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
     Scaffold(
         modifier = modifier,
         floatingActionButton = {
-            AddActionButton {
+            AddActionButton(
+                modifier = Modifier.offset(y = -BottomBarHeight - systemBarHeight)
+            ) {
                 onAction(DashboardAction.OnAddActionClick)
             }
         },
@@ -40,6 +48,8 @@ internal fun DashboardScaffold(
         )
     }
 }
+
+private val BottomBarHeight = 80.dp
 
 @PreviewLightDark
 @Composable

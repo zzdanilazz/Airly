@@ -4,7 +4,6 @@ import ru.health.core.domain.result.RequestError
 import ru.health.core.domain.result.ResultError
 import ru.health.core.domain.result.RootResult
 import javax.inject.Inject
-import kotlin.time.Duration
 
 class DefaultGetDashboardInfoUseCase @Inject constructor(
 
@@ -15,9 +14,8 @@ class DefaultGetDashboardInfoUseCase @Inject constructor(
             DashboardInfo(
                 hasNotifications = true,
                 health = 86,
-                abstinenceDuration = Duration.ZERO,
-                savedMoney = 3_398.08f,
-                achievements = emptyList()
+                startAbstinenceTimeMillis = 0L,
+                savedMoney = 3_398.08f
             )
         )
     } catch (_: Exception) {

@@ -2,11 +2,11 @@ package ru.health.liquid.presentation.detail.ui.bottle
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -22,11 +22,12 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import ru.health.core.presentation.ui.gradient.GradientBox
 import ru.health.core.presentation.ui.theme.AirlyTheme
 import ru.health.core.presentation.ui.theme.LightRed
 import ru.health.core.presentation.ui.theme.ModerateRed
@@ -100,23 +101,27 @@ private fun Flacon(
     currentVolume: Int
 ) {
     val shape = RoundedCornerShape(26.dp)
-    Box(
+    val liquidFraction = currentVolume / bottleType.volume.toFloat()
+    val totalSize = bottleType.flaconSize
+    val flaconColor = if (isSystemInDarkTheme()) Color.White else Color.Black
+
+    Column(
         modifier = modifier
-            .size(bottleType.flaconSize)
-            .clip(shape),
-        contentAlignment = Alignment.BottomCenter
+            .size(totalSize)
+            .clip(shape)
     ) {
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(totalSize.height * (1 - liquidFraction))
+                .background(flaconColor.copy(alpha = 0.25f))
+        )
         Liquid(
             modifier = Modifier
                 .fillMaxWidth()
-                .defaultMinSize(minHeight = 32.dp)
-                .fillMaxHeight(currentVolume / bottleType.volume.toFloat()),
+                .height(totalSize.height * liquidFraction)
+                .defaultMinSize(minHeight = 32.dp),
             currentVolume = currentVolume
-        )
-        Spacer(
-            modifier = Modifier
-                .matchParentSize()
-                .background(Color.Black.copy(alpha = 0.25f), shape)
         )
     }
 }
@@ -163,12 +168,15 @@ private val BottleType.flaconSize: DpSize
         BottleType.LARGE -> DpSize(width = 138.dp, height = 265.dp)
     }
 
-@Preview
+@PreviewLightDark
 @Composable
 private fun BottlePreview() {
     AirlyTheme {
-        Box(modifier = Modifier.background(Color.White)) {
-            Bottle(liquid = liquidPreview)
+        GradientBox {
+            Bottle(
+                modifier = Modifier.align(Alignment.Center),
+                liquid = liquidPreview
+            )
         }
     }
 }

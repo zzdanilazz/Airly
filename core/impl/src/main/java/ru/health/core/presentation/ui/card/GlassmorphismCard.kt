@@ -1,6 +1,7 @@
 package ru.health.core.presentation.ui.card
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.size
@@ -22,11 +23,12 @@ fun GlassmorphismCard(
     hazeState: HazeState = LocalHazeState.current,
     content: @Composable ColumnScope.() -> Unit = {}
 ) {
+    val alpha = if (isSystemInDarkTheme()) 0.2f else 0.5f
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(16.dp))
             .hazeEffect(state = hazeState)
-            .background(Color.White.copy(alpha = 0.3f)),
+            .background(Color.White.copy(alpha = alpha)),
         content = content
     )
 }

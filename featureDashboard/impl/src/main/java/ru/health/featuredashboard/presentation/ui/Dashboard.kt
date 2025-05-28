@@ -20,20 +20,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.haze.hazeSource
-import dev.chrisbanes.haze.rememberHazeState
+import ru.health.core.presentation.ui.gradient.GradientBox
 import ru.health.core.presentation.ui.theme.AirlyTheme
+import ru.health.core.presentation.ui.theme.LocalHazeState
 import ru.health.featuredashboard.presentation.DashboardAction
 import ru.health.featuredashboard.presentation.DashboardUiState
-import ru.health.featuredashboard.presentation.model.AbstinencePeriod
 import ru.health.featuredashboard.presentation.ui.abstinence.AbstinencePeriodCard
 import ru.health.featuredashboard.presentation.ui.airly.Airly
 import ru.health.featuredashboard.presentation.ui.banner.BannerFeed
 import ru.health.featuredashboard.presentation.ui.health.Health
 import ru.health.featuredashboard.presentation.ui.saved_money.SavedMoneyCard
-import kotlin.time.Duration.Companion.days
-import kotlin.time.Duration.Companion.hours
-import kotlin.time.Duration.Companion.minutes
-import kotlin.time.Duration.Companion.seconds
 
 @Composable
 internal fun Dashboard(
@@ -41,13 +37,19 @@ internal fun Dashboard(
     state: DashboardUiState,
     onAction: (action: DashboardAction) -> Unit = {}
 ) {
-    val hazeState = rememberHazeState()
+    val hazeState = LocalHazeState.current
 
     val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val listState = rememberLazyListState()
 
     val defaultContentPadding = 16.dp
     val contentModifier = Modifier.padding(horizontal = defaultContentPadding)
+
+    GradientBox(
+        modifier = Modifier
+            .fillMaxSize()
+            .hazeSource(LocalHazeState.current)
+    )
 
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -66,7 +68,7 @@ internal fun Dashboard(
             Spacer(modifier = Modifier.height(18.dp))
             AbstinencePeriodCard(
                 modifier = contentModifier,
-                abstinencePeriod = state.abstinencePeriod
+                startAbstinenceTimeMillis = state.startAbstinenceTimeMillis
             )
         }
         stickyHeader {
@@ -97,6 +99,7 @@ internal fun Dashboard(
                 modifier = Modifier.hazeSource(hazeState),
                 health = state.health
             )
+            Spacer(modifier = Modifier.fillParentMaxHeight(0.1f))
         }
         item {
             BannerFeed(
@@ -111,14 +114,9 @@ internal val dashboardUiStatePreview by lazy {
     DashboardUiState(
         hasNotifications = true,
         health = 86,
-        abstinencePeriod = AbstinencePeriod(
-            duration = durationPreview
-        ),
         savedMoney = 3_398.08f
     )
 }
-
-private val durationPreview = 3.days + 12.hours + 48.minutes + 59.seconds
 
 @PreviewLightDark
 @Composable
