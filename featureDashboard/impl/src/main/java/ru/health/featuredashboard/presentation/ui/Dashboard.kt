@@ -1,22 +1,33 @@
 package ru.health.featuredashboard.presentation.ui
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import dev.chrisbanes.haze.hazeSource
+import dev.chrisbanes.haze.rememberHazeState
 import ru.health.core.presentation.ui.theme.AirlyTheme
 import ru.health.featuredashboard.presentation.DashboardAction
 import ru.health.featuredashboard.presentation.DashboardUiState
 import ru.health.featuredashboard.presentation.model.AbstinencePeriod
 import ru.health.featuredashboard.presentation.ui.abstinence.AbstinencePeriodCard
 import ru.health.featuredashboard.presentation.ui.airly.Airly
+import ru.health.featuredashboard.presentation.ui.banner.BannerFeed
 import ru.health.featuredashboard.presentation.ui.health.Health
 import ru.health.featuredashboard.presentation.ui.saved_money.SavedMoneyCard
 import kotlin.time.Duration.Companion.days
@@ -30,25 +41,69 @@ internal fun Dashboard(
     state: DashboardUiState,
     onAction: (action: DashboardAction) -> Unit = {}
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(
-                start = 16.dp,
-                end = 16.dp,
-                top = 10.dp,
-                bottom = 4.dp
-            ),
+    val hazeState = rememberHazeState()
+
+    val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+    val listState = rememberLazyListState()
+
+    val defaultContentPadding = 16.dp
+    val contentModifier = Modifier.padding(horizontal = defaultContentPadding)
+
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        state = listState,
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
+        contentPadding = PaddingValues(bottom = defaultContentPadding)
     ) {
-        Health(value = state.health)
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            AbstinencePeriodCard(abstinencePeriod = state.abstinencePeriod)
-            Spacer(modifier = Modifier.height(6.dp))
-            SavedMoneyCard(value = state.savedMoney)
+        item {
+            DashboardTopBar(
+                onUpload = { onAction(DashboardAction.OnUploadClick) },
+                onNotifications = { onAction(DashboardAction.OnNotificationsClick) }
+            )
+            Health(
+                modifier = contentModifier,
+                value = state.health)
+            Spacer(modifier = Modifier.height(18.dp))
+            AbstinencePeriodCard(
+                modifier = contentModifier,
+                abstinencePeriod = state.abstinencePeriod
+            )
         }
-        Airly(health = state.health)
+        stickyHeader {
+            val isSticky by remember {
+                derivedStateOf { listState.firstVisibleItemIndex > 0 }
+            }
+            val defaultSpacerHeight = 6.dp
+            val spacerHeight by animateDpAsState(
+                if (isSticky) 0.dp else defaultSpacerHeight
+            )
+            val cardPadding by animateDpAsState(
+                if (isSticky) 0.dp else defaultContentPadding
+            )
+            val cardSpacerHeight by animateDpAsState(
+                if (isSticky) statusBarHeight else defaultSpacerHeight
+            )
+            Spacer(modifier = Modifier.height(spacerHeight))
+            SavedMoneyCard(
+                modifier = modifier.padding(horizontal = cardPadding),
+                hazeState = hazeState,
+                value = state.savedMoney,
+                topSpacerHeight = cardSpacerHeight
+            )
+        }
+        item {
+            Spacer(modifier = Modifier.fillParentMaxHeight(0.1f))
+            Airly(
+                modifier = Modifier.hazeSource(hazeState),
+                health = state.health
+            )
+        }
+        item {
+            BannerFeed(
+                modifier = Modifier.hazeSource(hazeState),
+                maxPrice = state.savedMoney
+            )
+        }
     }
 }
 

@@ -31,11 +31,8 @@ internal fun TabScaffold(
         ),
         containerColor = Color.Transparent,
         bottomBar = {
-            BottomBar(
-                modifier = Modifier,
-                component = component
-            )
-        }
+            BottomBar(component = component)
+        },
     ) { padding ->
         TabChildren(
             modifier = Modifier

@@ -50,6 +50,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.graphics.shapes)
 
+    implementation(libs.haze)
+
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
 

@@ -6,6 +6,7 @@ googleDagger = "2.56"
 graphicsShapesVersion = "1.0.1"
 haze = "1.6.0"
 kotlin = "2.1.20"
+mobileads = "7.12.3"
 serialization = "1.9.23"
 ksp = "2.1.20-1.0.31"
 firebase = "4.4.2"
@@ -20,6 +21,7 @@ composeBom = "2025.05.00"
 runtime = "1.8.1"
 appcompat = "1.7.0"
 material = "1.12.0"
+recyclerview = "1.4.0"
 
 [libraries]
 
@@ -59,6 +61,8 @@ decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decom
 decompose-extensions-compose-experimental = { module = "com.arkivanov.decompose:extensions-compose-experimental", version.ref = "decompose" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+mobileads = { module = "com.yandex.android:mobileads", version.ref = "mobileads" }
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 
 
 [plugins]

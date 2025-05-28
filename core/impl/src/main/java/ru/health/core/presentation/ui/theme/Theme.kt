@@ -6,7 +6,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
+import dev.chrisbanes.haze.HazeState
+import dev.chrisbanes.haze.rememberHazeState
 
 private val DarkColorScheme = darkColorScheme(
     primary = Color(0xff3ee92f),
@@ -102,6 +106,8 @@ private val LightColorScheme = lightColorScheme(
     scrim = Color.Black
 )
 
+val LocalHazeState = compositionLocalOf { HazeState() }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AirlyTheme(
@@ -113,7 +119,11 @@ fun AirlyTheme(
         else -> LightColorScheme
     }
 
-    MaterialTheme {
-        content()
+    val hazeState = rememberHazeState()
+
+    CompositionLocalProvider(LocalHazeState provides hazeState) {
+        MaterialTheme {
+            content()
+        }
     }
 }

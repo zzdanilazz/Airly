@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,6 +37,7 @@ internal fun AbstinencePeriodCard(
         ) {
             Text(
                 text = stringResource(R.string.abstinence_title).uppercase(),
+                color = Color.White,
                 fontSize = 16.sp
             )
             Spacer(modifier = Modifier.height(18.dp))

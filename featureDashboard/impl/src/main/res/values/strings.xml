@@ -4,4 +4,6 @@
     <string name="notifications">Уведомления</string>
     <string name="abstinence_title">Вы не парите уже</string>
     <string name="saved_money_title">Сэкономлено</string>
+    <string name="dashboard_banner">Баннер на главной</string>
+    <string name="dashboard_banner_unit_id">R-M-15664191-1</string>
 </resources>

@@ -12,8 +12,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
-import dev.chrisbanes.haze.hazeEffect
-import dev.chrisbanes.haze.rememberHazeState
 import ru.health.airly.tab.api.TabChild
 import ru.health.airly.tab.api.TabComponent
 import ru.health.core.presentation.ui.theme.AirlyTheme
@@ -26,12 +24,9 @@ import ru.health.featurestatistics.impl.R as StatisticsR
 internal fun BottomBar(modifier: Modifier = Modifier, component: TabComponent) {
     val childStack by component.stack.subscribeAsState()
     val activeComponent = childStack.active.instance
-    val hazeState = rememberHazeState()
 
     NavigationBar(
-        modifier = modifier
-            .clip(RoundedCornerShape(28.dp, 28.dp, 0.dp, 0.dp))
-            .hazeEffect(hazeState),
+        modifier = modifier.clip(RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp)),
         containerColor = Color.White.copy(alpha = 0.3f),
         tonalElevation = 0.dp
     ) {

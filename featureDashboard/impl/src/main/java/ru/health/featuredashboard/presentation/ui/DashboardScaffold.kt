@@ -1,8 +1,11 @@
 package ru.health.featuredashboard.presentation.ui
 
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,17 +23,14 @@ internal fun DashboardScaffold(
 ) {
     Scaffold(
         modifier = modifier,
-        topBar = {
-            DashboardTopBar(
-                onUpload = { onAction(DashboardAction.OnUploadClick) },
-                onNotifications = { onAction(DashboardAction.OnNotificationsClick) }
-            )
-        },
         floatingActionButton = {
             AddActionButton {
                 onAction(DashboardAction.OnAddActionClick)
             }
         },
+        contentWindowInsets = ScaffoldDefaults.contentWindowInsets.only(
+            WindowInsetsSides.Horizontal
+        ),
         containerColor = Color.Transparent
     ) { padding ->
         Dashboard(

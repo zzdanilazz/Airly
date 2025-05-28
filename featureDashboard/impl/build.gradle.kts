@@ -51,9 +51,14 @@ dependencies {
     implementation(libs.androidx.material3)
 
     implementation(libs.dagger)
+    implementation(libs.androidx.recyclerview)
     ksp(libs.dagger.compiler)
 
     implementation(libs.decompose)
+
+    implementation(libs.haze)
+
+    implementation(libs.mobileads)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -13,10 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.chrisbanes.haze.HazeState
 import ru.health.core.presentation.ui.card.GlassmorphismCard
 import ru.health.core.presentation.ui.theme.AirlyTheme
+import ru.health.core.presentation.ui.theme.LocalHazeState
 import ru.health.core.presentation.ui.theme.RubikOneFamily
 import ru.health.featuredashboard.impl.R
 import ru.health.featuredashboard.presentation.ui.dashboardUiStatePreview
@@ -24,17 +27,22 @@ import ru.health.featuredashboard.presentation.ui.dashboardUiStatePreview
 @Composable
 internal fun SavedMoneyCard(
     modifier: Modifier = Modifier,
-    value: Float
+    hazeState: HazeState = LocalHazeState.current,
+    value: Float,
+    topSpacerHeight: Dp = 0.dp
 ) {
-    GlassmorphismCard(modifier = modifier) {
+    GlassmorphismCard(
+        modifier = modifier,
+        hazeState = hazeState
+    ) {
         Column(
             modifier = Modifier
-                .height(150.dp)
                 .fillMaxWidth()
                 .padding(16.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(topSpacerHeight))
             Text(
                 text = stringResource(R.string.saved_money_title).uppercase(),
                 fontSize = 16.sp,
