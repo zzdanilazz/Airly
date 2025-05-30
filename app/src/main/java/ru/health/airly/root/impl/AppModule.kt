@@ -9,11 +9,11 @@ import ru.health.airly.root.api.AppComponent
 import ru.health.airly.tab.impl.TabModule
 import ru.health.core.api.data.date.DateFormatter
 import ru.health.core.impl.data.date.DefaultDateFormatter
-import ru.health.featuredashboard.DashboardFeatureModule
-import ru.health.featurenotifications.AchievementFeatureModule
-import ru.health.featurenotifications.ApproveFeatureModule
-import ru.health.featurestatistics.StatisticsFeatureModule
-import ru.health.liquid.LiquidFeatureModule
+import ru.health.featuredashboard.impl.DashboardFeatureModule
+import ru.health.featurenotifications.impl.AchievementFeatureModule
+import ru.health.featurenotifications.impl.ApproveFeatureModule
+import ru.health.featurestatistics.impl.StatisticsFeatureModule
+import ru.health.featureliquid.impl.LiquidFeatureModule
 
 @Module(
     includes = [

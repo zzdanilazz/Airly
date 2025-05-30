@@ -1,9 +1,9 @@
 package ru.health.airly.tab.api
 
-import ru.health.featuredashboard.presentation.DashboardComponent
-import ru.health.featurenotifications.presentation.AchievementComponent
-import ru.health.featurestatistics.presentation.StatisticsComponent
-import ru.health.liquid.presentation.LiquidDetailComponent
+import ru.health.featuredashboard.api.presentation.DashboardComponent
+import ru.health.featurenotifications.api.presentation.AchievementComponent
+import ru.health.featurestatistics.api.presentation.StatisticsComponent
+import ru.health.featureliquid.api.presentation.LiquidDetailComponent
 
 sealed interface TabChild {
 

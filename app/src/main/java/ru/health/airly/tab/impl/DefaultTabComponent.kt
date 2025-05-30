@@ -16,11 +16,11 @@ import ru.health.airly.tab.api.TabChild.StatisticsTab
 import ru.health.airly.tab.api.TabComponent
 import ru.health.airly.tab.impl.config.TabConfig
 import ru.health.core.api.presentation.component.RootComponent
-import ru.health.featuredashboard.presentation.DashboardComponent
-import ru.health.featurenotifications.domain.Achievement
-import ru.health.featurenotifications.presentation.AchievementComponent
-import ru.health.featurestatistics.presentation.StatisticsComponent
-import ru.health.liquid.presentation.LiquidDetailComponent
+import ru.health.featuredashboard.api.presentation.DashboardComponent
+import ru.health.featurenotifications.api.domain.Achievement
+import ru.health.featurenotifications.api.presentation.AchievementComponent
+import ru.health.featurestatistics.api.presentation.StatisticsComponent
+import ru.health.featureliquid.api.presentation.LiquidDetailComponent
 
 internal class DefaultTabComponent @AssistedInject internal constructor(
     private val dashboardFactory: DashboardComponent.Factory,

@@ -1,7 +1,7 @@
 package ru.health.airly.root.impl.config
 
 import kotlinx.serialization.Serializable
-import ru.health.featurenotifications.domain.Achievement
+import ru.health.featurenotifications.api.domain.Achievement
 
 @Serializable
 sealed interface Config {

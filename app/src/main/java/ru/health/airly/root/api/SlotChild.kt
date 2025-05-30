@@ -1,6 +1,6 @@
 package ru.health.airly.root.api
 
-import ru.health.featurenotifications.presentation.ApproveComponent
+import ru.health.featurenotifications.api.presentation.ApproveComponent
 
 sealed interface SlotChild {
 
