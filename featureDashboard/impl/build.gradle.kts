@@ -39,6 +39,7 @@ dependencies {
     implementation(project(":core:api"))
     implementation(project(":core:impl"))
     implementation(project(":featureAchievement:api"))
+    implementation(project(":featureLiquid:api"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -49,6 +50,10 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    implementation(libs.androidx.datastore.core.android)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.preferences.core)
 
     implementation(libs.dagger)
     implementation(libs.androidx.recyclerview)

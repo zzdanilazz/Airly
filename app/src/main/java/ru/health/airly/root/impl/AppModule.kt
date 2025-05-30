@@ -7,9 +7,11 @@ import dagger.Provides
 import ru.health.airly.AirlyApp
 import ru.health.airly.root.api.AppComponent
 import ru.health.airly.tab.impl.TabModule
+import ru.health.core.api.data.date.DateFormatter
+import ru.health.core.impl.data.date.DefaultDateFormatter
+import ru.health.featuredashboard.DashboardFeatureModule
 import ru.health.featurenotifications.AchievementFeatureModule
 import ru.health.featurenotifications.ApproveFeatureModule
-import ru.health.featuredashboard.DashboardFeatureModule
 import ru.health.featurestatistics.StatisticsFeatureModule
 import ru.health.liquid.LiquidFeatureModule
 
@@ -29,6 +31,9 @@ interface AppModule {
 
     @Binds
     fun bindAppRootComponentFactory(impl: DefaultAppComponent.Factory): AppComponent.Factory
+
+    @Binds
+    fun dateFormatter(dateFormatter: DefaultDateFormatter): DateFormatter
 
     companion object {
 

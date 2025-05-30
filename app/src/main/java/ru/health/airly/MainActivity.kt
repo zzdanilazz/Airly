@@ -13,7 +13,7 @@ import com.arkivanov.decompose.defaultComponentContext
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import ru.health.airly.root.api.AppComponent
-import ru.health.core.presentation.ui.theme.AirlyTheme
+import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 
 class MainActivity : ComponentActivity() {
 

@@ -13,7 +13,7 @@ import com.arkivanov.decompose.extensions.compose.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import ru.health.airly.tab.api.TabChild
 import ru.health.airly.tab.api.TabComponent
-import ru.health.core.presentation.ui.theme.AirlyTheme
+import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable

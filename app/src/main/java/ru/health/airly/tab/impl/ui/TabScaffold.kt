@@ -15,7 +15,7 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.MutableValue
 import ru.health.airly.tab.api.TabChild
 import ru.health.airly.tab.api.TabComponent
-import ru.health.core.presentation.ui.theme.AirlyTheme
+import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.featuredashboard.presentation.DashboardComponent
 
 @Composable

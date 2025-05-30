@@ -5,7 +5,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
-import ru.health.core.presentation.component.RenderComponent
+import ru.health.core.api.presentation.component.RenderComponent
 
 @Immutable
 interface AppComponent : RenderComponent {

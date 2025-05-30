@@ -4,9 +4,11 @@ import android.app.Application
 import androidx.lifecycle.ProcessLifecycleOwner
 import ru.health.airly.di.DaggerMainDaggerComponent
 import ru.health.airly.di.MainDaggerComponent
-import ru.health.core.AppLifecycleObserver
+import ru.health.core.impl.AppLifecycleObserver
+import ru.health.featurenotifications.impl.presentation.di.PushServiceInjectAssistant
+import ru.health.featurenotifications.impl.presentation.push.FirebasePushService
 
-class AirlyApp : Application() {
+class AirlyApp : Application(), PushServiceInjectAssistant {
 
     internal lateinit var mainDaggerComponent: MainDaggerComponent
 
@@ -19,5 +21,9 @@ class AirlyApp : Application() {
 
         mainDaggerComponent.inject(this)
         ProcessLifecycleOwner.get().lifecycle.addObserver(AppLifecycleObserver())
+    }
+
+    override fun inject(firebasePushService: FirebasePushService) {
+        mainDaggerComponent.inject(firebasePushService)
     }
 }

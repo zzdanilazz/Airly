@@ -1,7 +1,7 @@
 package ru.health.featuredashboard.domain
 
-import ru.health.core.domain.result.ResultError
-import ru.health.core.domain.result.RootResult
+import ru.health.core.api.ResultError
+import ru.health.core.api.domain.result.RootResult
 
 interface GetDashboardInfoUseCase {
 

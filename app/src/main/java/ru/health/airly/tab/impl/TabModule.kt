@@ -6,6 +6,7 @@ import dagger.Binds
 import dagger.Module
 import ru.health.airly.tab.api.TabComponent
 import ru.health.featuredashboard.DashboardFeatureModule
+import ru.health.featurenotifications.impl.NotificationFeatureModule
 import ru.health.featurestatistics.StatisticsFeatureModule
 import ru.health.liquid.LiquidFeatureModule
 
@@ -14,6 +15,7 @@ import ru.health.liquid.LiquidFeatureModule
         DashboardFeatureModule::class,
         StatisticsFeatureModule::class,
         LiquidFeatureModule::class,
+        NotificationFeatureModule::class
     ]
 )
 internal interface TabModule {

@@ -1,5 +1,6 @@
 [versions]
 agp = "8.9.3"
+datastorePreferencesCore = "1.1.7"
 decompose = "3.3.0"
 firebaseBom = "33.13.0"
 googleDagger = "2.56"
@@ -22,10 +23,13 @@ runtime = "1.8.1"
 appcompat = "1.7.0"
 material = "1.12.0"
 recyclerview = "1.4.0"
+datastoreCoreAndroid = "1.1.7"
 
 [libraries]
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferencesCore" }
+androidx-datastore-preferences-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastorePreferencesCore" }
 androidx-graphics-shapes = { module = "androidx.graphics:graphics-shapes", version.ref = "graphicsShapesVersion" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -63,6 +67,7 @@ decompose-extensions-compose-experimental = { module = "com.arkivanov.decompose:
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 mobileads = { module = "com.yandex.android:mobileads", version.ref = "mobileads" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+androidx-datastore-core-android = { group = "androidx.datastore", name = "datastore-core-android", version.ref = "datastoreCoreAndroid" }
 
 
 [plugins]

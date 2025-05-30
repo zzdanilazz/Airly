@@ -32,10 +32,10 @@ import dev.chrisbanes.haze.HazeStyle
 import dev.chrisbanes.haze.hazeEffect
 import ru.health.airly.tab.api.TabChild
 import ru.health.airly.tab.api.TabComponent
-import ru.health.core.presentation.ui.gradient.GradientBox
-import ru.health.core.presentation.ui.theme.AirlyTheme
-import ru.health.core.presentation.ui.theme.LightRed
-import ru.health.core.presentation.ui.theme.LocalHazeState
+import ru.health.core.impl.presentation.ui.gradient.GradientBox
+import ru.health.core.impl.presentation.ui.theme.AirlyTheme
+import ru.health.core.impl.presentation.ui.theme.LightRed
+import ru.health.core.impl.presentation.ui.theme.LocalHazeState
 
 @Composable
 internal fun BottomBar(

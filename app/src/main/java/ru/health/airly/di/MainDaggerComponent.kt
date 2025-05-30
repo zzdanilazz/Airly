@@ -6,6 +6,7 @@ import ru.health.airly.AirlyApp
 import ru.health.airly.MainActivity
 import ru.health.airly.root.impl.AppModule
 import ru.health.airly.root.impl.DefaultAppComponent
+import ru.health.featurenotifications.impl.presentation.push.FirebasePushService
 import javax.inject.Singleton
 
 @Singleton
@@ -24,6 +25,8 @@ interface MainDaggerComponent {
     fun inject(app: AirlyApp)
 
     fun inject(activity: MainActivity)
+
+    fun inject(firebasePushService: FirebasePushService)
 
     val rootComponentFactory: DefaultAppComponent.Factory
 

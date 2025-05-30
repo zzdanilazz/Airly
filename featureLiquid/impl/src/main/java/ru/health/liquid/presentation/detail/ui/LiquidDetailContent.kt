@@ -6,7 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import ru.health.core.presentation.ui.gradient.GradientBox
+import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.liquid.presentation.detail.LiquidDetailAction
 import ru.health.liquid.presentation.detail.LiquidDetailViewModel
 

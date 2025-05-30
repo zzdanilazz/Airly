@@ -2,7 +2,7 @@ package ru.health.featurenotifications.presentation
 
 import androidx.compose.runtime.Immutable
 import com.arkivanov.decompose.ComponentContext
-import ru.health.core.presentation.component.RenderComponent
+import ru.health.core.api.presentation.component.RenderComponent
 
 @Immutable
 interface ApproveComponent : RenderComponent {

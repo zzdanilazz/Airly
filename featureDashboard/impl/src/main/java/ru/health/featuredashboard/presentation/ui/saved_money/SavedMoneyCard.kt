@@ -29,10 +29,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.chrisbanes.haze.HazeState
-import ru.health.core.presentation.ui.card.GlassmorphismCard
-import ru.health.core.presentation.ui.theme.AirlyTheme
-import ru.health.core.presentation.ui.theme.LocalHazeState
-import ru.health.core.presentation.ui.theme.RubikOneFamily
+import ru.health.core.impl.presentation.ui.card.GlassmorphismCard
+import ru.health.core.impl.presentation.ui.theme.AirlyTheme
+import ru.health.core.impl.presentation.ui.theme.LocalHazeState
+import ru.health.core.impl.presentation.ui.theme.RubikOneFamily
 import ru.health.featuredashboard.impl.R
 import ru.health.featuredashboard.presentation.ui.dashboardUiStatePreview
 

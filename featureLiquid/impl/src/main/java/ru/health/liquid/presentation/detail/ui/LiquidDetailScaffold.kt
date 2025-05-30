@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import ru.health.core.presentation.ui.theme.AirlyTheme
+import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.liquid.presentation.detail.LiquidDetailAction
 import ru.health.liquid.presentation.detail.LiquidDetailUiState
 import ru.health.liquid.presentation.detail.ui.fab.LiquidDetailFabGroup

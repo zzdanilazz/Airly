@@ -15,7 +15,7 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import org.junit.Rule
 import org.junit.Test
-import ru.health.core.domain.result.RootResult
+import ru.health.core.api.domain.result.RootResult
 import ru.health.featuredashboard.domain.DashboardInfo
 import ru.health.featuredashboard.domain.GetDashboardInfoUseCase
 import ru.health.featuredashboard.presentation.DashboardAction
@@ -39,7 +39,7 @@ class DashboardGetDashboardInfoTest {
                 DashboardInfo(
                     hasNotifications = hasNotifications,
                     health = health,
-                    startAbstinenceTimeMillis = abstinencePeriod.duration,
+                    abstinenceDuration = abstinencePeriod.duration,
                     savedMoney = savedMoney
                 )
             }
@@ -54,7 +54,7 @@ class DashboardGetDashboardInfoTest {
             }
             Column {
                 Health(value = state.health)
-                AbstinencePeriodCard(startAbstinenceTimeMillis = state.abstinencePeriod)
+                AbstinencePeriodCard(duration = state.abstinencePeriod)
                 Spacer(modifier = Modifier.height(6.dp))
                 SavedMoneyCard(value = state.savedMoney)
             }

@@ -1,5 +1,6 @@
 package ru.health.featuredashboard.presentation
 
+import android.util.Log
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.channels.Channel
@@ -9,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.health.core.presentation.component.ComponentViewModel
+import ru.health.core.api.presentation.component.ComponentViewModel
 import ru.health.featuredashboard.domain.GetDashboardInfoUseCase
 
 internal class DashboardViewModel @AssistedInject constructor(
@@ -33,7 +34,16 @@ internal class DashboardViewModel @AssistedInject constructor(
 
     private suspend fun init() {
         getDashboardInfoUseCase().onSuccess { dashboardInfo ->
-            _state.update { uiState -> uiState.copy(dashboardInfo) }
+            dashboardInfo.abstinenceDuration.collect { abstinenceDuration ->
+                _state.update { uiState ->
+                    uiState.copy(
+                        hasNotifications = dashboardInfo.hasNotifications,
+                        health = dashboardInfo.health,
+                        abstinenceDuration = abstinenceDuration,
+                        savedMoney = dashboardInfo.savedMoney
+                    )
+                }
+            }
         }
     }
 

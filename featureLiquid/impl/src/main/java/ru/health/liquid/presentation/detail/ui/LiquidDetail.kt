@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import ru.health.core.presentation.ui.theme.AirlyTheme
+import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.liquid.domain.model.BottleType
 import ru.health.liquid.domain.model.VapeProduct
 import ru.health.liquid.presentation.detail.LiquidDetailAction

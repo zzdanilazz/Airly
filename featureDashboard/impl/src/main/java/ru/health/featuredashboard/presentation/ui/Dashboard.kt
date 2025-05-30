@@ -22,9 +22,9 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.haze.hazeSource
 import kotlinx.coroutines.launch
-import ru.health.core.presentation.ui.gradient.GradientBox
-import ru.health.core.presentation.ui.theme.AirlyTheme
-import ru.health.core.presentation.ui.theme.LocalHazeState
+import ru.health.core.impl.presentation.ui.gradient.GradientBox
+import ru.health.core.impl.presentation.ui.theme.AirlyTheme
+import ru.health.core.impl.presentation.ui.theme.LocalHazeState
 import ru.health.featuredashboard.presentation.DashboardAction
 import ru.health.featuredashboard.presentation.DashboardUiState
 import ru.health.featuredashboard.presentation.ui.abstinence.AbstinencePeriodCard
@@ -71,7 +71,7 @@ internal fun Dashboard(
             Spacer(modifier = Modifier.height(18.dp))
             AbstinencePeriodCard(
                 modifier = contentModifier,
-                startAbstinenceTimeMillis = state.startAbstinenceTimeMillis
+                duration = state.abstinenceDuration
             )
         }
         stickyHeader {

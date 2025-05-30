@@ -1,24 +1,49 @@
 package ru.health.featuredashboard.domain
 
-import ru.health.core.domain.result.RequestError
-import ru.health.core.domain.result.ResultError
-import ru.health.core.domain.result.RootResult
+import kotlinx.coroutines.async
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.supervisorScope
+import ru.health.core.api.RequestError
+import ru.health.core.api.ResultError
+import ru.health.core.api.domain.result.RootResult
+import java.time.Instant
 import javax.inject.Inject
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.ExperimentalTime
 
 class DefaultGetDashboardInfoUseCase @Inject constructor(
-
+    private val dashboardRepository: DashboardRepository
 ) : GetDashboardInfoUseCase {
 
-    override suspend fun invoke(): RootResult<DashboardInfo, ResultError> = try {
-        RootResult.Success(
-            DashboardInfo(
-                hasNotifications = true,
-                health = 86,
-                startAbstinenceTimeMillis = 0L,
-                savedMoney = 3_398.08f
+    @OptIn(ExperimentalTime::class)
+    override suspend fun invoke(): RootResult<DashboardInfo, ResultError> = supervisorScope {
+        val abstinenceDurationDeferred = async {
+            flow {
+                while (currentCoroutineContext().isActive) {
+                    val currentTimeMillis = Instant.now().toEpochMilli()
+                    val lastRelapsedTimeMillis = dashboardRepository.getLastRelapsedDate().time
+
+                    emit((currentTimeMillis - lastRelapsedTimeMillis).milliseconds)
+                    delay(1_000)
+                }
+            }
+        }
+
+        try {
+            val abstinenceDuration = abstinenceDurationDeferred.await()
+            RootResult.Success(
+                DashboardInfo(
+                    hasNotifications = true,
+                    health = 86,
+                    abstinenceDuration = abstinenceDuration,
+                    savedMoney = 3_398.08f
+                )
             )
-        )
-    } catch (_: Exception) {
-        RootResult.Failure(RequestError.GENERIC)
+        } catch (_: Exception) {
+            RootResult.Failure(RequestError.GENERIC)
+        }
     }
 }

@@ -7,9 +7,8 @@ import com.arkivanov.essenty.instancekeeper.getOrCreate
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import ru.health.core.presentation.EventEffect
+import ru.health.core.impl.presentation.EventEffect
 import ru.health.featuredashboard.presentation.ui.DashboardContent
-import ru.health.featurenotifications.domain.Achievement
 
 internal class DefaultDashboardComponent @AssistedInject internal constructor(
     @Assisted componentContext: ComponentContext,

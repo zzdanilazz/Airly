@@ -52,6 +52,9 @@ dependencies {
     implementation(libs.androidx.material3)
 
     implementation(libs.dagger)
+    implementation(libs.androidx.datastore.core.android)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.preferences.core)
     ksp(libs.dagger.compiler)
 
     implementation(platform(libs.firebase.bom))

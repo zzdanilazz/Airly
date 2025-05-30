@@ -1,8 +1,8 @@
 package ru.health.liquid.domain
 
-import ru.health.core.domain.result.RequestError
-import ru.health.core.domain.result.ResultError
-import ru.health.core.domain.result.RootResult
+import ru.health.core.api.RequestError
+import ru.health.core.api.ResultError
+import ru.health.core.api.domain.result.RootResult
 import ru.health.liquid.domain.model.VapeProduct
 import ru.health.liquid.domain.usecase.GetVapeProductUseCase
 import ru.health.liquid.presentation.detail.ui.liquidPreview

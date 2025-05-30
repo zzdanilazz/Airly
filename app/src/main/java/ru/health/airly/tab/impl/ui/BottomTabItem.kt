@@ -25,10 +25,10 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import ru.health.core.presentation.ui.theme.AirlyTheme
-import ru.health.core.presentation.ui.theme.LightRed
-import ru.health.core.presentation.ui.theme.MostlyDesaturatedDarkBlue
-import ru.health.core.presentation.ui.theme.VerySoftBlue
+import ru.health.core.impl.presentation.ui.theme.AirlyTheme
+import ru.health.core.impl.presentation.ui.theme.LightRed
+import ru.health.core.impl.presentation.ui.theme.MostlyDesaturatedDarkBlue
+import ru.health.core.impl.presentation.ui.theme.VerySoftBlue
 
 @Composable
 internal fun RowScope.BottomTabItem(

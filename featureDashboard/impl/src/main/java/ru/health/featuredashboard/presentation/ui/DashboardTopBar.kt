@@ -19,9 +19,9 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
-import ru.health.core.presentation.ui.button.TransparentIconButton
-import ru.health.core.presentation.ui.theme.AirlyTheme
-import ru.health.core.presentation.ui.theme.LightRed
+import ru.health.core.impl.presentation.ui.button.TransparentIconButton
+import ru.health.core.impl.presentation.ui.theme.AirlyTheme
+import ru.health.core.impl.presentation.ui.theme.LightRed
 import ru.health.featuredashboard.impl.R
 
 @OptIn(ExperimentalMaterial3Api::class)

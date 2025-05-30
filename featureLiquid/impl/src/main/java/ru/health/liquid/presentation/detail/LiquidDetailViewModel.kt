@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.health.core.presentation.component.ComponentViewModel
+import ru.health.core.api.presentation.component.ComponentViewModel
 import ru.health.liquid.domain.model.VapeProduct
 import ru.health.liquid.domain.usecase.GetVapeProductUseCase
 

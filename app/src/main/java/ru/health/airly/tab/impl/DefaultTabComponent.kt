@@ -15,7 +15,7 @@ import ru.health.airly.tab.api.TabChild.LiquidTab
 import ru.health.airly.tab.api.TabChild.StatisticsTab
 import ru.health.airly.tab.api.TabComponent
 import ru.health.airly.tab.impl.config.TabConfig
-import ru.health.core.presentation.component.RootComponent
+import ru.health.core.api.presentation.component.RootComponent
 import ru.health.featuredashboard.presentation.DashboardComponent
 import ru.health.featurenotifications.domain.Achievement
 import ru.health.featurenotifications.presentation.AchievementComponent

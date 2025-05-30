@@ -27,7 +27,7 @@ import ru.health.airly.root.impl.config.SlotConfig
 import ru.health.airly.root.impl.ui.SlotContent
 import ru.health.airly.root.impl.ui.StackContent
 import ru.health.airly.tab.api.TabComponent
-import ru.health.core.presentation.component.SlotRootComponent
+import ru.health.core.api.presentation.component.SlotRootComponent
 import ru.health.featurenotifications.presentation.ApproveComponent
 
 class DefaultAppComponent @AssistedInject internal constructor(
