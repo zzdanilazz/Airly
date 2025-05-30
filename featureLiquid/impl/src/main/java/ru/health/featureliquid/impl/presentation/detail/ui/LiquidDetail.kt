@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.featureliquid.api.domain.model.BottleType
 import ru.health.featureliquid.api.domain.model.VapeProduct
@@ -49,8 +50,10 @@ internal val liquidDetailUiStatePreview = LiquidDetailUiState(
 @Composable
 private fun LiquidDetailPreview() {
     AirlyTheme {
-        LiquidDetail(
-            state = liquidDetailUiStatePreview
-        )
+        GradientBox {
+            LiquidDetail(
+                state = liquidDetailUiStatePreview
+            )
+        }
     }
 }

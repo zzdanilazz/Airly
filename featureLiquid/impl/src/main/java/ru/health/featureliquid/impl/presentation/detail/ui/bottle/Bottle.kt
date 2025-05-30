@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -34,10 +35,11 @@ import ru.health.core.impl.presentation.ui.theme.ModerateRed
 import ru.health.core.impl.presentation.ui.theme.PaleRed
 import ru.health.core.impl.presentation.ui.theme.RubikOneFamily
 import ru.health.core.impl.presentation.ui.theme.VeryDarkGray
-import ru.health.featureliquid.impl.R
 import ru.health.featureliquid.api.domain.model.BottleType
 import ru.health.featureliquid.api.domain.model.VapeProduct
+import ru.health.featureliquid.impl.R
 import ru.health.featureliquid.impl.presentation.detail.ui.liquidPreview
+import kotlin.math.sqrt
 
 @Composable
 internal fun Bottle(
@@ -66,6 +68,7 @@ private fun Cap(
         Image(
             modifier = Modifier.size(bottleType.upperCapSize),
             painter = painterResource(R.drawable.illustration_cap),
+            contentScale = ContentScale.FillBounds,
             contentDescription = null
         )
         val brush = Brush.verticalGradient(
@@ -113,13 +116,13 @@ private fun Flacon(
         Spacer(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(totalSize.height * (1 - liquidFraction))
+                .weight(1f - liquidFraction, fill = true)
                 .background(flaconColor.copy(alpha = 0.25f))
         )
         Liquid(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(totalSize.height * liquidFraction)
+                .weight(liquidFraction, fill = true)
                 .defaultMinSize(minHeight = 32.dp),
             currentVolume = currentVolume
         )
@@ -147,35 +150,57 @@ private fun Liquid(
     }
 }
 
-private val BottleType.upperCapSize: DpSize
-    get() = when (this) {
-        BottleType.SMALL -> DpSize(width = 138.dp, height = 68.dp)
-        BottleType.TALL -> DpSize(width = 138.dp, height = 68.dp)
-        BottleType.LARGE -> DpSize(width = 138.dp, height = 68.dp)
-    }
-
-private val BottleType.bottomCapSize: DpSize
-    get() = when (this) {
-        BottleType.SMALL -> DpSize(width = 138.dp, height = 106.dp)
-        BottleType.TALL -> DpSize(width = 138.dp, height = 106.dp)
-        BottleType.LARGE -> DpSize(width = 138.dp, height = 106.dp)
-    }
-
 private val BottleType.flaconSize: DpSize
     get() = when (this) {
         BottleType.SMALL -> DpSize(width = 138.dp, height = 265.dp)
-        BottleType.TALL -> DpSize(width = 138.dp, height = 265.dp)
-        BottleType.LARGE -> DpSize(width = 138.dp, height = 265.dp)
+        BottleType.TALL -> DpSize(width = 138.dp, height = 530.dp)
+        BottleType.LARGE -> DpSize(width = (138 * sqrt(2f)).dp, height = 530.dp)
     }
+
+private val BottleType.upperCapSize: DpSize
+    get() = DpSize(width = this.flaconSize.width, height = 68.dp)
+
+private val BottleType.bottomCapSize: DpSize
+    get() = DpSize(width = this.flaconSize.width, height = 106.dp)
 
 @PreviewLightDark
 @Composable
-private fun BottlePreview() {
+private fun SmallBottlePreview() {
     AirlyTheme {
         GradientBox {
             Bottle(
                 modifier = Modifier.align(Alignment.Center),
                 liquid = liquidPreview
+            )
+        }
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun TallBottlePreview() {
+    AirlyTheme {
+        GradientBox {
+            Bottle(
+                modifier = Modifier.align(Alignment.Center),
+                liquid = liquidPreview.copy(
+                    bottleType = BottleType.TALL
+                )
+            )
+        }
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun LargeBottlePreview() {
+    AirlyTheme {
+        GradientBox {
+            Bottle(
+                modifier = Modifier.align(Alignment.Center),
+                liquid = liquidPreview.copy(
+                    bottleType = BottleType.LARGE
+                )
             )
         }
     }
