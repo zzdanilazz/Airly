@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.health.core.api.presentation.component.ComponentViewModel
-import ru.health.featureliquid.api.domain.model.VapeProduct
-import ru.health.featureliquid.api.domain.usecase.GetVapeProductUseCase
+import ru.health.featureliquid.api.domain.model.DeviceType
+import ru.health.featureliquid.api.domain.usecase.GetDeviceTypeUseCase
 
 internal class LiquidDetailViewModel @AssistedInject constructor(
-    private val getVapeProductUseCase: GetVapeProductUseCase
+    private val getDeviceTypeUseCase: GetDeviceTypeUseCase
 ) : ComponentViewModel() {
 
     private val _state = MutableStateFlow(LiquidDetailUiState())
@@ -29,19 +29,17 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
             LiquidDetailAction.EditLiquidLevelApprove -> editLiquidLevelApprove()
             LiquidDetailAction.AddLiquidBottle -> addLiquidBottle()
             LiquidDetailAction.AddAtomizer -> addAtomizer()
+            LiquidDetailAction.AddDisposableApprove -> addDisposableApprove()
+            LiquidDetailAction.AddPuffsApprove -> addPuffsApprove()
             is LiquidDetailAction.SwitchDeviceType -> switchDevice(action.isPodSelected)
             is LiquidDetailAction.EditLiquidLevel -> editLiquidLevel(action.liquid)
         }
     }
 
-    private suspend fun editLiquidLevelApprove() {
-
-    }
-
     private suspend fun switchDevice(isPodSelected: Boolean) {
-        getVapeProductUseCase(isPodSelected)
+        getDeviceTypeUseCase(isPodSelected)
             .onSuccess {
-                _state.update { uiState -> uiState.copy(vapeProduct = it) }
+                _state.update { uiState -> uiState.copy(deviceType = it) }
             }
             .onFailure {
                 //todo approve
@@ -49,7 +47,7 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
 
     }
 
-    private suspend fun addAtomizer() {
+    private suspend fun editLiquidLevelApprove() {
 
     }
 
@@ -57,13 +55,25 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
 
     }
 
-    private suspend fun editLiquidLevel(liquid: VapeProduct.Liquid) {
+    private suspend fun addAtomizer() {
+
+    }
+
+    private suspend fun editLiquidLevel(liquid: DeviceType.Liquid) {
+
+    }
+
+    private suspend fun addDisposableApprove() {
+
+    }
+
+    private suspend fun addPuffsApprove() {
 
     }
 
     private suspend fun init() {
-        getVapeProductUseCase().onSuccess {
-            _state.update { uiState -> uiState.copy(vapeProduct = it) }
+        getDeviceTypeUseCase().onSuccess {
+            _state.update { uiState -> uiState.copy(deviceType = it) }
         }
     }
 

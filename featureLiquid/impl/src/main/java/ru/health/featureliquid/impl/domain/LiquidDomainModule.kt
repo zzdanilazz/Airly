@@ -4,12 +4,12 @@ package ru.health.featureliquid.impl.domain
 
 import dagger.Binds
 import dagger.Module
-import ru.health.featureliquid.api.domain.usecase.GetVapeProductUseCase
+import ru.health.featureliquid.api.domain.usecase.GetDeviceTypeUseCase
 
 @Module
 internal interface LiquidDomainModule {
 
     @Binds
-    fun bindGetLiquidInfoUseCase(impl: DefaultGetVapeProductUseCase): GetVapeProductUseCase
+    fun bindGetLiquidInfoUseCase(impl: DefaultGetDeviceTypeUseCase): GetDeviceTypeUseCase
 
 }

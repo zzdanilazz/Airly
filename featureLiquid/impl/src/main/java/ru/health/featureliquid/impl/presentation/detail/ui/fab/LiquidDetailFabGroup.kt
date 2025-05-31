@@ -31,32 +31,50 @@ internal fun LiquidDetailFabGroup(
     isPodSelected: Boolean,
     onAction: (LiquidDetailAction) -> Unit = {}
 ) {
+    val addPainter = rememberVectorPainter(Icons.Rounded.Add)
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.End,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        LiquidDetailFab(
-            containerColor = LightRed,
-            contentColor = Color.White,
-            painter = painterResource(R.drawable.ic_level),
-            textResId = R.string.level_fab,
-            onClick = { onAction(LiquidDetailAction.EditLiquidLevelApprove) }
-        )
-        LiquidDetailFab(
-            containerColor = LightRed,
-            contentColor = Color.White,
-            painter = rememberVectorPainter(Icons.Rounded.Add),
-            textResId = R.string.liquid_fab,
-            onClick = { onAction(LiquidDetailAction.AddLiquidBottle) }
-        )
-        LiquidDetailFab(
-            containerColor = Color.White,
-            contentColor = LightRed,
-            painter = rememberVectorPainter(Icons.Rounded.Add),
-            textResId = R.string.atomizer_fab,
-            onClick = { onAction(LiquidDetailAction.AddAtomizer) }
-        )
+        if (isPodSelected) {
+            LiquidDetailFab(
+                containerColor = LightRed,
+                contentColor = Color.White,
+                painter = painterResource(R.drawable.ic_level),
+                textResId = R.string.level_fab,
+                onClick = { onAction(LiquidDetailAction.EditLiquidLevelApprove) }
+            )
+            LiquidDetailFab(
+                containerColor = LightRed,
+                contentColor = Color.White,
+                painter = addPainter,
+                textResId = R.string.liquid_fab,
+                onClick = { onAction(LiquidDetailAction.AddLiquidBottle) }
+            )
+            LiquidDetailFab(
+                containerColor = Color.White,
+                contentColor = LightRed,
+                painter = addPainter,
+                textResId = R.string.atomizer_fab,
+                onClick = { onAction(LiquidDetailAction.AddAtomizer) }
+            )
+        } else {
+            LiquidDetailFab(
+                containerColor = LightRed,
+                contentColor = Color.White,
+                painter = addPainter,
+                textResId = R.string.puff,
+                onClick = { onAction(LiquidDetailAction.AddPuffsApprove) }
+            )
+            LiquidDetailFab(
+                containerColor = Color.White,
+                contentColor = LightRed,
+                painter = addPainter,
+                textResId = R.string.disposable,
+                onClick = { onAction(LiquidDetailAction.AddDisposableApprove) }
+            )
+        }
     }
 }
 

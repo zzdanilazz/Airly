@@ -1,6 +1,6 @@
 package ru.health.featureliquid.api.domain.model
 
-sealed interface VapeProduct {
+sealed interface DeviceType {
 
     val isPodSelected
         get() = this is Liquid
@@ -9,11 +9,9 @@ sealed interface VapeProduct {
         val id: Int,
         val bottleType: BottleType,
         val currentVolume: Int
-    ) : VapeProduct
+    ) : DeviceType
 
     data class Disposable(
-        val id: Int,
-        val totalPuffs: Int,
-        val currentPuffs: Int
-    ) : VapeProduct
+        val id: Int
+    ) : DeviceType
 }

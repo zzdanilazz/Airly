@@ -26,7 +26,7 @@ internal fun LiquidDetailScaffold(
     Scaffold(
         modifier = modifier,
         topBar = {
-            state.vapeProduct?.let {
+            state.deviceType?.let {
                 LiquidDetailTopBar(
                     isPodSelected = it.isPodSelected,
                     onSwitch = {
@@ -36,7 +36,7 @@ internal fun LiquidDetailScaffold(
             }
         },
         floatingActionButton = {
-            state.vapeProduct?.let {
+            state.deviceType?.let {
                 LiquidDetailFabGroup(
                     isPodSelected = it.isPodSelected,
                     onAction = onAction
@@ -58,8 +58,18 @@ internal fun LiquidDetailScaffold(
 
 @PreviewLightDark
 @Composable
-private fun InputLiquidScaffoldPreview() {
+private fun LiquidDetailScaffoldPreview() {
     AirlyTheme {
         LiquidDetailScaffold(state = liquidDetailUiStatePreview)
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun LiquidDetailDisposableScaffoldPreview() {
+    AirlyTheme {
+        LiquidDetailScaffold(state = liquidDetailUiStatePreview.copy(
+            deviceType = disposablePreview
+        ))
     }
 }

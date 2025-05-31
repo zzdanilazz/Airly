@@ -11,10 +11,11 @@ import androidx.compose.ui.unit.dp
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.featureliquid.api.domain.model.BottleType
-import ru.health.featureliquid.api.domain.model.VapeProduct
+import ru.health.featureliquid.api.domain.model.DeviceType
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailAction
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailUiState
 import ru.health.featureliquid.impl.presentation.detail.ui.bottle.Bottle
+import ru.health.featureliquid.impl.presentation.detail.ui.disposable.Disposable
 
 @Composable
 internal fun LiquidDetail(
@@ -27,23 +28,31 @@ internal fun LiquidDetail(
             .fillMaxSize()
             .padding(horizontal = 16.dp)
     ) {
-        if (state.vapeProduct is VapeProduct.Liquid) {
+        val contentModifier = Modifier.align(Alignment.BottomStart)
+
+        if (state.deviceType is DeviceType.Liquid) {
             Bottle(
-                modifier = Modifier.align(Alignment.BottomStart),
-                liquid = state.vapeProduct
+                modifier = contentModifier,
+                liquid = state.deviceType
             )
+        } else {
+            Disposable(modifier = contentModifier)
         }
     }
 }
 
-internal val liquidPreview = VapeProduct.Liquid(
+internal val liquidPreview = DeviceType.Liquid(
     id = 1,
     bottleType = BottleType.SMALL,
     currentVolume = 13
 )
 
+internal val disposablePreview = DeviceType.Disposable(
+    id = 1
+)
+
 internal val liquidDetailUiStatePreview = LiquidDetailUiState(
-    vapeProduct = liquidPreview
+    deviceType = liquidPreview
 )
 
 @PreviewLightDark
@@ -53,6 +62,20 @@ private fun LiquidDetailPreview() {
         GradientBox {
             LiquidDetail(
                 state = liquidDetailUiStatePreview
+            )
+        }
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun LiquidDetailDisposablePreview() {
+    AirlyTheme {
+        GradientBox {
+            LiquidDetail(
+                state = liquidDetailUiStatePreview.copy(
+                    deviceType = disposablePreview
+                )
             )
         }
     }
