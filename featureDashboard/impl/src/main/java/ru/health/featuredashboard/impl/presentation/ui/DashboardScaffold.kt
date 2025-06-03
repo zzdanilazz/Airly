@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.unit.dp
+import ru.health.core.api.presentation.component.bottom_bar.BottomBarHeight
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.featuredashboard.impl.presentation.DashboardAction
 import ru.health.featuredashboard.impl.presentation.DashboardUiState
@@ -48,8 +48,6 @@ internal fun DashboardScaffold(
         )
     }
 }
-
-private val BottomBarHeight = 80.dp
 
 @PreviewLightDark
 @Composable

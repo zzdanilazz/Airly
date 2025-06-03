@@ -7,11 +7,14 @@ import com.arkivanov.essenty.instancekeeper.getOrCreate
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import ru.health.featureliquid.api.presentation.LiquidDetailComponent
+import ru.health.core.impl.presentation.EventEffect
+import ru.health.featureliquid.api.domain.model.DeviceType
+import ru.health.featureliquid.api.presentation.detail.LiquidDetailComponent
 import ru.health.featureliquid.impl.presentation.detail.ui.LiquidDetailContent
 
 internal class DefaultLiquidDetailComponent @AssistedInject internal constructor(
     @Assisted componentContext: ComponentContext,
+    @Assisted private val onInputLiquid: (liquid: DeviceType.Liquid) -> Unit,
     private val liquidDetailViewModel: LiquidDetailViewModel.Factory,
 ) : LiquidDetailComponent, ComponentContext by componentContext {
 
@@ -19,6 +22,14 @@ internal class DefaultLiquidDetailComponent @AssistedInject internal constructor
 
     @Composable
     override fun Render(modifier: Modifier) {
+        EventEffect(viewModel.navEvent) { event ->
+            when (event) {
+                LiquidDetailNavEvent.AddAtomizer -> {}
+                LiquidDetailNavEvent.AddLiquidBottle -> {}
+                is LiquidDetailNavEvent.EditLiquidLevel -> onInputLiquid(event.liquid)
+            }
+        }
+
         LiquidDetailContent(
             modifier = modifier,
             viewModel = viewModel
@@ -28,7 +39,8 @@ internal class DefaultLiquidDetailComponent @AssistedInject internal constructor
     @AssistedFactory
     interface Factory : LiquidDetailComponent.Factory {
         override fun invoke(
-            @Assisted componentContext: ComponentContext,
+            componentContext: ComponentContext,
+            onInputLiquid: (DeviceType.Liquid) -> Unit,
         ): DefaultLiquidDetailComponent
     }
 }

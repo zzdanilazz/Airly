@@ -5,6 +5,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,10 +22,10 @@ import kotlin.math.sqrt
 internal fun Flacon(
     modifier: Modifier = Modifier,
     bottleType: BottleType,
-    currentVolume: Int
+    currentVolume: Float
 ) {
     val shape = RoundedCornerShape(26.dp)
-    val liquidFraction = currentVolume / bottleType.volume.toFloat()
+    val liquidFraction = currentVolume / bottleType.volume
     val totalSize = bottleType.flaconSize
     val flaconColor = if (isSystemInDarkTheme()) Color.White else Color.Black
 
@@ -33,17 +34,20 @@ internal fun Flacon(
             .size(totalSize)
             .clip(shape)
     ) {
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f - liquidFraction, fill = true)
-                .background(flaconColor.copy(alpha = 0.25f))
-        )
+        if (liquidFraction < 1f) {
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f - liquidFraction, fill = true)
+                    .background(flaconColor.copy(alpha = 0.25f))
+            )
+        }
+
         Liquid(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(liquidFraction, fill = true)
-                .defaultMinSize(minHeight = 32.dp),
+                .defaultMinSize(minHeight = 32.dp)
+                .fillMaxHeight(liquidFraction),
             currentVolume = currentVolume
         )
     }

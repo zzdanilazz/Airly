@@ -17,7 +17,7 @@ import ru.health.featureliquid.impl.R
 @Composable
 internal fun Liquid(
     modifier: Modifier = Modifier,
-    currentVolume: Int,
+    currentVolume: Float,
 ) {
     val brush = Brush.verticalGradient(
         listOf(VeryDarkGray, Color.Black)

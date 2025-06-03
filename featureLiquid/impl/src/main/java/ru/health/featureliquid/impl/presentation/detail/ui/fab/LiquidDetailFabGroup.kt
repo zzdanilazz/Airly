@@ -37,20 +37,20 @@ internal fun LiquidDetailFabGroup(
         horizontalAlignment = Alignment.End,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
+        LiquidDetailFab(
+            containerColor = LightRed,
+            contentColor = Color.White,
+            painter = addPainter,
+            textResId = R.string.puff,
+            onClick = { onAction(LiquidDetailAction.AddPuffsApprove) }
+        )
         if (isPodSelected) {
             LiquidDetailFab(
                 containerColor = LightRed,
                 contentColor = Color.White,
                 painter = painterResource(R.drawable.ic_level),
-                textResId = R.string.level_fab,
-                onClick = { onAction(LiquidDetailAction.EditLiquidLevelApprove) }
-            )
-            LiquidDetailFab(
-                containerColor = LightRed,
-                contentColor = Color.White,
-                painter = addPainter,
                 textResId = R.string.liquid_fab,
-                onClick = { onAction(LiquidDetailAction.AddLiquidBottle) }
+                onClick = { onAction(LiquidDetailAction.EditLiquidLevelApprove) }
             )
             LiquidDetailFab(
                 containerColor = Color.White,
@@ -60,13 +60,6 @@ internal fun LiquidDetailFabGroup(
                 onClick = { onAction(LiquidDetailAction.AddAtomizer) }
             )
         } else {
-            LiquidDetailFab(
-                containerColor = LightRed,
-                contentColor = Color.White,
-                painter = addPainter,
-                textResId = R.string.puff,
-                onClick = { onAction(LiquidDetailAction.AddPuffsApprove) }
-            )
             LiquidDetailFab(
                 containerColor = Color.White,
                 contentColor = LightRed,

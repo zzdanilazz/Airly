@@ -1,9 +1,9 @@
 <resources>
     <string name="input_liquid">Ввод</string>
-    <string name="level_fab">Уровень</string>
     <string name="liquid_fab">Жидкость</string>
     <string name="atomizer_fab">Испаритель</string>
     <string name="puff">Затяжка</string>
     <string name="disposable">Одноразка</string>
-    <string name="ml">%1$d мл</string>
+    <string name="ml">%s мл</string>
+    <string name="ml_with_prefix">-%1$.1f\n мл</string>
 </resources>

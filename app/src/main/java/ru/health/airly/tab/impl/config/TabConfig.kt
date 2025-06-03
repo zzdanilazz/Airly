@@ -9,7 +9,7 @@ sealed interface TabConfig {
     data object DashboardTab : TabConfig
 
     @Serializable
-    data object InputLiquidTab : TabConfig
+    data object LiquidTab : TabConfig
 
     @Serializable
     data object AchievementTab : TabConfig

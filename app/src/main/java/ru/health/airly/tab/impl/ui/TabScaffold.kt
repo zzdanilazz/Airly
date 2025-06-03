@@ -1,20 +1,19 @@
 package ru.health.airly.tab.impl.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.MutableValue
 import ru.health.airly.tab.api.TabChild
 import ru.health.airly.tab.api.TabComponent
+import ru.health.core.api.presentation.component.bottom_bar.rememberBottomBarVisibility
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.featuredashboard.api.presentation.DashboardComponent
 
@@ -23,6 +22,9 @@ internal fun TabScaffold(
     modifier: Modifier = Modifier,
     component: TabComponent
 ) {
+    val bottomBarVisibility = rememberBottomBarVisibility()
+    val isBottomBarVisible = bottomBarVisibility.bottomBar.isVisible
+
     Scaffold(
         modifier = modifier,
         contentWindowInsets = ScaffoldDefaults.contentWindowInsets.only(
@@ -30,13 +32,17 @@ internal fun TabScaffold(
         ),
         containerColor = Color.Transparent,
         bottomBar = {
-            BottomBar(component = component)
+            BottomBar(
+                component = component,
+                isVisible = isBottomBarVisible
+            )
         },
     ) { padding ->
         TabChildren(
             modifier = Modifier.fillMaxSize(),
             contentPadding = padding,
-            component = component
+            component = component,
+            bottomBarVisibility = bottomBarVisibility
         )
     }
 }
@@ -64,12 +70,9 @@ internal val tabComponentPreview = object : TabComponent {
 }
 
 @Composable
-@Preview
+@PreviewLightDark
 private fun TabContentPreview() {
     AirlyTheme {
-        TabScaffold(
-            modifier = Modifier.background(MaterialTheme.colorScheme.background),
-            component = tabComponentPreview
-        )
+        TabScaffold(component = tabComponentPreview)
     }
 }

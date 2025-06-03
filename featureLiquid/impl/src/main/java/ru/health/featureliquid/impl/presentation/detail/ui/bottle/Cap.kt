@@ -27,6 +27,7 @@ import ru.health.core.impl.presentation.ui.theme.PaleRed
 import ru.health.core.impl.presentation.ui.theme.RubikOneFamily
 import ru.health.featureliquid.api.domain.model.BottleType
 import ru.health.featureliquid.impl.R
+import kotlin.math.roundToInt
 
 @Composable
 internal fun Cap(
@@ -51,7 +52,7 @@ internal fun Cap(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = stringResource(R.string.ml, bottleType.volume),
+                text = stringResource(R.string.ml, bottleType.volume.roundToInt()),
                 fontFamily = RubikOneFamily,
                 fontSize = 24.sp,
                 color = ModerateRed

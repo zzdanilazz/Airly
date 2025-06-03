@@ -13,6 +13,8 @@ import com.arkivanov.decompose.extensions.compose.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import ru.health.airly.tab.api.TabChild
 import ru.health.airly.tab.api.TabComponent
+import ru.health.core.api.presentation.component.bottom_bar.BottomBarVisibility
+import ru.health.core.api.presentation.component.bottom_bar.rememberBottomBarVisibility
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -20,7 +22,8 @@ import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 internal fun TabChildren(
     modifier: Modifier = Modifier,
     component: TabComponent,
-    contentPadding: PaddingValues = PaddingValues(0.dp)
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    bottomBarVisibility: BottomBarVisibility = rememberBottomBarVisibility()
 ) {
     val contentModifier = Modifier
         .fillMaxSize()
@@ -33,7 +36,10 @@ internal fun TabChildren(
     ) {
         when (val child = it.instance) {
             is TabChild.DashboardTab -> child.component.Render(modifier = Modifier.fillMaxSize())
-            is TabChild.LiquidTab -> child.component.Render(modifier = contentModifier)
+            is TabChild.LiquidTab -> child.component.BottomBarRender(
+                modifier = contentModifier,
+                bottomBarVisibility = bottomBarVisibility
+            )
             is TabChild.AchievementTab -> child.component.Render(modifier = contentModifier)
             is TabChild.StatisticsTab -> child.component.Render(modifier = contentModifier)
         }

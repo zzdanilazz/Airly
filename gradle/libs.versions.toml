@@ -1,5 +1,6 @@
 [versions]
 agp = "8.9.3"
+all = "3.0.0"
 datastorePreferencesCore = "1.1.7"
 decompose = "3.3.0"
 firebaseBom = "33.13.0"
@@ -27,6 +28,7 @@ datastoreCoreAndroid = "1.1.7"
 
 [libraries]
 
+all = { module = "eu.sirotin.kotunil:all", version.ref = "all" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferencesCore" }
 androidx-datastore-preferences-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastorePreferencesCore" }

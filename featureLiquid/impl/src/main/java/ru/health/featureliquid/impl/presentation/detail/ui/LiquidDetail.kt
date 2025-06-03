@@ -44,7 +44,7 @@ internal fun LiquidDetail(
 internal val liquidPreview = DeviceType.Liquid(
     id = 1,
     bottleType = BottleType.SMALL,
-    currentVolume = 13
+    currentVolume = 25f
 )
 
 internal val disposablePreview = DeviceType.Disposable(

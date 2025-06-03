@@ -1,8 +1,11 @@
 package ru.health.airly.tab.impl.ui
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -40,7 +43,8 @@ import ru.health.core.impl.presentation.ui.theme.LocalHazeState
 @Composable
 internal fun BottomBar(
     modifier: Modifier = Modifier,
-    component: TabComponent
+    component: TabComponent,
+    isVisible: Boolean = true
 ) {
     val childStack by component.stack.subscribeAsState()
     val activeComponent = childStack.active.instance
@@ -59,76 +63,85 @@ internal fun BottomBar(
         }
     )
 
-    Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp))
-            .hazeEffect(
-                state = LocalHazeState.current,
-                style = HazeStyle.Unspecified
-            )
-            .background(brush)
+    AnimatedVisibility(
+        visible = isVisible,
+        enter = expandVertically(),
+        exit = shrinkVertically()
     ) {
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .windowInsetsPadding(NavigationBarDefaults.windowInsets)
-                .defaultMinSize(minHeight = 80.dp)
+            modifier = modifier
+                .clip(RoundedCornerShape(16.dp, 16.dp, 0.dp, 0.dp))
+                .hazeEffect(
+                    state = LocalHazeState.current,
+                    style = HazeStyle.Unspecified
+                )
+                .background(brush)
         ) {
-            val animatedSelectedTabIndex by animateFloatAsState(
-                targetValue = selectedTabIndex.toFloat(),
-                animationSpec = spring(
-                    stiffness = Spring.StiffnessLow,
-                    dampingRatio = Spring.DampingRatioLowBouncy,
-                )
-            )
-
-            Canvas(
+            Box(
                 modifier = Modifier
-                    .matchParentSize()
-                    .blur(
-                        radius = 50.dp,
-                        edgeTreatment = BlurredEdgeTreatment.Unbounded
-                    )
+                    .fillMaxWidth()
+                    .windowInsetsPadding(NavigationBarDefaults.windowInsets)
+                    .defaultMinSize(minHeight = 80.dp)
             ) {
-                val tabWidth = size.width / tabs.size
-                drawCircle(
-                    color = LightRed,
-                    radius = size.height / 2,
-                    center = Offset(
-                        (tabWidth * animatedSelectedTabIndex) + tabWidth / 2,
-                        size.height / 2
+                val animatedSelectedTabIndex by animateFloatAsState(
+                    targetValue = selectedTabIndex.toFloat(),
+                    animationSpec = spring(
+                        stiffness = Spring.StiffnessLow,
+                        dampingRatio = Spring.DampingRatioLowBouncy,
                     )
                 )
-            }
 
-            Row {
-                tabs.forEach { tab ->
-                    val isSelected: Boolean
-                    val onClick: () -> Unit
-                    when (tab) {
-                        BottomBarTabs.Dashboard -> {
-                            isSelected = activeComponent is TabChild.DashboardTab
-                            onClick = component::onDashboardTabClicked
-                        }
-                        BottomBarTabs.Liquid -> {
-                            isSelected = activeComponent is TabChild.LiquidTab
-                            onClick = component::onLiquidTabClicked
-                        }
-                        BottomBarTabs.Achievement -> {
-                            isSelected = activeComponent is TabChild.AchievementTab
-                            onClick = component::onAchievementTabClicked
-                        }
-                        BottomBarTabs.Statistics -> {
-                            isSelected = activeComponent is TabChild.StatisticsTab
-                            onClick = component::onStatisticsTabClicked
-                        }
-                    }
-                    BottomTabItem(
-                        isSelected = isSelected,
-                        painter = painterResource(tab.icon),
-                        contentDescription = stringResource(tab.title),
-                        onClick = onClick
+                Canvas(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .blur(
+                            radius = 50.dp,
+                            edgeTreatment = BlurredEdgeTreatment.Unbounded
+                        )
+                ) {
+                    val tabWidth = size.width / tabs.size
+                    drawCircle(
+                        color = LightRed,
+                        radius = size.height / 2,
+                        center = Offset(
+                            (tabWidth * animatedSelectedTabIndex) + tabWidth / 2,
+                            size.height / 2
+                        )
                     )
+                }
+
+                Row {
+                    tabs.forEach { tab ->
+                        val isSelected: Boolean
+                        val onClick: () -> Unit
+                        when (tab) {
+                            BottomBarTabs.Dashboard -> {
+                                isSelected = activeComponent is TabChild.DashboardTab
+                                onClick = component::onDashboardTabClicked
+                            }
+
+                            BottomBarTabs.Liquid -> {
+                                isSelected = activeComponent is TabChild.LiquidTab
+                                onClick = component::onLiquidTabClicked
+                            }
+
+                            BottomBarTabs.Achievement -> {
+                                isSelected = activeComponent is TabChild.AchievementTab
+                                onClick = component::onAchievementTabClicked
+                            }
+
+                            BottomBarTabs.Statistics -> {
+                                isSelected = activeComponent is TabChild.StatisticsTab
+                                onClick = component::onStatisticsTabClicked
+                            }
+                        }
+                        BottomTabItem(
+                            isSelected = isSelected,
+                            painter = painterResource(tab.icon),
+                            contentDescription = stringResource(tab.title),
+                            onClick = onClick
+                        )
+                    }
                 }
             }
         }

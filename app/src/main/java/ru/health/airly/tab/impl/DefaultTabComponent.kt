@@ -17,14 +17,14 @@ import ru.health.airly.tab.api.TabComponent
 import ru.health.airly.tab.impl.config.TabConfig
 import ru.health.core.api.presentation.component.RootComponent
 import ru.health.featuredashboard.api.presentation.DashboardComponent
+import ru.health.featureliquid.api.presentation.root.LiquidComponent
 import ru.health.featurenotifications.api.domain.Achievement
 import ru.health.featurenotifications.api.presentation.AchievementComponent
 import ru.health.featurestatistics.api.presentation.StatisticsComponent
-import ru.health.featureliquid.api.presentation.LiquidDetailComponent
 
 internal class DefaultTabComponent @AssistedInject internal constructor(
     private val dashboardFactory: DashboardComponent.Factory,
-    private val inputLiquidFactory: LiquidDetailComponent.Factory,
+    private val liquidFactory: LiquidComponent.Factory,
     private val achievementFactory: AchievementComponent.Factory,
     private val statisticsFactory: StatisticsComponent.Factory,
     @Assisted componentContext: ComponentContext,
@@ -44,7 +44,7 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
 
     override fun child(config: TabConfig, context: ComponentContext): TabChild = when (config) {
         TabConfig.DashboardTab -> DashboardTab(component = dashboardComponent(context))
-        TabConfig.InputLiquidTab -> LiquidTab(component = inputLiquidComponent(context))
+        TabConfig.LiquidTab -> LiquidTab(component = liquidComponent(context))
         TabConfig.AchievementTab -> AchievementTab(component = achievementComponent(context))
         TabConfig.StatisticsTab -> StatisticsTab(component = statisticsComponent(context))
     }
@@ -54,7 +54,7 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
     }
 
     override fun onLiquidTabClicked() {
-        navigation.bringToFront(TabConfig.InputLiquidTab)
+        navigation.bringToFront(TabConfig.LiquidTab)
     }
 
     override fun onAchievementTabClicked() {
@@ -65,31 +65,27 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
         navigation.bringToFront(TabConfig.StatisticsTab)
     }
 
-    private fun dashboardComponent(
-        context: ComponentContext
-    ): DashboardComponent = dashboardFactory(
-        componentContext = context,
-        onNotifications = onNotifications,
-        onUploadDetail = onUploadDetail,
-    )
+    private fun dashboardComponent(context: ComponentContext): DashboardComponent =
+        dashboardFactory(
+            componentContext = context,
+            onNotifications = onNotifications,
+            onUploadDetail = onUploadDetail,
+        )
 
-    private fun inputLiquidComponent(
-        context: ComponentContext
-    ): LiquidDetailComponent = inputLiquidFactory(
-        componentContext = context
-    )
+    private fun liquidComponent(context: ComponentContext): LiquidComponent =
+        liquidFactory(
+            componentContext = context
+        )
 
-    private fun achievementComponent(
-        context: ComponentContext
-    ): AchievementComponent = achievementFactory(
-        componentContext = context
-    )
+    private fun achievementComponent(context: ComponentContext): AchievementComponent =
+        achievementFactory(
+            componentContext = context
+        )
 
-    private fun statisticsComponent(
-        context: ComponentContext
-    ): StatisticsComponent = statisticsFactory(
-        componentContext = context
-    )
+    private fun statisticsComponent(context: ComponentContext): StatisticsComponent =
+        statisticsFactory(
+            componentContext = context
+        )
 
     @AssistedFactory
     interface Factory : TabComponent.Factory {

@@ -10,13 +10,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import ru.health.core.impl.presentation.ui.theme.DarkBlue
 
 @Composable
 fun GradientBox(
     modifier: Modifier = Modifier,
+    blurred: Boolean = false,
     content: @Composable BoxScope.() -> Unit = {}
 ) {
     val topBrush = Brush.verticalGradient(
@@ -31,7 +34,11 @@ fun GradientBox(
     )
     val containerColor = if (isSystemInDarkTheme()) Color.Black else Color.White
     Box(modifier = modifier.background(containerColor)) {
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .then(if (blurred) Modifier.blur(50.dp) else Modifier)
+        ) {
             val canvasModifier = Modifier.fillMaxWidth()
             Canvas(
                 modifier = canvasModifier.weight(7f),

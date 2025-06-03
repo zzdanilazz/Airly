@@ -48,7 +48,10 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
     }
 
     private suspend fun editLiquidLevelApprove() {
-
+        val liquid = state.value.deviceType
+        if (liquid is DeviceType.Liquid) {
+            editLiquidLevel(liquid)
+        }
     }
 
     private suspend fun addLiquidBottle() {
@@ -60,7 +63,7 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
     }
 
     private suspend fun editLiquidLevel(liquid: DeviceType.Liquid) {
-
+        _navEvent.send(LiquidDetailNavEvent.EditLiquidLevel(liquid))
     }
 
     private suspend fun addDisposableApprove() {
