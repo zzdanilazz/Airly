@@ -1,7 +1,13 @@
 package ru.health.featureliquid.impl.presentation.detail.ui
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,20 +29,37 @@ internal fun LiquidDetail(
     state: LiquidDetailUiState,
     onAction: (LiquidDetailAction) -> Unit = {}
 ) {
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp)
-    ) {
-        val contentModifier = Modifier.align(Alignment.BottomStart)
-
-        if (state.deviceType is DeviceType.Liquid) {
-            Bottle(
-                modifier = contentModifier,
-                liquid = state.deviceType
+    AnimatedContent(
+        targetState = state.deviceType,
+        transitionSpec = {
+            if (targetState is DeviceType.Disposable) {
+                slideInHorizontally { width -> width } togetherWith
+                        slideOutHorizontally { width -> -width }
+            } else {
+                slideInHorizontally { width -> -width } togetherWith
+                        slideOutHorizontally { width -> width }
+            }.using(
+                SizeTransform(clip = false)
             )
-        } else {
-            Disposable(modifier = contentModifier)
+        }
+    ) { deviceType ->
+        Box(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp)
+        ) {
+            val contentModifier = Modifier.align(Alignment.BottomStart)
+
+            if (deviceType is DeviceType.Liquid) {
+                Bottle(
+                    modifier = contentModifier,
+                    liquid = deviceType
+                )
+            } else {
+                Disposable(
+                    modifier = contentModifier.fillMaxWidth(0.5f)
+                )
+            }
         }
     }
 }
