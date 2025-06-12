@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package ru.health.featuredashboard.impl.presentation
+package ru.health.featuredashboard.impl.presentation.root
 
 import dagger.Binds
 import dagger.Module

@@ -1,4 +1,4 @@
-package ru.health.featuredashboard.impl.presentation.ui
+package ru.health.featuredashboard.impl.presentation.root.ui
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -16,8 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import ru.health.core.api.presentation.component.bottom_bar.BottomBarHeight
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
-import ru.health.featuredashboard.impl.presentation.DashboardAction
-import ru.health.featuredashboard.impl.presentation.DashboardUiState
+import ru.health.featuredashboard.impl.presentation.root.DashboardAction
+import ru.health.featuredashboard.impl.presentation.root.DashboardUiState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

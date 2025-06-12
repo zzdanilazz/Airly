@@ -1,4 +1,4 @@
-package ru.health.featuredashboard.impl.presentation
+package ru.health.featuredashboard.impl.presentation.root
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -9,7 +9,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import ru.health.core.impl.presentation.EventEffect
 import ru.health.featuredashboard.api.presentation.DashboardComponent
-import ru.health.featuredashboard.impl.presentation.ui.DashboardContent
+import ru.health.featuredashboard.impl.presentation.root.ui.DashboardContent
 
 internal class DefaultDashboardComponent @AssistedInject internal constructor(
     @Assisted componentContext: ComponentContext,

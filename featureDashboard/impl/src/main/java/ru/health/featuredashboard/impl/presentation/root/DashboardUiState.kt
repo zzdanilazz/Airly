@@ -1,4 +1,4 @@
-package ru.health.featuredashboard.impl.presentation
+package ru.health.featuredashboard.impl.presentation.root
 
 import androidx.compose.runtime.Immutable
 import kotlin.time.Duration

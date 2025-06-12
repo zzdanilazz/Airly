@@ -1,4 +1,4 @@
-package ru.health.featuredashboard.impl.presentation.model
+package ru.health.featuredashboard.impl.presentation.root.model
 
 import kotlin.time.Duration
 

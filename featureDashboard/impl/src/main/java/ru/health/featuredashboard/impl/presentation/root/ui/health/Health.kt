@@ -1,4 +1,4 @@
-package ru.health.featuredashboard.impl.presentation.ui.health
+package ru.health.featuredashboard.impl.presentation.root.ui.health
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

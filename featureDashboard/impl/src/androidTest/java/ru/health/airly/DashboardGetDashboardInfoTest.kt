@@ -5,7 +5,7 @@ import com.atiurin.ultron.core.compose.createDefaultUltronComposeRule
 import com.atiurin.ultron.extensions.assertIsDisplayed
 import org.junit.Rule
 import org.junit.Test
-import ru.health.featuredashboard.impl.presentation.ui.dashboardUiStatePreview
+import ru.health.featuredashboard.impl.presentation.root.ui.dashboardUiStatePreview
 
 class DashboardGetDashboardInfoTest {
     @get:Rule

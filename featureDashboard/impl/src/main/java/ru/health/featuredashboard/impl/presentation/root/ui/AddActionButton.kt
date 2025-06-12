@@ -1,4 +1,4 @@
-package ru.health.featuredashboard.impl.presentation.ui
+package ru.health.featuredashboard.impl.presentation.root.ui
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape

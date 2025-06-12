@@ -55,8 +55,6 @@ class DefaultAppComponent @AssistedInject internal constructor(
 
     override fun child(config: Config, context: ComponentContext): Child = when(config) {
         is Config.Tab -> Tab(tab(context))
-        //todo
-        is Config.AchievementDetail -> Tab(tab(context))
         Config.NotificationList -> Tab(tab(context))
         Config.UploadDetail -> Tab(tab(context))
     }
@@ -68,7 +66,6 @@ class DefaultAppComponent @AssistedInject internal constructor(
 
     private fun tab(context: ComponentContext) = tabFactory(
         componentContext = context,
-        onAchievementDetail = {},
         onNotifications = {},
         onUploadDetail = {},
     )

@@ -1,4 +1,4 @@
-package ru.health.featuredashboard.impl.presentation.ui.saved_money
+package ru.health.featuredashboard.impl.presentation.root.ui.saved_money
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -34,7 +34,7 @@ import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.core.impl.presentation.ui.theme.LocalHazeState
 import ru.health.core.impl.presentation.ui.theme.RubikOneFamily
 import ru.health.featuredashboard.impl.R
-import ru.health.featuredashboard.impl.presentation.ui.dashboardUiStatePreview
+import ru.health.featuredashboard.impl.presentation.root.ui.dashboardUiStatePreview
 
 @Composable
 internal fun SavedMoneyCard(

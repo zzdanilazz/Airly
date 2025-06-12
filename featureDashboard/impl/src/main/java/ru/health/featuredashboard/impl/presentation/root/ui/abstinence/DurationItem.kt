@@ -1,4 +1,4 @@
-package ru.health.featuredashboard.impl.presentation.ui.abstinence
+package ru.health.featuredashboard.impl.presentation.root.ui.abstinence
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text

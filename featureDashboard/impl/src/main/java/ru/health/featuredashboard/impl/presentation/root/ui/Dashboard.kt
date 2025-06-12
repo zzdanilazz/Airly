@@ -1,4 +1,4 @@
-package ru.health.featuredashboard.impl.presentation.ui
+package ru.health.featuredashboard.impl.presentation.root.ui
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.PaddingValues
@@ -25,13 +25,13 @@ import kotlinx.coroutines.launch
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.core.impl.presentation.ui.theme.LocalHazeState
-import ru.health.featuredashboard.impl.presentation.DashboardAction
-import ru.health.featuredashboard.impl.presentation.DashboardUiState
-import ru.health.featuredashboard.impl.presentation.ui.abstinence.AbstinencePeriodCard
-import ru.health.featuredashboard.impl.presentation.ui.airly.Airly
-import ru.health.featuredashboard.impl.presentation.ui.banner.BannerFeed
-import ru.health.featuredashboard.impl.presentation.ui.health.Health
-import ru.health.featuredashboard.impl.presentation.ui.saved_money.SavedMoneyCard
+import ru.health.featuredashboard.impl.presentation.root.DashboardAction
+import ru.health.featuredashboard.impl.presentation.root.DashboardUiState
+import ru.health.featuredashboard.impl.presentation.root.ui.abstinence.AbstinencePeriodCard
+import ru.health.featuredashboard.impl.presentation.root.ui.airly.Airly
+import ru.health.featuredashboard.impl.presentation.root.ui.banner.BannerFeed
+import ru.health.featuredashboard.impl.presentation.root.ui.health.Health
+import ru.health.featuredashboard.impl.presentation.root.ui.saved_money.SavedMoneyCard
 
 @Composable
 internal fun Dashboard(

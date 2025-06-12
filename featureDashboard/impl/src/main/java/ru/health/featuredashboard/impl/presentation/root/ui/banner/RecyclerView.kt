@@ -1,4 +1,4 @@
-package ru.health.featuredashboard.impl.presentation.ui.banner
+package ru.health.featuredashboard.impl.presentation.root.ui.banner
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

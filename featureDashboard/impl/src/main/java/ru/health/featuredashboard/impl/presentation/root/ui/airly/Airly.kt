@@ -1,4 +1,4 @@
-package ru.health.featuredashboard.impl.presentation.ui.airly
+package ru.health.featuredashboard.impl.presentation.root.ui.airly
 
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable

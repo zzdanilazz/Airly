@@ -1,4 +1,4 @@
-package ru.health.featuredashboard.impl.presentation.ui.abstinence
+package ru.health.featuredashboard.impl.presentation.root.ui.abstinence
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.sp
 import ru.health.core.impl.presentation.ui.card.GlassmorphismCard
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.featuredashboard.impl.R
-import ru.health.featuredashboard.impl.presentation.model.AbstinencePeriod
-import ru.health.featuredashboard.impl.presentation.ui.dashboardUiStatePreview
+import ru.health.featuredashboard.impl.presentation.root.model.AbstinencePeriod
+import ru.health.featuredashboard.impl.presentation.root.ui.dashboardUiStatePreview
 import kotlin.time.Duration
 
 @Composable

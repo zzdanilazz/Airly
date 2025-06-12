@@ -1,12 +1,12 @@
-package ru.health.featuredashboard.impl.presentation.ui
+package ru.health.featuredashboard.impl.presentation.root.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import ru.health.featuredashboard.impl.presentation.DashboardAction
-import ru.health.featuredashboard.impl.presentation.DashboardViewModel
+import ru.health.featuredashboard.impl.presentation.root.DashboardAction
+import ru.health.featuredashboard.impl.presentation.root.DashboardViewModel
 
 @Composable
 internal fun DashboardContent(
