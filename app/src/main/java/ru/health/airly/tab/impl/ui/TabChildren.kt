@@ -40,7 +40,7 @@ internal fun TabChildren(
                 modifier = contentModifier,
                 bottomBarVisibility = bottomBarVisibility
             )
-            is TabChild.AchievementTab -> child.component.Render(modifier = contentModifier)
+            is TabChild.AchievementTab -> child.component.Render(modifier = Modifier.fillMaxSize())
             is TabChild.StatisticsTab -> child.component.Render(modifier = contentModifier)
         }
     }

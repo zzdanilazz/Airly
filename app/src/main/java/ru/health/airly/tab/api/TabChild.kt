@@ -2,7 +2,7 @@ package ru.health.airly.tab.api
 
 import ru.health.featuredashboard.api.presentation.DashboardComponent
 import ru.health.featureliquid.api.presentation.root.LiquidComponent
-import ru.health.featurenotifications.api.presentation.AchievementComponent
+import ru.health.featureachievement.api.presentation.AchievementListComponent
 import ru.health.featurestatistics.api.presentation.StatisticsComponent
 
 sealed interface TabChild {
@@ -21,7 +21,7 @@ sealed interface TabChild {
 
     class AchievementTab(
         override val tabIndex: Int = 2,
-        val component: AchievementComponent
+        val component: AchievementListComponent
     ) : TabChild
 
     class StatisticsTab(

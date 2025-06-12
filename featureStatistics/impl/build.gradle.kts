@@ -54,6 +54,8 @@ dependencies {
 
     implementation(libs.decompose)
 
+    implementation(libs.haze)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

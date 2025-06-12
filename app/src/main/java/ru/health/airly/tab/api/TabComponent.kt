@@ -3,7 +3,7 @@ package ru.health.airly.tab.api
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
-import ru.health.featurenotifications.api.domain.Achievement
+import ru.health.featureachievement.api.domain.model.Achievement
 
 interface TabComponent {
 

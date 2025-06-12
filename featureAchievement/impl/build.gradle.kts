@@ -38,6 +38,7 @@ dependencies {
     implementation(project(":featureAchievement:api"))
     implementation(project(":core:api"))
     implementation(project(":core:impl"))
+    implementation(project(":featureDashboard:api"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -54,6 +55,8 @@ dependencies {
     ksp(libs.dagger.compiler)
 
     implementation(libs.decompose)
+
+    implementation(libs.haze)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

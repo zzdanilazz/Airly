@@ -18,14 +18,14 @@ import ru.health.airly.tab.impl.config.TabConfig
 import ru.health.core.api.presentation.component.RootComponent
 import ru.health.featuredashboard.api.presentation.DashboardComponent
 import ru.health.featureliquid.api.presentation.root.LiquidComponent
-import ru.health.featurenotifications.api.domain.Achievement
-import ru.health.featurenotifications.api.presentation.AchievementComponent
+import ru.health.featureachievement.api.domain.model.Achievement
+import ru.health.featureachievement.api.presentation.AchievementListComponent
 import ru.health.featurestatistics.api.presentation.StatisticsComponent
 
 internal class DefaultTabComponent @AssistedInject internal constructor(
     private val dashboardFactory: DashboardComponent.Factory,
     private val liquidFactory: LiquidComponent.Factory,
-    private val achievementFactory: AchievementComponent.Factory,
+    private val achievementFactory: AchievementListComponent.Factory,
     private val statisticsFactory: StatisticsComponent.Factory,
     @Assisted componentContext: ComponentContext,
     @Assisted(ON_ACHIEVEMENT_DETAIL) private val onAchievementDetail: (achievement: Achievement) -> Unit,
@@ -77,7 +77,7 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
             componentContext = context
         )
 
-    private fun achievementComponent(context: ComponentContext): AchievementComponent =
+    private fun achievementComponent(context: ComponentContext): AchievementListComponent =
         achievementFactory(
             componentContext = context
         )
