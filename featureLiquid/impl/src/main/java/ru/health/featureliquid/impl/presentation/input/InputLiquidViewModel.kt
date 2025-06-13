@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.health.core.api.presentation.component.ComponentViewModel
-import ru.health.featureliquid.api.domain.model.DeviceType
+import ru.health.featureliquid.api.domain.model.Device
 
 internal class InputLiquidViewModel @AssistedInject constructor(
-    @Assisted liquid: DeviceType.Liquid
+    @Assisted liquid: Device
 ) : ComponentViewModel() {
 
     private val _state = MutableStateFlow(InputLiquidUiState(liquid = liquid))
@@ -56,6 +56,6 @@ internal class InputLiquidViewModel @AssistedInject constructor(
 
     @AssistedFactory
     interface Factory {
-        operator fun invoke(liquid: DeviceType.Liquid): InputLiquidViewModel
+        operator fun invoke(liquid: Device): InputLiquidViewModel
     }
 }

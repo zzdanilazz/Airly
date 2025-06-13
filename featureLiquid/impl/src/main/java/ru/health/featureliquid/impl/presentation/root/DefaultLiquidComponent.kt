@@ -17,7 +17,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import ru.health.core.api.presentation.component.RootComponent
 import ru.health.core.api.presentation.component.bottom_bar.BottomBarVisibility
-import ru.health.featureliquid.api.domain.model.DeviceType
+import ru.health.featureliquid.api.domain.model.Device
 import ru.health.featureliquid.api.presentation.detail.LiquidDetailComponent
 import ru.health.featureliquid.api.presentation.input.InputLiquidComponent
 import ru.health.featureliquid.api.presentation.root.LiquidChild
@@ -53,7 +53,7 @@ internal class DefaultLiquidComponent @AssistedInject internal constructor(
 
     private fun inputLiquidComponent(
         context: ComponentContext,
-        liquid: DeviceType.Liquid
+        liquid: Device
     ): InputLiquidComponent = inputLiquidFactory(
         componentContext = context,
         liquid = liquid,

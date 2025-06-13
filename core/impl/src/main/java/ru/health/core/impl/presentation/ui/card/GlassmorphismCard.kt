@@ -26,12 +26,14 @@ fun GlassmorphismCard(
     val alpha = if (isSystemInDarkTheme()) 0.2f else 0.5f
     Column(
         modifier = modifier
-            .clip(RoundedCornerShape(16.dp))
+            .clip(GlassmorphismCardShape)
             .hazeEffect(state = hazeState)
             .background(Color.White.copy(alpha = alpha)),
         content = content
     )
 }
+
+val GlassmorphismCardShape = RoundedCornerShape(16.dp)
 
 @Preview
 @Composable

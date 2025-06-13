@@ -7,14 +7,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import ru.health.core.api.domain.DeviceType
+import ru.health.core.impl.presentation.iconResId
+import ru.health.core.impl.presentation.ui._switch.SemitransparentSwitch
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun LiquidDetailTopBar(
     modifier: Modifier = Modifier,
-    isPodSelected: Boolean,
-    onSwitch: (Boolean) -> Unit = {}
+    selectedDeviceType: DeviceType = DeviceType.POD,
+    onSwitch: (deviceType: DeviceType) -> Unit = {}
 ) {
     CenterAlignedTopAppBar(
         modifier = modifier,
@@ -22,8 +25,9 @@ internal fun LiquidDetailTopBar(
             containerColor = Color.Transparent
         ),
         title = {
-            DeviceSwitch(
-                isPodSelected = isPodSelected,
+            SemitransparentSwitch(
+                items = DeviceType.entries.map { it to it.iconResId },
+                selectedIndex = selectedDeviceType.ordinal,
                 onSwitch = onSwitch
             )
         }
@@ -34,7 +38,7 @@ internal fun LiquidDetailTopBar(
 @Preview
 private fun LiquidDetailTopBarPodSelectedPreview() {
     AirlyTheme {
-        LiquidDetailTopBar(isPodSelected = true)
+        LiquidDetailTopBar(selectedDeviceType = DeviceType.POD)
     }
 }
 
@@ -42,6 +46,6 @@ private fun LiquidDetailTopBarPodSelectedPreview() {
 @Preview
 private fun LiquidDetailTopBarDisposableSelectedPreview() {
     AirlyTheme {
-        LiquidDetailTopBar(isPodSelected = false)
+        LiquidDetailTopBar(selectedDeviceType = DeviceType.DISPOSABLE)
     }
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="roubles">%1$s ₽</string>
+    <string name="pod">POD-система</string>
+    <string name="disposable">Одноразка</string>
 </resources>

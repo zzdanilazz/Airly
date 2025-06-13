@@ -8,13 +8,13 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import ru.health.core.impl.presentation.EventEffect
-import ru.health.featureliquid.api.domain.model.DeviceType
+import ru.health.featureliquid.api.domain.model.Device
 import ru.health.featureliquid.api.presentation.input.InputLiquidComponent
 import ru.health.featureliquid.impl.presentation.input.ui.InputLiquidContent
 
 internal class DefaultInputLiquidComponent @AssistedInject internal constructor(
     @Assisted componentContext: ComponentContext,
-    @Assisted liquid: DeviceType.Liquid,
+    @Assisted liquid: Device,
     @Assisted private val onBack: () -> Unit,
     private val inputLiquidViewModel: InputLiquidViewModel.Factory,
 ) : InputLiquidComponent, ComponentContext by componentContext {
@@ -39,7 +39,7 @@ internal class DefaultInputLiquidComponent @AssistedInject internal constructor(
     interface Factory : InputLiquidComponent.Factory {
         override fun invoke(
             componentContext: ComponentContext,
-            liquid: DeviceType.Liquid,
+            liquid: Device,
             onBack: () -> Unit
         ): DefaultInputLiquidComponent
     }

@@ -39,7 +39,7 @@ internal fun InputLiquid(
     onAction: (action: InputLiquidAction) -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
-    val difference = state.liquid.currentVolume - state.editedVolume
+    val difference = (state.liquid.currentVolume ?: 0f) - state.editedVolume
 
     GradientBox(
         modifier = modifier.fillMaxSize(),
@@ -65,7 +65,7 @@ internal fun InputLiquid(
             LiquidSlider(
                 modifier = Modifier.align(Alignment.Center),
                 editedVolume = state.editedVolume,
-                currentVolume = state.liquid.currentVolume
+                currentVolume = state.liquid.currentVolume ?: 0f
             ) {
                 onAction(InputLiquidAction.OnVolumeChange(it))
             }

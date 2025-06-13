@@ -13,4 +13,7 @@ sealed interface Config {
 
     @Serializable
     data object UploadDetail : Config
+
+    @Serializable
+    data object StartupParameters : Config
 }

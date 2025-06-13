@@ -13,5 +13,7 @@ internal fun StackContent(child: Child) {
             modifier = Modifier.fillMaxSize(),
             component = child.component
         )
+
+        is Child.StartupParameters -> child.component.Render(modifier = Modifier.fillMaxSize())
     }
 }

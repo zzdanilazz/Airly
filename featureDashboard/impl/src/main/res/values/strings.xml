@@ -6,4 +6,19 @@
     <string name="saved_money_title">Сэкономлено</string>
     <string name="dashboard_banner">Баннер на главной</string>
     <string name="dashboard_banner_unit_id">demo-feed-yandex</string>
+
+    <string name="proceed">Продолжить</string>
+    <string name="step_1">Какое у Вас устройство?</string>
+    <string name="step_2">Сколько Вы тратите?</string>
+    <string name="step_3">Какие у Вас интересы?</string>
+
+    <string name="price_per_flacon">Стоимость жидкости</string>
+    <string name="flacon_buy_period">На сколько ее хватает</string>
+
+    <string name="price_per_vaporizer">Стоимость испарителя</string>
+    <string name="vaporizer_buy_period">Сколько \"живет\" испаритель</string>
+
+    <string name="price_per_disposable">Стоимость одноразки</string>
+    <string name="disposable_buy_period">На сколько ее хватает</string>
+
 </resources>

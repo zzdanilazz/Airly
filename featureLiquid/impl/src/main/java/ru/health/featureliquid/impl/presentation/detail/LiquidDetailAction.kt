@@ -1,16 +1,17 @@
 package ru.health.featureliquid.impl.presentation.detail
 
-import ru.health.featureliquid.api.domain.model.DeviceType
+import ru.health.core.api.domain.DeviceType
+import ru.health.featureliquid.api.domain.model.Device
 
 internal sealed interface LiquidDetailAction {
 
     data object Init : LiquidDetailAction
 
-    data class SwitchDeviceType(val isPodSelected: Boolean): LiquidDetailAction
+    data class SwitchDeviceType(val deviceType: DeviceType): LiquidDetailAction
 
     data object EditLiquidLevelApprove: LiquidDetailAction
 
-    data class EditLiquidLevel(val liquid: DeviceType.Liquid): LiquidDetailAction
+    data class EditLiquidLevel(val liquid: Device): LiquidDetailAction
 
     data object AddLiquidBottle: LiquidDetailAction
 

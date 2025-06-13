@@ -19,7 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import ru.health.featureliquid.api.domain.model.BottleType
+import ru.health.core.api.domain.BottleType
 import ru.health.featureliquid.impl.R
 
 @Composable

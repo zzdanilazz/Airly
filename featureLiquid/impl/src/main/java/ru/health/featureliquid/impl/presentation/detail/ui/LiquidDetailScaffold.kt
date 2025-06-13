@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import ru.health.core.api.domain.DeviceType
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailAction
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailUiState
@@ -26,9 +27,9 @@ internal fun LiquidDetailScaffold(
     Scaffold(
         modifier = modifier,
         topBar = {
-            state.deviceType?.let {
+            state.device?.let { device ->
                 LiquidDetailTopBar(
-                    isPodSelected = it.isPodSelected,
+                    selectedDeviceType = device.deviceType,
                     onSwitch = {
                         onAction(LiquidDetailAction.SwitchDeviceType(it))
                     }
@@ -36,9 +37,9 @@ internal fun LiquidDetailScaffold(
             }
         },
         floatingActionButton = {
-            state.deviceType?.let {
+            state.device?.let { device ->
                 LiquidDetailFabGroup(
-                    isPodSelected = it.isPodSelected,
+                    isPodSelected = device.deviceType == DeviceType.POD,
                     onAction = onAction
                 )
             }
@@ -69,7 +70,7 @@ private fun LiquidDetailScaffoldPreview() {
 private fun LiquidDetailDisposableScaffoldPreview() {
     AirlyTheme {
         LiquidDetailScaffold(state = liquidDetailUiStatePreview.copy(
-            deviceType = disposablePreview
+            device = disposablePreview
         ))
     }
 }

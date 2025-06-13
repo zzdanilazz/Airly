@@ -10,25 +10,31 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
-import ru.health.featureliquid.api.domain.model.BottleType
-import ru.health.featureliquid.api.domain.model.DeviceType
+import ru.health.core.api.domain.BottleType
+import ru.health.featureliquid.api.domain.model.Device
 import ru.health.featureliquid.impl.presentation.detail.ui.liquidPreview
 
 @Composable
 internal fun Bottle(
     modifier: Modifier = Modifier,
-    liquid: DeviceType.Liquid
+    liquid: Device
 ) {
+    val bottleType = liquid.bottleType
+    val currentVolume = liquid.currentVolume
+
     Column(modifier = modifier) {
-        Cap(
-            modifier = Modifier.zIndex(1f),
-            bottleType = liquid.bottleType
-        )
-        Flacon(
-            modifier = Modifier.offset(y = (-30).dp),
-            bottleType = liquid.bottleType,
-            currentVolume = liquid.currentVolume
-        )
+        if (bottleType != null && currentVolume != null) {
+            Cap(
+                modifier = Modifier.zIndex(1f),
+                bottleType = bottleType
+            )
+
+            Flacon(
+                modifier = Modifier.offset(y = (-30).dp),
+                bottleType = bottleType,
+                currentVolume = currentVolume
+            )
+        }
     }
 }
 

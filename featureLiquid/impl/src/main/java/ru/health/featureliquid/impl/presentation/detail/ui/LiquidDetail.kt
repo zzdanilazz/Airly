@@ -16,8 +16,9 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
-import ru.health.featureliquid.api.domain.model.BottleType
-import ru.health.featureliquid.api.domain.model.DeviceType
+import ru.health.core.api.domain.BottleType
+import ru.health.featureliquid.api.domain.model.Device
+import ru.health.core.api.domain.DeviceType
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailAction
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailUiState
 import ru.health.featureliquid.impl.presentation.detail.ui.bottle.Bottle
@@ -30,9 +31,9 @@ internal fun LiquidDetail(
     onAction: (LiquidDetailAction) -> Unit = {}
 ) {
     AnimatedContent(
-        targetState = state.deviceType,
+        targetState = state.device,
         transitionSpec = {
-            if (targetState is DeviceType.Disposable) {
+            if (targetState?.deviceType == DeviceType.DISPOSABLE) {
                 slideInHorizontally { width -> width } togetherWith
                         slideOutHorizontally { width -> -width }
             } else {
@@ -42,7 +43,7 @@ internal fun LiquidDetail(
                 SizeTransform(clip = false)
             )
         }
-    ) { deviceType ->
+    ) { device ->
         Box(
             modifier = modifier
                 .fillMaxSize()
@@ -50,32 +51,36 @@ internal fun LiquidDetail(
         ) {
             val contentModifier = Modifier.align(Alignment.BottomStart)
 
-            if (deviceType is DeviceType.Liquid) {
-                Bottle(
-                    modifier = contentModifier,
-                    liquid = deviceType
-                )
-            } else {
-                Disposable(
-                    modifier = contentModifier.fillMaxWidth(0.5f)
-                )
+            device?.let {
+                if (it.deviceType == DeviceType.POD) {
+                    Bottle(
+                        modifier = contentModifier,
+                        liquid = it
+                    )
+                } else {
+                    Disposable(
+                        modifier = contentModifier.fillMaxWidth(0.5f)
+                    )
+                }
             }
         }
     }
 }
 
-internal val liquidPreview = DeviceType.Liquid(
+internal val liquidPreview = Device(
     id = 1,
     bottleType = BottleType.SMALL,
-    currentVolume = 25f
+    currentVolume = 25f,
+    deviceType = DeviceType.POD
 )
 
-internal val disposablePreview = DeviceType.Disposable(
-    id = 1
+internal val disposablePreview = Device(
+    id = 1,
+    deviceType = DeviceType.DISPOSABLE
 )
 
 internal val liquidDetailUiStatePreview = LiquidDetailUiState(
-    deviceType = liquidPreview
+    device = liquidPreview
 )
 
 @PreviewLightDark
@@ -97,7 +102,7 @@ private fun LiquidDetailDisposablePreview() {
         GradientBox {
             LiquidDetail(
                 state = liquidDetailUiStatePreview.copy(
-                    deviceType = disposablePreview
+                    device = disposablePreview
                 )
             )
         }

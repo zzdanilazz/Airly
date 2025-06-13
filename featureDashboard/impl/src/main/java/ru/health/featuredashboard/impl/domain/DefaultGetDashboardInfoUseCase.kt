@@ -8,7 +8,7 @@ import ru.health.core.api.domain.result.RootResult
 import ru.health.core.impl.domain.getDurationFlow
 import ru.health.featuredashboard.api.domain.DashboardInfo
 import ru.health.featuredashboard.api.domain.DashboardRepository
-import ru.health.featuredashboard.api.domain.GetDashboardInfoUseCase
+import ru.health.featuredashboard.api.domain.usecase.GetDashboardInfoUseCase
 import javax.inject.Inject
 import kotlin.time.ExperimentalTime
 

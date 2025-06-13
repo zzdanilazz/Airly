@@ -25,7 +25,7 @@ import ru.health.core.impl.presentation.ui.theme.LightRed
 import ru.health.core.impl.presentation.ui.theme.ModerateRed
 import ru.health.core.impl.presentation.ui.theme.PaleRed
 import ru.health.core.impl.presentation.ui.theme.RubikOneFamily
-import ru.health.featureliquid.api.domain.model.BottleType
+import ru.health.core.api.domain.BottleType
 import ru.health.featureliquid.impl.R
 import kotlin.math.roundToInt
 

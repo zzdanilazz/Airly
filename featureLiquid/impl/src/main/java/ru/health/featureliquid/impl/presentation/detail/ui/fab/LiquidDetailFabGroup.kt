@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import ru.health.core.impl.presentation.ui.theme.LightRed
 import ru.health.featureliquid.impl.R
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailAction
+import ru.health.core.impl.R as CoreR
 
 @Composable
 internal fun LiquidDetailFabGroup(
@@ -64,7 +65,7 @@ internal fun LiquidDetailFabGroup(
                 containerColor = Color.White,
                 contentColor = LightRed,
                 painter = addPainter,
-                textResId = R.string.disposable,
+                textResId = CoreR.string.disposable,
                 onClick = { onAction(LiquidDetailAction.AddDisposableApprove) }
             )
         }

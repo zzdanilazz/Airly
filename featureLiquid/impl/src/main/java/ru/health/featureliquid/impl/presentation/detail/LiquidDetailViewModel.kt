@@ -9,12 +9,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import ru.health.core.api.domain.DeviceType
 import ru.health.core.api.presentation.component.ComponentViewModel
-import ru.health.featureliquid.api.domain.model.DeviceType
-import ru.health.featureliquid.api.domain.usecase.GetDeviceTypeUseCase
+import ru.health.featureliquid.api.domain.model.Device
+import ru.health.featureliquid.api.domain.usecase.GetDeviceUseCase
 
 internal class LiquidDetailViewModel @AssistedInject constructor(
-    private val getDeviceTypeUseCase: GetDeviceTypeUseCase
+    private val getDeviceUseCase: GetDeviceUseCase
 ) : ComponentViewModel() {
 
     private val _state = MutableStateFlow(LiquidDetailUiState())
@@ -31,15 +32,15 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
             LiquidDetailAction.AddAtomizer -> addAtomizer()
             LiquidDetailAction.AddDisposableApprove -> addDisposableApprove()
             LiquidDetailAction.AddPuffsApprove -> addPuffsApprove()
-            is LiquidDetailAction.SwitchDeviceType -> switchDevice(action.isPodSelected)
+            is LiquidDetailAction.SwitchDeviceType -> switchDevice(action.deviceType)
             is LiquidDetailAction.EditLiquidLevel -> editLiquidLevel(action.liquid)
         }
     }
 
-    private suspend fun switchDevice(isPodSelected: Boolean) {
-        getDeviceTypeUseCase(isPodSelected)
+    private suspend fun switchDevice(deviceType: DeviceType) {
+        getDeviceUseCase(deviceType)
             .onSuccess {
-                _state.update { uiState -> uiState.copy(deviceType = it) }
+                _state.update { uiState -> uiState.copy(device = it) }
             }
             .onFailure {
                 //todo approve
@@ -48,8 +49,8 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
     }
 
     private suspend fun editLiquidLevelApprove() {
-        val liquid = state.value.deviceType
-        if (liquid is DeviceType.Liquid) {
+        val liquid = state.value.device
+        if (liquid?.deviceType == DeviceType.POD) {
             editLiquidLevel(liquid)
         }
     }
@@ -62,7 +63,7 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
 
     }
 
-    private suspend fun editLiquidLevel(liquid: DeviceType.Liquid) {
+    private suspend fun editLiquidLevel(liquid: Device) {
         _navEvent.send(LiquidDetailNavEvent.EditLiquidLevel(liquid))
     }
 
@@ -75,8 +76,8 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
     }
 
     private suspend fun init() {
-        getDeviceTypeUseCase().onSuccess {
-            _state.update { uiState -> uiState.copy(deviceType = it) }
+        getDeviceUseCase().onSuccess {
+            _state.update { uiState -> uiState.copy(device = it) }
         }
     }
 

@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
-import ru.health.featureliquid.api.domain.model.BottleType
+import ru.health.core.api.domain.BottleType
 import kotlin.math.sqrt
 
 @Composable
