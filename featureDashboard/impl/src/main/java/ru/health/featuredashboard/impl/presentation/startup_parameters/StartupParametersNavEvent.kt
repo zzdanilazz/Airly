@@ -1,6 +1,6 @@
 package ru.health.featuredashboard.impl.presentation.startup_parameters
 
-import ru.health.core.api.domain.FlaconParams
+import ru.health.featureliquid.api.domain.model.FlaconParams
 
 internal sealed interface StartupParametersNavEvent {
 

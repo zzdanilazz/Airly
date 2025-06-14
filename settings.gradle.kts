@@ -25,6 +25,9 @@ include(":app")
 include(":core:api")
 include(":core:impl")
 
+include(":database:api")
+include(":database:impl")
+
 include(":featureApprove:api")
 include(":featureApprove:impl")
 

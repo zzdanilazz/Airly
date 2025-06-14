@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import ru.health.core.api.domain.FlaconParams
+import ru.health.featureliquid.api.domain.model.FlaconParams
 import ru.health.core.api.domain.FlaconType
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
@@ -41,6 +41,7 @@ internal fun InputLiquid(
 ) {
     val scrollState = rememberScrollState()
     val difference = state.flaconParams.volume - state.editedVolume
+    val isFabVisible = difference > 0f && (!state.isPositiveVolume || state.editedVolume > 0)
 
     GradientBox(
         modifier = modifier.fillMaxSize(),
@@ -72,7 +73,7 @@ internal fun InputLiquid(
             }
             Column(modifier = Modifier.align(Alignment.BottomCenter)) {
                 AnimatedVisibility(
-                    visible = difference > 0f,
+                    visible = isFabVisible,
                     enter = scaleIn(),
                     exit = scaleOut()
                 ) {

@@ -19,6 +19,14 @@ internal fun LiquidDetailTopBar(
     selectedDeviceType: DeviceType = DeviceType.POD,
     onSwitch: (deviceType: DeviceType) -> Unit = {}
 ) {
+    val targetItems = DeviceType.entries
+        .filter { it.isPrimary }
+        .map { it to it.iconResId }
+
+    val selectedIndex = targetItems.indexOfFirst {
+        it.first == selectedDeviceType
+    }
+
     CenterAlignedTopAppBar(
         modifier = modifier,
         colors = TopAppBarDefaults.topAppBarColors().copy(
@@ -26,8 +34,8 @@ internal fun LiquidDetailTopBar(
         ),
         title = {
             SemitransparentSwitch(
-                items = DeviceType.entries.map { it to it.iconResId },
-                selectedIndex = selectedDeviceType.ordinal,
+                items = targetItems,
+                selectedIndex = selectedIndex,
                 onSwitch = onSwitch
             )
         }

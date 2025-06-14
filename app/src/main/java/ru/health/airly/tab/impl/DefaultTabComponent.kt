@@ -15,11 +15,10 @@ import ru.health.airly.tab.api.TabChild.LiquidTab
 import ru.health.airly.tab.api.TabChild.StatisticsTab
 import ru.health.airly.tab.api.TabComponent
 import ru.health.airly.tab.impl.config.TabConfig
-import ru.health.core.api.domain.Device
-import ru.health.core.api.domain.FlaconParams
 import ru.health.core.api.presentation.component.RootComponent
 import ru.health.featureachievement.api.presentation.AchievementListComponent
 import ru.health.featuredashboard.api.presentation.DashboardComponent
+import ru.health.featureliquid.api.domain.model.FlaconParams
 import ru.health.featureliquid.api.presentation.root.LiquidComponent
 import ru.health.featurestatistics.api.presentation.StatisticsComponent
 

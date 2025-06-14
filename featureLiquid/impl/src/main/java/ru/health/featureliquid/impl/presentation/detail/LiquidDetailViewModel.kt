@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.health.core.api.domain.DeviceType
-import ru.health.core.api.domain.FlaconParams
 import ru.health.core.api.presentation.component.ComponentViewModel
+import ru.health.featureliquid.api.domain.model.FlaconParams
 import ru.health.featureliquid.api.domain.usecase.GetDeviceUseCase
 
 internal class LiquidDetailViewModel @AssistedInject constructor(

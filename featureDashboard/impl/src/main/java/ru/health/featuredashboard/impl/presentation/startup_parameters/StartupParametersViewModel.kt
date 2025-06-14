@@ -9,16 +9,21 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import ru.health.core.api.data.date.DateFormatter
 import ru.health.core.api.domain.DeviceType
-import ru.health.core.api.domain.FlaconParams
 import ru.health.core.api.domain.FlaconType
 import ru.health.core.api.presentation.component.ComponentViewModel
+import ru.health.featuredashboard.api.domain.model.StartupParameters
 import ru.health.featuredashboard.api.domain.usecase.GetIsStartupParametersSavedUseCase
 import ru.health.featuredashboard.api.domain.usecase.SaveStartupParametersUseCase
+import ru.health.featureliquid.api.domain.model.Device
+import ru.health.featureliquid.api.domain.model.FlaconParams
+import java.util.Date
 
 internal class StartupParametersViewModel @AssistedInject constructor(
     private val saveStartupParametersUseCase: SaveStartupParametersUseCase,
-    private val getIsStartupParametersSavedUseCase: GetIsStartupParametersSavedUseCase
+    private val getIsStartupParametersSavedUseCase: GetIsStartupParametersSavedUseCase,
+    private val dateFormatter: DateFormatter
 ) : ComponentViewModel() {
 
     private val _state = MutableStateFlow(StartupParametersUiState())
@@ -108,9 +113,47 @@ internal class StartupParametersViewModel @AssistedInject constructor(
         }
     }
 
-    private suspend fun onFinished() {
-        saveStartupParametersUseCase
-        _navEvent.send(StartupParametersNavEvent.OpenApp)
+    private suspend fun onFinished() = with(_state.value) {
+        deviceType?.let {
+            val currentDate = dateFormatter.formatDate(Date())
+            val primaryDevice = Device(
+                deviceType = deviceType,
+                date = currentDate,
+                price = pricePerDevice.toInt(),
+                flaconParams = flaconParams
+            )
+
+            val secondaryDevice = if (deviceType == DeviceType.POD) {
+                Device(
+                    deviceType = DeviceType.VAPORIZER,
+                    date = currentDate,
+                    price = pricePerVaporizer.toInt()
+                )
+            } else null
+
+            val selectedInterests = interests
+                .filter { it.selected }
+                .map { it.name }
+                .toSet()
+
+            val startupParameters = StartupParameters(
+                interests = selectedInterests,
+                primaryDevice = primaryDevice,
+                secondaryDevice = secondaryDevice,
+                pricePerPrimaryDevice = pricePerDevice.toInt(),
+                primaryDeviceBuyPeriod = deviceBuyPeriod.toInt(),
+                pricePerSecondaryDevice = pricePerVaporizer
+                    .ifEmpty { null }
+                    ?.toInt(),
+                secondaryDeviceBuyPeriod = vaporizerBuyPeriod
+                    .ifEmpty { null }
+                    ?.toInt()
+            )
+
+            saveStartupParametersUseCase(startupParameters).onSuccess {
+                _navEvent.send(StartupParametersNavEvent.OpenApp)
+            }
+        }
     }
 
     @AssistedFactory

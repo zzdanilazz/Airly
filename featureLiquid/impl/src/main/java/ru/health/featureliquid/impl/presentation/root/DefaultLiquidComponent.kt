@@ -13,8 +13,8 @@ import com.arkivanov.decompose.value.Value
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import ru.health.core.api.domain.Device
-import ru.health.core.api.domain.FlaconParams
+import ru.health.featureliquid.api.domain.model.Device
+import ru.health.featureliquid.api.domain.model.FlaconParams
 import ru.health.core.api.presentation.component.RootComponent
 import ru.health.core.api.presentation.component.bottom_bar.BottomBarVisibility
 import ru.health.featureliquid.api.presentation.detail.LiquidDetailComponent

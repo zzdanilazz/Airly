@@ -8,7 +8,12 @@ googleDagger = "2.56"
 graphicsShapesVersion = "1.0.1"
 haze = "1.6.0"
 kotlin = "2.1.20"
+kotlinxCoroutinesCore = "1.10.2"
 mobileads = "7.12.3"
+roomCommon = "2.7.1"
+roomCompiler = "2.7.1"
+roomKtx = "2.7.1"
+roomRuntime = "2.7.1"
 serialization = "1.9.23"
 ksp = "2.1.20-1.0.31"
 firebase = "4.4.2"
@@ -44,6 +49,10 @@ androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", versi
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
 
 androidx-material-icons-extended = {  group = "androidx.compose.material", name = "material-icons-extended"}
+androidx-room-common = { module = "androidx.room:room-common", version.ref = "roomCommon" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
@@ -60,6 +69,7 @@ firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx"
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx" }
 haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 decompose-extensions-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }

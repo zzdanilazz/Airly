@@ -2,8 +2,7 @@ package ru.health.featuredashboard.api.presentation
 
 import androidx.compose.runtime.Immutable
 import com.arkivanov.decompose.ComponentContext
-import ru.health.core.api.domain.Device
-import ru.health.core.api.domain.FlaconParams
+import ru.health.featureliquid.api.domain.model.FlaconParams
 import ru.health.core.api.presentation.component.RenderComponent
 import ru.health.featureliquid.api.presentation.input.EditLiquidCallback
 

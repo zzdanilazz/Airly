@@ -67,7 +67,7 @@ internal fun SelectDeviceType(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                DeviceType.entries.forEach {
+                DeviceType.entries.filter { it.isPrimary }.forEach {
                     val scale by animateFloatAsState(if (selectedDeviceType == it) 1.1f else 1f)
                     val containerColor by animateColorAsState(
                         if (selectedDeviceType == it) Color.White else Color.Transparent

@@ -3,8 +3,8 @@ package ru.health.featureliquid.api.presentation.detail
 import androidx.compose.runtime.Immutable
 import com.arkivanov.decompose.ComponentContext
 import ru.health.core.api.presentation.component.RenderComponent
-import ru.health.core.api.domain.Device
-import ru.health.core.api.domain.FlaconParams
+import ru.health.featureliquid.api.domain.model.Device
+import ru.health.featureliquid.api.domain.model.FlaconParams
 
 @Immutable
 interface LiquidDetailComponent : RenderComponent {

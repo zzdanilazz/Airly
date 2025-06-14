@@ -1,7 +1,7 @@
 package ru.health.airly.root.impl.config
 
 import kotlinx.serialization.Serializable
-import ru.health.core.api.domain.FlaconParams
+import ru.health.featureliquid.api.domain.model.FlaconParams
 
 @Serializable
 sealed interface Config {
@@ -19,5 +19,8 @@ sealed interface Config {
     data object StartupParameters : Config
 
     @Serializable
-    data class InputLiquid(val flaconParams: FlaconParams) : Config
+    data class InputLiquid(
+        val flaconParams: FlaconParams,
+        val isPositiveVolume: Boolean = false
+    ) : Config
 }

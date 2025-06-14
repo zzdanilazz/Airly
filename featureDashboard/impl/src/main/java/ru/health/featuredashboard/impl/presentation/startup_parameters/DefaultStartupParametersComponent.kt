@@ -7,8 +7,8 @@ import com.arkivanov.essenty.instancekeeper.getOrCreate
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import ru.health.core.api.domain.Device
-import ru.health.core.api.domain.FlaconParams
+import ru.health.featureliquid.api.domain.model.Device
+import ru.health.featureliquid.api.domain.model.FlaconParams
 import ru.health.core.impl.presentation.EventEffect
 import ru.health.featuredashboard.api.presentation.StartupParametersComponent
 import ru.health.featuredashboard.impl.presentation.startup_parameters.ui.StartupParametersContent

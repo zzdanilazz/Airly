@@ -1,7 +1,7 @@
 package ru.health.featureliquid.impl.presentation.detail
 
 import ru.health.core.api.domain.DeviceType
-import ru.health.core.api.domain.FlaconParams
+import ru.health.featureliquid.api.domain.model.FlaconParams
 
 internal sealed interface LiquidDetailAction {
 

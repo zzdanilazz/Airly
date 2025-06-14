@@ -62,8 +62,7 @@ internal fun FillConsumption(
             modifier = Modifier
                 .align(Alignment.TopCenter)
                 .fillMaxWidth()
-                .padding(16.dp)
-                .padding(bottom = 70.dp),
+                .padding(horizontal = 16.dp),
             state = listState,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -83,12 +82,12 @@ internal fun FillConsumption(
                     deviceBuyPeriodTitleRes = R.string.disposable_buy_period
                     devicePlaceHolder = "2000"
                 }
-                null -> return@LazyColumn
+                else -> return@LazyColumn
             }
             item {
                 Spacer(
                     modifier = Modifier
-                        .padding(top = TopAppBarDefaults.MediumAppBarExpandedHeight)
+                        .padding(top = TopAppBarDefaults.MediumAppBarExpandedHeight + 16.dp)
                         .statusBarsPadding()
                 )
 
@@ -109,6 +108,7 @@ internal fun FillConsumption(
                 val deviceBuyPeriodImeAction = when (state.deviceType) {
                     DeviceType.POD -> ImeAction.Next
                     DeviceType.DISPOSABLE -> ImeAction.Done
+                    else -> return@item
                 }
 
                 NumberTextFieldWithTitle(
@@ -151,6 +151,7 @@ internal fun FillConsumption(
                             onAction(StartupParametersAction.ChangeVaporizerBuyPeriod(it))
                         }
                     )
+                    Spacer(modifier = Modifier.height(86.dp))
                 }
             }
         }

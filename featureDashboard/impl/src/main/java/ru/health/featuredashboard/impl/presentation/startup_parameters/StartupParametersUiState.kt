@@ -2,7 +2,7 @@ package ru.health.featuredashboard.impl.presentation.startup_parameters
 
 import androidx.compose.runtime.Immutable
 import ru.health.core.api.domain.DeviceType
-import ru.health.core.api.domain.FlaconParams
+import ru.health.featureliquid.api.domain.model.FlaconParams
 import ru.health.featuredashboard.impl.presentation.startup_parameters.model.Interest
 
 @Immutable

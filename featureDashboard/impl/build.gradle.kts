@@ -38,6 +38,7 @@ dependencies {
     implementation(project(":featureDashboard:api"))
     implementation(project(":core:api"))
     implementation(project(":core:impl"))
+    implementation(project(":database:api"))
     implementation(project(":featureAchievement:api"))
     implementation(project(":featureLiquid:api"))
 

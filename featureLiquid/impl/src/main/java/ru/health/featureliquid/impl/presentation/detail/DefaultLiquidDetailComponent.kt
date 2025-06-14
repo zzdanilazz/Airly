@@ -8,7 +8,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import ru.health.core.impl.presentation.EventEffect
-import ru.health.core.api.domain.FlaconParams
+import ru.health.featureliquid.api.domain.model.FlaconParams
 import ru.health.featureliquid.api.presentation.detail.LiquidDetailComponent
 import ru.health.featureliquid.impl.presentation.detail.ui.LiquidDetailContent
 

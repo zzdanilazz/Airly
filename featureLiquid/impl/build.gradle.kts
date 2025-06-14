@@ -38,6 +38,7 @@ dependencies {
     implementation(project(":featureLiquid:api"))
     implementation(project(":core:api"))
     implementation(project(":core:impl"))
+    implementation(project(":database:api"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -45,6 +45,9 @@ dependencies {
     implementation(project(":core:api"))
     implementation(project(":core:impl"))
 
+    implementation(project(":database:api"))
+    implementation(project(":database:impl"))
+
     implementation(project(":featureApprove:api"))
     implementation(project(":featureApprove:impl"))
 

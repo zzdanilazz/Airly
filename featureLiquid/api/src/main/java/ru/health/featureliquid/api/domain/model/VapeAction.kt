@@ -1,4 +1,4 @@
-package ru.health.core.api.domain
+package ru.health.featureliquid.api.domain.model
 
 import androidx.compose.runtime.Immutable
 import kotlinx.serialization.Serializable
