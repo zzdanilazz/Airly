@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import dev.chrisbanes.haze.hazeSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import ru.health.core.api.domain.DeviceType
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.core.impl.presentation.ui.theme.LocalHazeState
@@ -22,6 +23,7 @@ import ru.health.featuredashboard.impl.presentation.startup_parameters.StartupPa
 import ru.health.featuredashboard.impl.presentation.startup_parameters.StartupParametersUiState
 import ru.health.featuredashboard.impl.presentation.startup_parameters.ui.consumption.FillConsumption
 import ru.health.featuredashboard.impl.presentation.startup_parameters.ui.device.SelectDeviceType
+import ru.health.featuredashboard.impl.presentation.startup_parameters.ui.fill_liquid.FillLiquid
 import ru.health.featuredashboard.impl.presentation.startup_parameters.ui.interests.SelectInterests
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,6 +41,14 @@ internal fun StartupParameters(
             .fillMaxSize()
             .hazeSource(LocalHazeState.current)
     )
+
+    val selectInterests: @Composable () -> Unit = {
+        SelectInterests(
+            interests = state.interests,
+            onSelect = { onAction(StartupParametersAction.SelectInterest(it)) },
+            onProceed = { onAction(StartupParametersAction.OnFinished) }
+        )
+    }
 
     Column(
         modifier = modifier,
@@ -69,12 +79,17 @@ internal fun StartupParameters(
                     )
                 }
                 2 -> {
-                    SelectInterests(
-                        interests = state.interests,
-                        onSelect = { onAction(StartupParametersAction.SelectInterest(it)) },
-                        onProceed = { onAction(StartupParametersAction.OnFinished) }
-                    )
+                    if (state.deviceType == DeviceType.POD) {
+                        FillLiquid(
+                            state = state,
+                            onAction = onAction,
+                            onProceed = {
+                                coroutineScope.scrollToNextPage(pagerState)
+                            }
+                        )
+                    } else selectInterests()
                 }
+                3 -> selectInterests()
             }
         }
     }

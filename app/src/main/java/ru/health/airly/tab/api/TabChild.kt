@@ -1,11 +1,12 @@
 package ru.health.airly.tab.api
 
-import ru.health.featuredashboard.api.presentation.DashboardComponent
-import ru.health.featureliquid.api.presentation.root.LiquidComponent
 import ru.health.featureachievement.api.presentation.AchievementListComponent
+import ru.health.featuredashboard.api.presentation.DashboardComponent
+import ru.health.featureliquid.api.presentation.input.EditLiquidCallback
+import ru.health.featureliquid.api.presentation.root.LiquidComponent
 import ru.health.featurestatistics.api.presentation.StatisticsComponent
 
-sealed interface TabChild {
+sealed interface TabChild: EditLiquidCallback {
 
     val tabIndex: Int
 
@@ -17,7 +18,7 @@ sealed interface TabChild {
     class LiquidTab(
         override val tabIndex: Int = 1,
         val component: LiquidComponent
-    ) : TabChild
+    ) : TabChild, EditLiquidCallback by component
 
     class AchievementTab(
         override val tabIndex: Int = 2,

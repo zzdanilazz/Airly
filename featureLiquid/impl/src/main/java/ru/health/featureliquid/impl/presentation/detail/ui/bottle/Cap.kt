@@ -21,13 +21,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.health.core.api.domain.BottleType
 import ru.health.core.impl.presentation.ui.theme.LightRed
 import ru.health.core.impl.presentation.ui.theme.ModerateRed
 import ru.health.core.impl.presentation.ui.theme.PaleRed
 import ru.health.core.impl.presentation.ui.theme.RubikOneFamily
-import ru.health.core.api.domain.BottleType
 import ru.health.featureliquid.impl.R
 import kotlin.math.roundToInt
+import ru.health.core.impl.R as CoreR
 
 @Composable
 internal fun Cap(
@@ -52,7 +53,7 @@ internal fun Cap(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = stringResource(R.string.ml, bottleType.volume.roundToInt()),
+                text = stringResource(CoreR.string.ml_int, bottleType.volume.roundToInt()),
                 fontFamily = RubikOneFamily,
                 fontSize = 24.sp,
                 color = ModerateRed

@@ -2,4 +2,7 @@
     <string name="roubles">%1$s ₽</string>
     <string name="pod">POD-система</string>
     <string name="disposable">Одноразка</string>
+    <string name="bottle_volume">Объем флакона</string>
+    <string name="ml">%1$.1f мл</string>
+    <string name="ml_int">%1s мл</string>
 </resources>

@@ -13,7 +13,9 @@ import com.arkivanov.decompose.router.slot.ChildSlot
 import com.arkivanov.decompose.router.slot.childSlot
 import com.arkivanov.decompose.router.slot.dismiss
 import com.arkivanov.decompose.router.stack.ChildStack
+import com.arkivanov.decompose.router.stack.active
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.value.Value
 import dagger.assisted.Assisted
@@ -27,14 +29,17 @@ import ru.health.airly.root.impl.config.SlotConfig
 import ru.health.airly.root.impl.ui.SlotContent
 import ru.health.airly.root.impl.ui.StackContent
 import ru.health.airly.tab.api.TabComponent
+import ru.health.core.api.domain.Device
 import ru.health.core.api.presentation.component.SlotRootComponent
 import ru.health.featuredashboard.api.presentation.StartupParametersComponent
+import ru.health.featureliquid.api.presentation.input.InputLiquidComponent
 import ru.health.featurenotifications.api.presentation.ApproveComponent
 
 class DefaultAppComponent @AssistedInject internal constructor(
     private val tabFactory: TabComponent.Factory,
     private val approveFactory: ApproveComponent.Factory,
     private val startupParametersFactory: StartupParametersComponent.Factory,
+    private val inputLiquidFactory: InputLiquidComponent.Factory,
     @Assisted componentContext: ComponentContext,
 ) : SlotRootComponent<Config, Child, SlotConfig, SlotChild>(componentContext), AppComponent {
 
@@ -60,6 +65,7 @@ class DefaultAppComponent @AssistedInject internal constructor(
         Config.NotificationList -> Child.Tab(tab(context))
         Config.UploadDetail -> Child.Tab(tab(context))
         Config.StartupParameters -> Child.StartupParameters(startupParameters(context))
+        is Config.InputLiquid -> Child.InputLiquid(inputLiquidComponent(context, config.liquid))
     }
 
     override fun slotChild(slotConfig: SlotConfig, context: ComponentContext): SlotChild =
@@ -71,6 +77,9 @@ class DefaultAppComponent @AssistedInject internal constructor(
         componentContext = context,
         onNotifications = {},
         onUploadDetail = {},
+        onInputLiquid = {
+            navigation.pushNew(Config.InputLiquid(it))
+        }
     )
 
     private fun approve(context: ComponentContext) = approveFactory(
@@ -82,7 +91,24 @@ class DefaultAppComponent @AssistedInject internal constructor(
         componentContext = context,
         onApp = {
             navigation.pushNew(Config.Tab)
+        },
+        onInputLiquid = {
+            navigation.pushNew(Config.InputLiquid(it))
         }
+    )
+
+    private fun inputLiquidComponent(
+        context: ComponentContext,
+        liquid: Device
+    ): InputLiquidComponent = inputLiquidFactory(
+        componentContext = context,
+        liquid = liquid,
+        onEdited = { editedVolume ->
+            navigation.pop {
+                stack.active.instance.onLiquidEdited(editedVolume)
+            }
+        },
+        onBack = { navigation.pop() }
     )
 
     @OptIn(ExperimentalDecomposeApi::class)

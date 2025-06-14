@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import ru.health.core.impl.presentation.ui.theme.RubikOneFamily
 import ru.health.core.impl.presentation.ui.theme.VeryDarkGray
-import ru.health.featureliquid.impl.R
+import ru.health.core.impl.R as CoreR
 
 @Composable
 internal fun Liquid(
@@ -27,7 +27,7 @@ internal fun Liquid(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = stringResource(R.string.ml, currentVolume),
+            text = stringResource(CoreR.string.ml, currentVolume),
             fontFamily = RubikOneFamily,
             fontSize = 24.sp,
             color = Color.White

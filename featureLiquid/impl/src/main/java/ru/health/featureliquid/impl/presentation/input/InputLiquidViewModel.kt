@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import ru.health.core.api.domain.Device
 import ru.health.core.api.presentation.component.ComponentViewModel
-import ru.health.featureliquid.api.domain.model.Device
 
 internal class InputLiquidViewModel @AssistedInject constructor(
     @Assisted liquid: Device
@@ -42,7 +42,8 @@ internal class InputLiquidViewModel @AssistedInject constructor(
     }
 
     private suspend fun onSaveApprove() {
-
+        //todo
+        _navEvent.send(InputLiquidNavEvent.OnLiquidEdited(_state.value.editedVolume))
     }
 
     private suspend fun onSave(volume: Int) {

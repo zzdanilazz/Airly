@@ -1,6 +1,6 @@
 package ru.health.featureliquid.impl.presentation.detail
 
-import ru.health.featureliquid.api.domain.model.Device
+import ru.health.core.api.domain.Device
 
 internal sealed interface LiquidDetailNavEvent {
 

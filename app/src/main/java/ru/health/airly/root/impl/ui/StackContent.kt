@@ -15,5 +15,6 @@ internal fun StackContent(child: Child) {
         )
 
         is Child.StartupParameters -> child.component.Render(modifier = Modifier.fillMaxSize())
+        is Child.InputLiquid -> child.component.Render(modifier = Modifier.fillMaxSize())
     }
 }

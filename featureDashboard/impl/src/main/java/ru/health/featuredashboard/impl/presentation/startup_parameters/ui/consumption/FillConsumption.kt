@@ -12,10 +12,10 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -31,6 +31,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.health.core.api.domain.DeviceType
+import ru.health.core.impl.presentation.scroll.scrollToItemOnFocusChange
 import ru.health.core.impl.presentation.ui.button.PrimaryButton
 import ru.health.core.impl.presentation.ui.field.DefaultTextField
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
@@ -48,7 +49,7 @@ internal fun FillConsumption(
     onAction: (action: StartupParametersAction) -> Unit = {},
     onProceed: () -> Unit = {}
 ) {
-    val scrollState = rememberScrollState()
+    val listState = rememberLazyListState()
     val focusManager = LocalFocusManager.current
 
     Box(
@@ -57,13 +58,13 @@ internal fun FillConsumption(
             .imePadding()
             .navigationBarsPadding()
     ) {
-        Column(
+        LazyColumn(
             modifier = Modifier
-                .verticalScroll(scrollState)
                 .align(Alignment.TopCenter)
                 .fillMaxWidth()
                 .padding(16.dp)
                 .padding(bottom = 70.dp),
+            state = listState,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -82,62 +83,75 @@ internal fun FillConsumption(
                     deviceBuyPeriodTitleRes = R.string.disposable_buy_period
                     devicePlaceHolder = "2000"
                 }
-                null -> return
+                null -> return@LazyColumn
             }
-            Spacer(
-                modifier = Modifier
-                    .padding(top = TopAppBarDefaults.MediumAppBarExpandedHeight)
-                    .statusBarsPadding()
-            )
+            item {
+                Spacer(
+                    modifier = Modifier
+                        .padding(top = TopAppBarDefaults.MediumAppBarExpandedHeight)
+                        .statusBarsPadding()
+                )
 
-            NumberTextFieldWithTitle(
-                titleRes = devicePriceTitleRes,
-                imeAction = ImeAction.Next,
-                value = state.pricePerDevice,
-                placeholder = devicePlaceHolder,
-                trailingText = "₽",
-                onValueChange = {
-                    onAction(StartupParametersAction.ChangeDevicePrice(it))
-                }
-            )
-
-            val deviceBuyPeriodImeAction = when (state.deviceType) {
-                DeviceType.POD -> ImeAction.Next
-                DeviceType.DISPOSABLE -> ImeAction.Done
-            }
-
-            NumberTextFieldWithTitle(
-                titleRes = deviceBuyPeriodTitleRes,
-                imeAction = deviceBuyPeriodImeAction,
-                value = state.deviceBuyPeriod,
-                placeholder = "14",
-                trailingText = "сут.",
-                onValueChange = {
-                    onAction(StartupParametersAction.ChangeDeviceBuyPeriod(it))
-                }
-            )
-
-            if (state.deviceType == DeviceType.POD) {
                 NumberTextFieldWithTitle(
-                    titleRes = R.string.price_per_vaporizer,
+                    modifier = Modifier.scrollToItemOnFocusChange(listState, 0),
+                    titleRes = devicePriceTitleRes,
                     imeAction = ImeAction.Next,
-                    value = state.pricePerVaporizer,
-                    placeholder = "300",
+                    value = state.pricePerDevice,
+                    placeholder = devicePlaceHolder,
                     trailingText = "₽",
                     onValueChange = {
-                        onAction(StartupParametersAction.ChangeVaporizerPrice(it))
+                        onAction(StartupParametersAction.ChangeDevicePrice(it))
                     }
                 )
+            }
+
+            item {
+                val deviceBuyPeriodImeAction = when (state.deviceType) {
+                    DeviceType.POD -> ImeAction.Next
+                    DeviceType.DISPOSABLE -> ImeAction.Done
+                }
+
                 NumberTextFieldWithTitle(
-                    titleRes = R.string.vaporizer_buy_period,
-                    imeAction = ImeAction.Done,
-                    value = state.vaporizerBuyPeriod,
-                    placeholder = "21",
+                    modifier = Modifier.scrollToItemOnFocusChange(listState, 1),
+                    titleRes = deviceBuyPeriodTitleRes,
+                    imeAction = deviceBuyPeriodImeAction,
+                    value = state.deviceBuyPeriod,
+                    placeholder = "14",
                     trailingText = "сут.",
                     onValueChange = {
-                        onAction(StartupParametersAction.ChangeVaporizerBuyPeriod(it))
+                        onAction(StartupParametersAction.ChangeDeviceBuyPeriod(it))
                     }
                 )
+            }
+
+            if (state.deviceType == DeviceType.POD) {
+                item {
+                    NumberTextFieldWithTitle(
+                        modifier = Modifier.scrollToItemOnFocusChange(listState, 2),
+                        titleRes = R.string.price_per_vaporizer,
+                        imeAction = ImeAction.Next,
+                        value = state.pricePerVaporizer,
+                        placeholder = "300",
+                        trailingText = "₽",
+                        onValueChange = {
+                            onAction(StartupParametersAction.ChangeVaporizerPrice(it))
+                        }
+                    )
+                }
+
+                item {
+                    NumberTextFieldWithTitle(
+                        modifier = Modifier.scrollToItemOnFocusChange(listState, 3),
+                        titleRes = R.string.vaporizer_buy_period,
+                        imeAction = ImeAction.Done,
+                        value = state.vaporizerBuyPeriod,
+                        placeholder = "21",
+                        trailingText = "сут.",
+                        onValueChange = {
+                            onAction(StartupParametersAction.ChangeVaporizerBuyPeriod(it))
+                        }
+                    )
+                }
             }
         }
 

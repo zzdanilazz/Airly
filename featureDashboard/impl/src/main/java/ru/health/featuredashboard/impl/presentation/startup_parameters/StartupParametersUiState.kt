@@ -1,8 +1,10 @@
 package ru.health.featuredashboard.impl.presentation.startup_parameters
 
 import androidx.compose.runtime.Immutable
+import ru.health.core.api.domain.BottleType
 import ru.health.core.api.domain.DeviceType
 import ru.health.featuredashboard.impl.presentation.startup_parameters.model.Interest
+import ru.health.core.api.domain.Device
 
 @Immutable
 internal data class StartupParametersUiState(
@@ -13,6 +15,9 @@ internal data class StartupParametersUiState(
 
     val pricePerVaporizer: String = "",
     val vaporizerBuyPeriod: String = "",
+
+    val bottleType: BottleType? = null,
+    val device: Device? = null,
 
     val interests: List<Interest> = listOf(
         Interest("Путешествия"),

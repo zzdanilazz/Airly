@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.core.api.domain.BottleType
-import ru.health.featureliquid.api.domain.model.Device
+import ru.health.core.api.domain.Device
 import ru.health.core.api.domain.DeviceType
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailAction
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailUiState

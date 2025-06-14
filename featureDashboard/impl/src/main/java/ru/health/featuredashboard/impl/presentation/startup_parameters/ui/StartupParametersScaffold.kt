@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import dev.chrisbanes.haze.hazeSource
+import ru.health.core.api.domain.DeviceType
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.core.impl.presentation.ui.theme.LocalHazeState
 import ru.health.featuredashboard.impl.presentation.startup_parameters.StartupParametersAction
@@ -24,7 +25,9 @@ internal fun StartupParametersScaffold(
     state: StartupParametersUiState,
     onAction: (action: StartupParametersAction) -> Unit = {}
 ) {
-    val pagerState = rememberPagerState { 3 }
+    val pagerState = rememberPagerState {
+        if (state.deviceType == DeviceType.POD) 4 else 3
+    }
 
     Scaffold(
         modifier = modifier,
@@ -41,7 +44,10 @@ internal fun StartupParametersScaffold(
             pagerState = pagerState,
             onAction = onAction
         )
-        StartupParametersTopBar(pagerState = pagerState)
+        StartupParametersTopBar(
+            pagerState = pagerState,
+            deviceType = state.deviceType
+        )
     }
 }
 

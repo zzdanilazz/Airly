@@ -8,9 +8,10 @@
     <string name="dashboard_banner_unit_id">demo-feed-yandex</string>
 
     <string name="proceed">Продолжить</string>
-    <string name="step_1">Какое у Вас устройство?</string>
-    <string name="step_2">Сколько Вы тратите?</string>
-    <string name="step_3">Какие у Вас интересы?</string>
+    <string name="what_is_your_device">Какое у Вас устройство?</string>
+    <string name="how_much_do_you_consume">Сколько Вы тратите?</string>
+    <string name="what_is_the_liquid_rest">Сколько жидкости осталось?</string>
+    <string name="what_is_your_interests">Какие у Вас интересы?</string>
 
     <string name="price_per_flacon">Стоимость жидкости</string>
     <string name="flacon_buy_period">На сколько ее хватает</string>
@@ -20,5 +21,8 @@
 
     <string name="price_per_disposable">Стоимость одноразки</string>
     <string name="disposable_buy_period">На сколько ее хватает</string>
+
+    <string name="current_volume">Текущий объем: %1$s</string>
+    <string name="edit_current_volume">Изменить текущий объем</string>
 
 </resources>

@@ -26,6 +26,7 @@ import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.core.impl.presentation.ui.theme.LightRed
 import ru.health.core.impl.presentation.ui.theme.RubikOneFamily
 import ru.health.featureliquid.impl.R
+import ru.health.core.impl.R as CoreR
 
 @Composable
 internal fun LiquidSlider(

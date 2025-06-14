@@ -8,5 +8,9 @@ interface MetaDataStore {
 
     suspend fun getAchievementValue(id: Int): Flow<Int>
 
+    suspend fun saveIsStartupParametersSaved()
+
+    suspend fun getIsStartupParametersSaved(): Boolean
+
     suspend fun clear()
 }

@@ -7,14 +7,15 @@ import com.arkivanov.essenty.instancekeeper.getOrCreate
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import ru.health.core.api.domain.Device
 import ru.health.core.impl.presentation.EventEffect
-import ru.health.featureliquid.api.domain.model.Device
 import ru.health.featureliquid.api.presentation.input.InputLiquidComponent
 import ru.health.featureliquid.impl.presentation.input.ui.InputLiquidContent
 
 internal class DefaultInputLiquidComponent @AssistedInject internal constructor(
     @Assisted componentContext: ComponentContext,
     @Assisted liquid: Device,
+    @Assisted private val onEdited: (editedVolume: Float) -> Unit,
     @Assisted private val onBack: () -> Unit,
     private val inputLiquidViewModel: InputLiquidViewModel.Factory,
 ) : InputLiquidComponent, ComponentContext by componentContext {
@@ -26,6 +27,7 @@ internal class DefaultInputLiquidComponent @AssistedInject internal constructor(
         EventEffect(viewModel.navEvent) { event ->
             when (event) {
                 InputLiquidNavEvent.Back -> onBack()
+                is InputLiquidNavEvent.OnLiquidEdited -> onEdited(event.editedVolume)
             }
         }
 
@@ -40,6 +42,7 @@ internal class DefaultInputLiquidComponent @AssistedInject internal constructor(
         override fun invoke(
             componentContext: ComponentContext,
             liquid: Device,
+            onEdited: (Float) -> Unit,
             onBack: () -> Unit
         ): DefaultInputLiquidComponent
     }

@@ -1,7 +1,7 @@
 package ru.health.featureliquid.impl.presentation.input
 
 import androidx.compose.runtime.Immutable
-import ru.health.featureliquid.api.domain.model.Device
+import ru.health.core.api.domain.Device
 
 @Immutable
 internal data class InputLiquidUiState(

@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.chrisbanes.haze.hazeEffect
+import ru.health.core.api.domain.DeviceType
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.core.impl.presentation.ui.theme.LightRed
 import ru.health.core.impl.presentation.ui.theme.LocalHazeState
@@ -33,6 +34,7 @@ import ru.health.featuredashboard.impl.R
 @Composable
 internal fun StartupParametersTopBar(
     modifier: Modifier = Modifier,
+    deviceType: DeviceType? = DeviceType.POD,
     pagerState: PagerState = rememberPagerState { 3 },
 ) {
     MediumTopAppBar(
@@ -44,9 +46,14 @@ internal fun StartupParametersTopBar(
         ),
         navigationIcon = {
             val text = when (pagerState.currentPage) {
-                0 -> stringResource(R.string.step_1)
-                1 -> stringResource(R.string.step_2)
-                2 -> stringResource(R.string.step_3)
+                0 -> stringResource(R.string.what_is_your_device)
+                1 -> stringResource(R.string.how_much_do_you_consume)
+                2 -> if (deviceType == DeviceType.POD) {
+                    stringResource(R.string.what_is_the_liquid_rest)
+                } else {
+                    stringResource(R.string.what_is_your_interests)
+                }
+                3 -> stringResource(R.string.what_is_your_interests)
                 else -> ""
             }
             Text(

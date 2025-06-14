@@ -35,6 +35,7 @@ android {
 dependencies {
     implementation(project(":core:api"))
     implementation(project(":featureAchievement:api"))
+    implementation(project(":featureLiquid:api"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

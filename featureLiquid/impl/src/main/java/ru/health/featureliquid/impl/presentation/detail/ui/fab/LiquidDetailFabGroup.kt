@@ -49,7 +49,7 @@ internal fun LiquidDetailFabGroup(
             LiquidDetailFab(
                 containerColor = LightRed,
                 contentColor = Color.White,
-                painter = painterResource(R.drawable.ic_level),
+                painter = painterResource(CoreR.drawable.ic_level),
                 textResId = R.string.liquid_fab,
                 onClick = { onAction(LiquidDetailAction.EditLiquidLevelApprove) }
             )
