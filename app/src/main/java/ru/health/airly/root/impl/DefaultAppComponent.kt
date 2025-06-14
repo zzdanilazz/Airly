@@ -29,7 +29,7 @@ import ru.health.airly.root.impl.config.SlotConfig
 import ru.health.airly.root.impl.ui.SlotContent
 import ru.health.airly.root.impl.ui.StackContent
 import ru.health.airly.tab.api.TabComponent
-import ru.health.core.api.domain.Device
+import ru.health.core.api.domain.FlaconParams
 import ru.health.core.api.presentation.component.SlotRootComponent
 import ru.health.featuredashboard.api.presentation.StartupParametersComponent
 import ru.health.featureliquid.api.presentation.input.InputLiquidComponent
@@ -65,7 +65,7 @@ class DefaultAppComponent @AssistedInject internal constructor(
         Config.NotificationList -> Child.Tab(tab(context))
         Config.UploadDetail -> Child.Tab(tab(context))
         Config.StartupParameters -> Child.StartupParameters(startupParameters(context))
-        is Config.InputLiquid -> Child.InputLiquid(inputLiquidComponent(context, config.liquid))
+        is Config.InputLiquid -> Child.InputLiquid(inputLiquidComponent(context, config.flaconParams))
     }
 
     override fun slotChild(slotConfig: SlotConfig, context: ComponentContext): SlotChild =
@@ -99,10 +99,10 @@ class DefaultAppComponent @AssistedInject internal constructor(
 
     private fun inputLiquidComponent(
         context: ComponentContext,
-        liquid: Device
+        flaconParams: FlaconParams
     ): InputLiquidComponent = inputLiquidFactory(
         componentContext = context,
-        liquid = liquid,
+        flaconParams = flaconParams,
         onEdited = { editedVolume ->
             navigation.pop {
                 stack.active.instance.onLiquidEdited(editedVolume)

@@ -1,4 +1,4 @@
-package ru.health.featuredashboard.api.domain
+package ru.health.featuredashboard.api.domain.model
 
 import kotlinx.coroutines.flow.Flow
 import kotlin.time.Duration

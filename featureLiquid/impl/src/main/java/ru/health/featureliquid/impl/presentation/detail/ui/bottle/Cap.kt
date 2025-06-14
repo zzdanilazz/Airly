@@ -21,7 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.health.core.api.domain.BottleType
+import ru.health.core.api.domain.FlaconType
 import ru.health.core.impl.presentation.ui.theme.LightRed
 import ru.health.core.impl.presentation.ui.theme.ModerateRed
 import ru.health.core.impl.presentation.ui.theme.PaleRed
@@ -33,11 +33,11 @@ import ru.health.core.impl.R as CoreR
 @Composable
 internal fun Cap(
     modifier: Modifier = Modifier,
-    bottleType: BottleType
+    flaconType: FlaconType
 ) {
     Column(modifier = modifier) {
         Image(
-            modifier = Modifier.size(bottleType.upperCapSize),
+            modifier = Modifier.size(flaconType.upperCapSize),
             painter = painterResource(R.drawable.illustration_cap),
             contentScale = ContentScale.FillBounds,
             contentDescription = null
@@ -48,12 +48,12 @@ internal fun Cap(
         Box(
             modifier = Modifier
                 .offset(y = (-5).dp)
-                .size(bottleType.bottomCapSize)
+                .size(flaconType.bottomCapSize)
                 .background(brush, RoundedCornerShape(5.dp)),
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = stringResource(CoreR.string.ml_int, bottleType.volume.roundToInt()),
+                text = stringResource(CoreR.string.ml_int, flaconType.volume.roundToInt()),
                 fontFamily = RubikOneFamily,
                 fontSize = 24.sp,
                 color = ModerateRed
@@ -61,15 +61,15 @@ internal fun Cap(
         }
         Spacer(
             modifier = Modifier
-                .width(bottleType.bottomCapSize.width)
+                .width(flaconType.bottomCapSize.width)
                 .height(16.dp)
                 .background(brush, RoundedCornerShape(5.dp))
         )
     }
 }
 
-private val BottleType.upperCapSize: DpSize
+private val FlaconType.upperCapSize: DpSize
     get() = DpSize(width = this.flaconSize.width, height = 68.dp)
 
-private val BottleType.bottomCapSize: DpSize
+private val FlaconType.bottomCapSize: DpSize
     get() = DpSize(width = this.flaconSize.width, height = 106.dp)

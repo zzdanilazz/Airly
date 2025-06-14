@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.health.core.api.domain.DeviceType
+import ru.health.core.api.domain.FlaconParams
 import ru.health.core.api.presentation.component.ComponentViewModel
-import ru.health.core.api.domain.Device
 import ru.health.featureliquid.api.domain.usecase.GetDeviceUseCase
 
 internal class LiquidDetailViewModel @AssistedInject constructor(
@@ -33,7 +33,7 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
             LiquidDetailAction.AddDisposableApprove -> addDisposableApprove()
             LiquidDetailAction.AddPuffsApprove -> addPuffsApprove()
             is LiquidDetailAction.SwitchDeviceType -> switchDevice(action.deviceType)
-            is LiquidDetailAction.EditLiquidLevel -> editLiquidLevel(action.liquid)
+            is LiquidDetailAction.EditLiquidLevel -> editLiquidLevel(action.flaconParams)
         }
     }
 
@@ -49,9 +49,8 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
     }
 
     private suspend fun editLiquidLevelApprove() {
-        val liquid = state.value.device
-        if (liquid?.deviceType == DeviceType.POD) {
-            editLiquidLevel(liquid)
+        state.value.device?.flaconParams?.let {
+            editLiquidLevel(it)
         }
     }
 
@@ -63,8 +62,8 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
 
     }
 
-    private suspend fun editLiquidLevel(liquid: Device) {
-        _navEvent.send(LiquidDetailNavEvent.EditLiquidLevel(liquid))
+    private suspend fun editLiquidLevel(flaconParams: FlaconParams) {
+        _navEvent.send(LiquidDetailNavEvent.EditLiquidLevel(flaconParams))
     }
 
     private suspend fun addDisposableApprove() {

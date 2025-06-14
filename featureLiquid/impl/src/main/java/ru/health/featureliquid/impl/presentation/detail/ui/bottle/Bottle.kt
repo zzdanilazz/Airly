@@ -8,31 +8,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import ru.health.core.api.domain.Device
+import ru.health.core.api.domain.FlaconType
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
-import ru.health.core.api.domain.BottleType
-import ru.health.core.api.domain.Device
 import ru.health.featureliquid.impl.presentation.detail.ui.liquidPreview
+import ru.health.featureliquid.impl.presentation.input.ui.flaconParamsPreview
 
 @Composable
 internal fun Bottle(
     modifier: Modifier = Modifier,
-    liquid: Device
+    pod: Device
 ) {
-    val bottleType = liquid.bottleType
-    val currentVolume = liquid.currentVolume
-
     Column(modifier = modifier) {
-        if (bottleType != null && currentVolume != null) {
+        pod.flaconParams?.let {
             Cap(
                 modifier = Modifier.zIndex(1f),
-                bottleType = bottleType
+                flaconType = it.flaconType
             )
 
             Flacon(
                 modifier = Modifier.offset(y = (-30).dp),
-                bottleType = bottleType,
-                currentVolume = currentVolume
+                flaconType = it.flaconType,
+                currentVolume = it.volume
             )
         }
     }
@@ -45,7 +43,7 @@ private fun SmallBottlePreview() {
         GradientBox {
             Bottle(
                 modifier = Modifier.align(Alignment.Center),
-                liquid = liquidPreview
+                pod = liquidPreview
             )
         }
     }
@@ -58,8 +56,10 @@ private fun TallBottlePreview() {
         GradientBox {
             Bottle(
                 modifier = Modifier.align(Alignment.Center),
-                liquid = liquidPreview.copy(
-                    bottleType = BottleType.TALL
+                pod = liquidPreview.copy(
+                    flaconParams = flaconParamsPreview.copy(
+                        flaconType = FlaconType.TALL
+                    )
                 )
             )
         }
@@ -73,8 +73,10 @@ private fun LargeBottlePreview() {
         GradientBox {
             Bottle(
                 modifier = Modifier.align(Alignment.Center),
-                liquid = liquidPreview.copy(
-                    bottleType = BottleType.LARGE
+                pod = liquidPreview.copy(
+                    flaconParams = flaconParamsPreview.copy(
+                        flaconType = FlaconType.LARGE
+                    )
                 )
             )
         }

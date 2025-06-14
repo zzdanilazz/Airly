@@ -10,14 +10,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.health.core.api.domain.Device
+import ru.health.core.api.domain.FlaconParams
 import ru.health.core.api.presentation.component.ComponentViewModel
 
 internal class InputLiquidViewModel @AssistedInject constructor(
-    @Assisted liquid: Device
+    @Assisted flaconParams: FlaconParams
 ) : ComponentViewModel() {
 
-    private val _state = MutableStateFlow(InputLiquidUiState(liquid = liquid))
+    private val _state = MutableStateFlow(InputLiquidUiState(flaconParams = flaconParams))
     val state: StateFlow<InputLiquidUiState> = _state.asStateFlow()
 
     private val _navEvent = Channel<InputLiquidNavEvent>()
@@ -57,6 +57,6 @@ internal class InputLiquidViewModel @AssistedInject constructor(
 
     @AssistedFactory
     interface Factory {
-        operator fun invoke(liquid: Device): InputLiquidViewModel
+        operator fun invoke(flaconParams: FlaconParams): InputLiquidViewModel
     }
 }

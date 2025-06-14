@@ -14,6 +14,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import ru.health.core.api.domain.Device
+import ru.health.core.api.domain.FlaconParams
 import ru.health.core.api.presentation.component.RootComponent
 import ru.health.core.api.presentation.component.bottom_bar.BottomBarVisibility
 import ru.health.featureliquid.api.presentation.detail.LiquidDetailComponent
@@ -23,7 +24,7 @@ import ru.health.featureliquid.api.presentation.root.LiquidComponent
 internal class DefaultLiquidComponent @AssistedInject internal constructor(
     private val liquidDetailFactory: LiquidDetailComponent.Factory,
     @Assisted componentContext: ComponentContext,
-    @Assisted private val onInputLiquid: (liquid: Device) -> Unit,
+    @Assisted private val onInputLiquid: (flaconParams: FlaconParams) -> Unit,
 ) : LiquidComponent, RootComponent<LiquidConfig, LiquidChild>(componentContext) {
 
     override val stack: Value<ChildStack<*, LiquidChild>> =
@@ -66,7 +67,7 @@ internal class DefaultLiquidComponent @AssistedInject internal constructor(
     interface Factory : LiquidComponent.Factory {
         override fun invoke(
             componentContext: ComponentContext,
-            onInputLiquid: (Device) -> Unit,
+            onInputLiquid: (flaconParams: FlaconParams) -> Unit,
         ): DefaultLiquidComponent
     }
 }

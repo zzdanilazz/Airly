@@ -5,7 +5,7 @@ import ru.health.core.api.ResultError
 import ru.health.core.api.data.MetaDataStore
 import ru.health.core.api.domain.result.RootResult
 import ru.health.featuredashboard.api.domain.DashboardRepository
-import ru.health.featuredashboard.api.domain.StartupParameters
+import ru.health.featuredashboard.api.domain.model.StartupParameters
 import ru.health.featuredashboard.api.domain.usecase.SaveStartupParametersUseCase
 import javax.inject.Inject
 

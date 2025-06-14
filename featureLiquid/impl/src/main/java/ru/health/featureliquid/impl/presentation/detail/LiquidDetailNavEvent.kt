@@ -1,10 +1,10 @@
 package ru.health.featureliquid.impl.presentation.detail
 
-import ru.health.core.api.domain.Device
+import ru.health.core.api.domain.FlaconParams
 
 internal sealed interface LiquidDetailNavEvent {
 
-    data class EditLiquidLevel(val liquid: Device) : LiquidDetailNavEvent
+    data class EditLiquidLevel(val flaconParams: FlaconParams) : LiquidDetailNavEvent
 
     data object AddLiquidBottle: LiquidDetailNavEvent
 

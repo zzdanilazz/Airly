@@ -16,6 +16,7 @@ import ru.health.airly.tab.api.TabChild.StatisticsTab
 import ru.health.airly.tab.api.TabComponent
 import ru.health.airly.tab.impl.config.TabConfig
 import ru.health.core.api.domain.Device
+import ru.health.core.api.domain.FlaconParams
 import ru.health.core.api.presentation.component.RootComponent
 import ru.health.featureachievement.api.presentation.AchievementListComponent
 import ru.health.featuredashboard.api.presentation.DashboardComponent
@@ -30,7 +31,7 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
     @Assisted componentContext: ComponentContext,
     @Assisted(ON_NOTIFICATIONS) private val onNotifications: () -> Unit,
     @Assisted(ON_UPLOAD_DETAIL) private val onUploadDetail: () -> Unit,
-    @Assisted(ON_INPUT_LIQUID) private val onInputLiquid: (Device) -> Unit,
+    @Assisted(ON_INPUT_LIQUID) private val onInputLiquid: (flaconParams: FlaconParams) -> Unit,
 ) : TabComponent, RootComponent<TabConfig, TabChild>(componentContext) {
 
     override val stack: Value<ChildStack<*, TabChild>> =
@@ -94,7 +95,7 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
             componentContext: ComponentContext,
             @Assisted(ON_NOTIFICATIONS) onNotifications: () -> Unit,
             @Assisted(ON_UPLOAD_DETAIL) onUploadDetail: () -> Unit,
-            @Assisted(ON_INPUT_LIQUID) onInputLiquid: (Device) -> Unit,
+            @Assisted(ON_INPUT_LIQUID) onInputLiquid: (flaconParams: FlaconParams) -> Unit,
         ): DefaultTabComponent
     }
 

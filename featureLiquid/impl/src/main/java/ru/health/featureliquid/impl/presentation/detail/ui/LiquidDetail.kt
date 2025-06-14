@@ -14,15 +14,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import ru.health.core.impl.presentation.ui.gradient.GradientBox
-import ru.health.core.impl.presentation.ui.theme.AirlyTheme
-import ru.health.core.api.domain.BottleType
 import ru.health.core.api.domain.Device
 import ru.health.core.api.domain.DeviceType
+import ru.health.core.impl.presentation.ui.gradient.GradientBox
+import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailAction
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailUiState
 import ru.health.featureliquid.impl.presentation.detail.ui.bottle.Bottle
 import ru.health.featureliquid.impl.presentation.detail.ui.disposable.Disposable
+import ru.health.featureliquid.impl.presentation.input.ui.flaconParamsPreview
 
 @Composable
 internal fun LiquidDetail(
@@ -55,7 +55,7 @@ internal fun LiquidDetail(
                 if (it.deviceType == DeviceType.POD) {
                     Bottle(
                         modifier = contentModifier,
-                        liquid = it
+                        pod = it
                     )
                 } else {
                     Disposable(
@@ -69,14 +69,17 @@ internal fun LiquidDetail(
 
 internal val liquidPreview = Device(
     id = 1,
-    bottleType = BottleType.SMALL,
-    currentVolume = 25f,
-    deviceType = DeviceType.POD
+    flaconParams = flaconParamsPreview,
+    deviceType = DeviceType.POD,
+    date = "31.10.2024",
+    price = 500
 )
 
 internal val disposablePreview = Device(
     id = 1,
-    deviceType = DeviceType.DISPOSABLE
+    deviceType = DeviceType.DISPOSABLE,
+    date = "31.10.2024",
+    price = 2_000
 )
 
 internal val liquidDetailUiStatePreview = LiquidDetailUiState(

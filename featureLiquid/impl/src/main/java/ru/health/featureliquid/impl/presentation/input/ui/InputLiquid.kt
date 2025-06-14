@@ -24,10 +24,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import ru.health.core.api.domain.FlaconParams
+import ru.health.core.api.domain.FlaconType
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.core.impl.presentation.ui.theme.LightRed
-import ru.health.featureliquid.impl.presentation.detail.ui.liquidPreview
 import ru.health.featureliquid.impl.presentation.input.InputLiquidAction
 import ru.health.featureliquid.impl.presentation.input.InputLiquidUiState
 import ru.health.featureliquid.impl.presentation.input.ui.outlined_bottle.OutlinedBottle
@@ -39,7 +40,7 @@ internal fun InputLiquid(
     onAction: (action: InputLiquidAction) -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
-    val difference = (state.liquid.currentVolume ?: 0f) - state.editedVolume
+    val difference = state.flaconParams.volume - state.editedVolume
 
     GradientBox(
         modifier = modifier.fillMaxSize(),
@@ -55,7 +56,7 @@ internal fun InputLiquid(
                 .verticalScroll(scrollState)
                 .navigationBarsPadding()
                 .padding(start = 16.dp),
-            liquid = state.liquid,
+            flaconParams = state.flaconParams,
             editedVolume = state.editedVolume
         )
         Box(
@@ -65,7 +66,7 @@ internal fun InputLiquid(
             LiquidSlider(
                 modifier = Modifier.align(Alignment.Center),
                 editedVolume = state.editedVolume,
-                currentVolume = state.liquid.currentVolume ?: 0f
+                currentVolume = state.flaconParams.volume
             ) {
                 onAction(InputLiquidAction.OnVolumeChange(it))
             }
@@ -93,8 +94,14 @@ internal fun InputLiquid(
     }
 }
 
+
+internal val flaconParamsPreview = FlaconParams(
+    volume = 12.3f,
+    flaconType = FlaconType.SMALL
+)
+
 internal val inputLiquidUiStatePreview = InputLiquidUiState(
-    liquid = liquidPreview
+    flaconParams = flaconParamsPreview
 )
 
 @PreviewLightDark

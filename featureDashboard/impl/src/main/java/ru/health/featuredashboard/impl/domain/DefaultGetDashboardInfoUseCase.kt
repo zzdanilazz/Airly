@@ -6,7 +6,7 @@ import ru.health.core.api.RequestError
 import ru.health.core.api.ResultError
 import ru.health.core.api.domain.result.RootResult
 import ru.health.core.impl.domain.getDurationFlow
-import ru.health.featuredashboard.api.domain.DashboardInfo
+import ru.health.featuredashboard.api.domain.model.DashboardInfo
 import ru.health.featuredashboard.api.domain.DashboardRepository
 import ru.health.featuredashboard.api.domain.usecase.GetDashboardInfoUseCase
 import javax.inject.Inject

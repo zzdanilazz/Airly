@@ -1,6 +1,6 @@
 package ru.health.featuredashboard.impl.presentation.startup_parameters
 
-import ru.health.core.api.domain.BottleType
+import ru.health.core.api.domain.FlaconType
 import ru.health.core.api.domain.DeviceType
 
 internal sealed interface StartupParametersAction {
@@ -15,7 +15,7 @@ internal sealed interface StartupParametersAction {
 
     data class ChangeVaporizerBuyPeriod(val buyPeriod: String) : StartupParametersAction
 
-    data class SelectBottleType(val bottleType: BottleType) : StartupParametersAction
+    data class SelectBottleType(val flaconType: FlaconType) : StartupParametersAction
 
     data object OnLiquidLevelClick : StartupParametersAction
 

@@ -19,17 +19,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import ru.health.core.api.domain.BottleType
+import ru.health.core.api.domain.FlaconType
 import ru.health.featureliquid.impl.R
 
 @Composable
 internal fun FilledCap(
     modifier: Modifier = Modifier,
-    bottleType: BottleType
+    flaconType: FlaconType
 ) {
     Column(modifier = modifier) {
         Image(
-            modifier = Modifier.size(bottleType.upperCapSize),
+            modifier = Modifier.size(flaconType.upperCapSize),
             painter = painterResource(R.drawable.illustration_cap),
             colorFilter = ColorFilter.tint(Color.White),
             contentScale = ContentScale.FillBounds,
@@ -38,7 +38,7 @@ internal fun FilledCap(
         Spacer(
             modifier = Modifier
                 .offset(y = (-5).dp)
-                .size(bottleType.bottomCapSize)
+                .size(flaconType.bottomCapSize)
                 .background(Color.White, RoundedCornerShape(5.dp))
         )
     }
@@ -54,10 +54,10 @@ fun mmToDp(mm: Float): Dp {
     }
 }
 
-private val BottleType.upperCapSize: DpSize
+private val FlaconType.upperCapSize: DpSize
     @Composable
     get() = DpSize(width = this.flaconSize.width, height = mmToDp(15f))
 
-private val BottleType.bottomCapSize: DpSize
+private val FlaconType.bottomCapSize: DpSize
     @Composable
     get() = DpSize(width = this.flaconSize.width, height = mmToDp(20f))

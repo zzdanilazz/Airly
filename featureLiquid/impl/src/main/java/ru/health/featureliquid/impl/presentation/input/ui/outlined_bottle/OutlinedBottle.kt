@@ -8,36 +8,34 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.zIndex
+import ru.health.core.api.domain.FlaconParams
+import ru.health.core.api.domain.FlaconType
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
-import ru.health.core.api.domain.BottleType
-import ru.health.core.api.domain.Device
-import ru.health.featureliquid.impl.presentation.detail.ui.liquidPreview
+import ru.health.featureliquid.impl.presentation.input.ui.flaconParamsPreview
 
 @Composable
 internal fun OutlinedBottle(
     modifier: Modifier = Modifier,
-    liquid: Device,
+    flaconParams: FlaconParams,
     editedVolume: Float
 ) {
-    val bottleType = liquid.bottleType
-    val currentVolume = liquid.currentVolume
+    val bottleType = flaconParams.flaconType
+    val currentVolume = flaconParams.volume
 
     Column(
         modifier = modifier.fillMaxHeight(),
         verticalArrangement = Arrangement.Bottom
     ) {
-        if (bottleType != null && currentVolume != null) {
-            FilledCap(
-                modifier = Modifier.zIndex(1f),
-                bottleType = bottleType
-            )
-            OutlinedFlacon(
-                bottleType = bottleType,
-                currentVolume = currentVolume,
-                editedVolume = editedVolume
-            )
-        }
+        FilledCap(
+            modifier = Modifier.zIndex(1f),
+            flaconType = bottleType
+        )
+        OutlinedFlacon(
+            flaconType = bottleType,
+            currentVolume = currentVolume,
+            editedVolume = editedVolume
+        )
     }
 }
 
@@ -48,7 +46,7 @@ private fun SmallOutlinedBottlePreview() {
         GradientBox {
             OutlinedBottle(
                 modifier = Modifier.align(Alignment.Center),
-                liquid = liquidPreview,
+                flaconParams = flaconParamsPreview,
                 editedVolume = 10f
             )
         }
@@ -62,8 +60,8 @@ private fun TallOutlinedBottlePreview() {
         GradientBox {
             OutlinedBottle(
                 modifier = Modifier.align(Alignment.Center),
-                liquid = liquidPreview.copy(
-                    bottleType = BottleType.TALL
+                flaconParams = flaconParamsPreview.copy(
+                    flaconType = FlaconType.TALL
                 ),
                 editedVolume = 10f
             )
@@ -78,8 +76,8 @@ private fun LargeOutlinedBottlePreview() {
         GradientBox {
             OutlinedBottle(
                 modifier = Modifier.align(Alignment.Center),
-                liquid = liquidPreview.copy(
-                    bottleType = BottleType.LARGE
+                flaconParams = flaconParamsPreview.copy(
+                    flaconType = FlaconType.LARGE
                 ),
                 editedVolume = 10f
             )

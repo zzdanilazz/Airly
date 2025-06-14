@@ -1,10 +1,10 @@
 package ru.health.featureliquid.impl.presentation.input
 
 import androidx.compose.runtime.Immutable
-import ru.health.core.api.domain.Device
+import ru.health.core.api.domain.FlaconParams
 
 @Immutable
 internal data class InputLiquidUiState(
-    val liquid: Device,
-    val editedVolume: Float = liquid.currentVolume ?: 0f
+    val flaconParams: FlaconParams,
+    val editedVolume: Float = flaconParams.volume
 )

@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 data class Device(
     val id: Int = 0,
     val deviceType: DeviceType,
-    val bottleType: BottleType? = null,
-    val currentVolume: Float? = null
+    val date: String,
+    val price: Int,
+    val flaconParams: FlaconParams? = null,
 )

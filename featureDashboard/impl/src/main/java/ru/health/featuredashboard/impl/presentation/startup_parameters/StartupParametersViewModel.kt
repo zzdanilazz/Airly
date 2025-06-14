@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.health.core.api.domain.BottleType
-import ru.health.core.api.domain.Device
 import ru.health.core.api.domain.DeviceType
+import ru.health.core.api.domain.FlaconParams
+import ru.health.core.api.domain.FlaconType
 import ru.health.core.api.presentation.component.ComponentViewModel
 import ru.health.featuredashboard.api.domain.usecase.GetIsStartupParametersSavedUseCase
 import ru.health.featuredashboard.api.domain.usecase.SaveStartupParametersUseCase
@@ -42,7 +42,7 @@ internal class StartupParametersViewModel @AssistedInject constructor(
             is StartupParametersAction.ChangeDevicePrice -> changePrice(action.price)
             is StartupParametersAction.ChangeVaporizerBuyPeriod -> changeVaporizerBuyPeriod(action.buyPeriod)
             is StartupParametersAction.ChangeVaporizerPrice -> changeVaporizerPrice(action.price)
-            is StartupParametersAction.SelectBottleType -> selectBottleType(action.bottleType)
+            is StartupParametersAction.SelectBottleType -> selectFlaconType(action.flaconType)
             is StartupParametersAction.SelectInterest -> selectInterest(action.interestIndex)
             is StartupParametersAction.OnLiquidEdited -> onLiquidEdited(action.editedVolume)
             StartupParametersAction.OnLiquidLevelClick -> onLiquidLevelClick()
@@ -51,14 +51,7 @@ internal class StartupParametersViewModel @AssistedInject constructor(
     }
 
     private fun selectDeviceType(deviceType: DeviceType) {
-        _state.update { uiState ->
-            uiState.copy(
-                deviceType = deviceType,
-                device = Device(
-                    deviceType = deviceType
-                )
-            )
-        }
+        _state.update { uiState -> uiState.copy(deviceType = deviceType) }
     }
 
     private fun changePrice(price: String) {
@@ -73,13 +66,12 @@ internal class StartupParametersViewModel @AssistedInject constructor(
         _state.update { uiState -> uiState.copy(pricePerVaporizer = price) }
     }
 
-    private fun selectBottleType(bottleType: BottleType) {
+    private fun selectFlaconType(flaconType: FlaconType) {
         _state.update { uiState ->
             uiState.copy(
-                bottleType = bottleType,
-                device = uiState.device?.copy(
-                    bottleType = bottleType,
-                    currentVolume = bottleType.volume
+                flaconParams = FlaconParams(
+                    volume = flaconType.volume,
+                    flaconType = flaconType
                 )
             )
         }
@@ -102,14 +94,16 @@ internal class StartupParametersViewModel @AssistedInject constructor(
 
     private fun onLiquidEdited(editedVolume: Float) {
         _state.update { uiState ->
-            uiState.copy(
-                device = uiState.device?.copy(currentVolume = editedVolume)
-            )
+            uiState.copy(flaconParams = uiState.flaconParams?.copy(volume = editedVolume))
         }
     }
 
     private suspend fun onLiquidLevelClick() {
-        _state.value.device?.let {
+        val currentFlaconParams = _state.value.flaconParams
+        val filledFlaconParams = currentFlaconParams?.copy(
+            volume = currentFlaconParams.flaconType.volume
+        )
+        filledFlaconParams?.let {
             _navEvent.send(StartupParametersNavEvent.OpenInputLiquid(it))
         }
     }

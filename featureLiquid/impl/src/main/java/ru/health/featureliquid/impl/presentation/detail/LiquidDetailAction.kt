@@ -1,7 +1,7 @@
 package ru.health.featureliquid.impl.presentation.detail
 
 import ru.health.core.api.domain.DeviceType
-import ru.health.core.api.domain.Device
+import ru.health.core.api.domain.FlaconParams
 
 internal sealed interface LiquidDetailAction {
 
@@ -11,7 +11,7 @@ internal sealed interface LiquidDetailAction {
 
     data object EditLiquidLevelApprove: LiquidDetailAction
 
-    data class EditLiquidLevel(val liquid: Device): LiquidDetailAction
+    data class EditLiquidLevel(val flaconParams: FlaconParams): LiquidDetailAction
 
     data object AddLiquidBottle: LiquidDetailAction
 

@@ -7,20 +7,20 @@ import com.arkivanov.essenty.instancekeeper.getOrCreate
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import ru.health.core.api.domain.Device
+import ru.health.core.api.domain.FlaconParams
 import ru.health.core.impl.presentation.EventEffect
 import ru.health.featureliquid.api.presentation.input.InputLiquidComponent
 import ru.health.featureliquid.impl.presentation.input.ui.InputLiquidContent
 
 internal class DefaultInputLiquidComponent @AssistedInject internal constructor(
     @Assisted componentContext: ComponentContext,
-    @Assisted liquid: Device,
+    @Assisted flaconParams: FlaconParams,
     @Assisted private val onEdited: (editedVolume: Float) -> Unit,
     @Assisted private val onBack: () -> Unit,
     private val inputLiquidViewModel: InputLiquidViewModel.Factory,
 ) : InputLiquidComponent, ComponentContext by componentContext {
 
-    private val viewModel = instanceKeeper.getOrCreate { inputLiquidViewModel(liquid) }
+    private val viewModel = instanceKeeper.getOrCreate { inputLiquidViewModel(flaconParams) }
 
     @Composable
     override fun Render(modifier: Modifier) {
@@ -41,7 +41,7 @@ internal class DefaultInputLiquidComponent @AssistedInject internal constructor(
     interface Factory : InputLiquidComponent.Factory {
         override fun invoke(
             componentContext: ComponentContext,
-            liquid: Device,
+            flaconParams: FlaconParams,
             onEdited: (Float) -> Unit,
             onBack: () -> Unit
         ): DefaultInputLiquidComponent

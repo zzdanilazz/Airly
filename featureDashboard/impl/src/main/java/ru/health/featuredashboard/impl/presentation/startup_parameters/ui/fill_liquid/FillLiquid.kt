@@ -25,7 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.health.core.api.domain.BottleType
+import ru.health.core.api.domain.FlaconType
 import ru.health.core.impl.presentation.iconResId
 import ru.health.core.impl.presentation.ui.button.PrimaryButton
 import ru.health.core.impl.presentation.ui.card.GlassmorphismCard
@@ -47,7 +47,7 @@ internal fun FillLiquid(
     onAction: (action: StartupParametersAction) -> Unit = {},
     onProceed: () -> Unit = {}
 ) {
-    val selectedBottleType = state.bottleType
+    val selectedFlaconType = state.flaconParams?.flaconType
 
     Box(
         modifier = modifier
@@ -72,13 +72,13 @@ internal fun FillLiquid(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                BottleType.entries.forEach {
-                    val scale by animateFloatAsState(if (selectedBottleType == it) 1.1f else 1f)
+                FlaconType.entries.forEach {
+                    val scale by animateFloatAsState(if (selectedFlaconType == it) 1.1f else 1f)
                     val containerColor by animateColorAsState(
-                        if (selectedBottleType == it) Color.White else Color.Transparent
+                        if (selectedFlaconType == it) Color.White else Color.Transparent
                     )
                     val contentColor by animateColorAsState(
-                        if (selectedBottleType == it) LightRed else Color.White
+                        if (selectedFlaconType == it) LightRed else Color.White
                     )
 
                     GlassmorphismCard(
@@ -105,12 +105,10 @@ internal fun FillLiquid(
                     }
                 }
             }
-            val device = state.device
-            val currentVolume = device?.currentVolume
-            if (device != null && currentVolume != null) {
+            state.flaconParams?.volume?.let {
                 val currentVolumeMl = stringResource(
                     CoreR.string.ml,
-                    currentVolume
+                    it
                 )
                 Text(
                     text = stringResource(
@@ -122,7 +120,7 @@ internal fun FillLiquid(
                     color = Color.White
                 )
                 PrimaryButton(
-                    isEnabled = selectedBottleType != null,
+                    isEnabled = selectedFlaconType != null,
                     buttonText = stringResource(R.string.edit_current_volume),
                     iconResId = CoreR.drawable.ic_level,
                     containerColor = Color.White,
@@ -135,10 +133,10 @@ internal fun FillLiquid(
         }
         PrimaryButton(
             modifier = Modifier.align(Alignment.BottomCenter),
-            isEnabled = selectedBottleType != null,
+            isEnabled = selectedFlaconType != null,
             buttonText = stringResource(R.string.proceed),
             onButtonClick = {
-                selectedBottleType?.let { onProceed() }
+                selectedFlaconType?.let { onProceed() }
             }
         )
     }

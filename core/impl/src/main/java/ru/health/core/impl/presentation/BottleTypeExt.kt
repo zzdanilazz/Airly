@@ -1,11 +1,11 @@
 package ru.health.core.impl.presentation
 
-import ru.health.core.api.domain.BottleType
+import ru.health.core.api.domain.FlaconType
 import ru.health.core.impl.R
 
-val BottleType.iconResId: Int
+val FlaconType.iconResId: Int
     get() = when (this) {
-        BottleType.SMALL -> R.drawable.ic_small_flacon
-        BottleType.TALL -> R.drawable.ic_tall_flacon
-        BottleType.LARGE -> R.drawable.ic_large_flacon
+        FlaconType.SMALL -> R.drawable.ic_small_flacon
+        FlaconType.TALL -> R.drawable.ic_tall_flacon
+        FlaconType.LARGE -> R.drawable.ic_large_flacon
     }

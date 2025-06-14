@@ -15,18 +15,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
-import ru.health.core.api.domain.BottleType
+import ru.health.core.api.domain.FlaconType
 import kotlin.math.sqrt
 
 @Composable
 internal fun Flacon(
     modifier: Modifier = Modifier,
-    bottleType: BottleType,
+    flaconType: FlaconType,
     currentVolume: Float
 ) {
     val shape = RoundedCornerShape(26.dp)
-    val liquidFraction = currentVolume / bottleType.volume
-    val totalSize = bottleType.flaconSize
+    val liquidFraction = currentVolume / flaconType.volume
+    val totalSize = flaconType.flaconSize
     val flaconColor = if (isSystemInDarkTheme()) Color.White else Color.Black
 
     Column(
@@ -53,9 +53,9 @@ internal fun Flacon(
     }
 }
 
-internal val BottleType.flaconSize: DpSize
+internal val FlaconType.flaconSize: DpSize
     get() = when (this) {
-        BottleType.SMALL -> DpSize(width = 138.dp, height = 265.dp)
-        BottleType.TALL -> DpSize(width = 138.dp, height = 530.dp)
-        BottleType.LARGE -> DpSize(width = (138 * sqrt(2f)).dp, height = 530.dp)
+        FlaconType.SMALL -> DpSize(width = 138.dp, height = 265.dp)
+        FlaconType.TALL -> DpSize(width = 138.dp, height = 530.dp)
+        FlaconType.LARGE -> DpSize(width = (138 * sqrt(2f)).dp, height = 530.dp)
     }

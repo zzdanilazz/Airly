@@ -1,4 +1,4 @@
-package ru.health.featuredashboard.api.domain
+package ru.health.featuredashboard.api.domain.model
 
 import kotlinx.serialization.Serializable
 import ru.health.core.api.domain.DeviceType

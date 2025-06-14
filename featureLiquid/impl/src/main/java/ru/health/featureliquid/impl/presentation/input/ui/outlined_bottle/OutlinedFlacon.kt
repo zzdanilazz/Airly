@@ -21,21 +21,21 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
-import ru.health.core.api.domain.BottleType
+import ru.health.core.api.domain.FlaconType
 import kotlin.math.sqrt
 
 @Composable
 internal fun OutlinedFlacon(
     modifier: Modifier = Modifier,
-    bottleType: BottleType,
+    flaconType: FlaconType,
     currentVolume: Float,
     editedVolume: Float
 ) {
     val flaconShape = RoundedCornerShape(26.dp)
     val liquidShape = RoundedCornerShape(18.dp)
-    val editedLiquidFraction = editedVolume / bottleType.volume
-    val currentLiquidFraction = currentVolume / bottleType.volume
-    val totalSize = bottleType.flaconSize
+    val editedLiquidFraction = editedVolume / flaconType.volume
+    val currentLiquidFraction = currentVolume / flaconType.volume
+    val totalSize = flaconType.flaconSize
 
     Box(
         modifier = modifier
@@ -70,12 +70,12 @@ internal fun OutlinedFlacon(
 
 private val BorderWidth = 4.dp
 
-internal val BottleType.flaconSize: DpSize
+internal val FlaconType.flaconSize: DpSize
     @Composable
     get() = when (this) {
-        BottleType.SMALL -> DpSize(width = mmToDp(30f), height = mmToDp(50f))
-        BottleType.TALL -> DpSize(width = mmToDp(30f), height = mmToDp(100f))
-        BottleType.LARGE -> DpSize(width = mmToDp(30f) * sqrt(2f), height = mmToDp(100f))
+        FlaconType.SMALL -> DpSize(width = mmToDp(30f), height = mmToDp(50f))
+        FlaconType.TALL -> DpSize(width = mmToDp(30f), height = mmToDp(100f))
+        FlaconType.LARGE -> DpSize(width = mmToDp(30f) * sqrt(2f), height = mmToDp(100f))
     }
 
 @Composable
@@ -85,7 +85,7 @@ private fun OutlinedFlaconPreview() {
         GradientBox(blurred = true) {
             OutlinedFlacon(
                 modifier = Modifier.align(Alignment.Center),
-                bottleType = BottleType.SMALL,
+                flaconType = FlaconType.SMALL,
                 currentVolume = 28f,
                 editedVolume = 25f
             )
