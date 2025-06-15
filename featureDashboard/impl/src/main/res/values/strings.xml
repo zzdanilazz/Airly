@@ -3,8 +3,8 @@
     <string name="upload">Выгрузка</string>
     <string name="notifications">Уведомления</string>
     <string name="abstinence_title">Вы не парите уже</string>
-    <string name="saved_money_title">Сэкономлено</string>
-    <string name="lost_money_title">Потрачено</string>
+    <string name="saved_money_title">Сэкономлено всего</string>
+    <string name="lost_money_title">Потрачено всего</string>
     <string name="dashboard_banner">Баннер на главной</string>
     <string name="dashboard_banner_unit_id">demo-feed-yandex</string>
 

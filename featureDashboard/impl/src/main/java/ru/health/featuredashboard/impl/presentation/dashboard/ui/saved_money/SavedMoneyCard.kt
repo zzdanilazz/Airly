@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import dev.chrisbanes.haze.HazeState
 import ru.health.core.impl.presentation.ui.card.GlassmorphismCard
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
+import ru.health.core.impl.presentation.ui.theme.LightRed
 import ru.health.core.impl.presentation.ui.theme.LocalHazeState
 import ru.health.core.impl.presentation.ui.theme.RubikOneFamily
 import ru.health.featuredashboard.impl.R
@@ -54,6 +55,7 @@ internal fun SavedMoneyCard(
     LaunchedEffect(topSpacerHeight) {
         isSticky = topSpacerHeight > 0.dp
     }
+    val contentColor = if (value >= 0) Color.White else LightRed
 
     GlassmorphismCard(
         modifier = modifier.clickable {
@@ -75,12 +77,12 @@ internal fun SavedMoneyCard(
                         if (value >= 0) R.string.saved_money_title else R.string.lost_money_title
                     ).uppercase(),
                     fontSize = 16.sp,
-                    color = Color.White
+                    color = contentColor
                 )
                 Spacer(modifier = Modifier.size(8.dp))
                 Text(
                     text = stringResource(CoreR.string.roubles, abs(value)),
-                    color = Color.White,
+                    color = contentColor,
                     fontSize = 24.sp,
                     fontFamily = RubikOneFamily
                 )
