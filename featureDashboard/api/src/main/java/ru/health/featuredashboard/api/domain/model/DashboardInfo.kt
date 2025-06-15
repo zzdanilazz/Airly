@@ -7,5 +7,5 @@ data class DashboardInfo(
     val hasNotifications: Boolean,
     val health: Int,
     val abstinenceDuration: Flow<Duration>,
-    val savedMoney: Float
+    val savedMoneyFlow: Flow<Double>
 )

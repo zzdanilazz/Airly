@@ -11,7 +11,7 @@ internal class DefaultDashboardRepository @Inject constructor(
     private val dashboardLocalDataSource: DashboardLocalDataSource,
 ) : DashboardRepository {
 
-    override suspend fun getLastRelapsedDate(): Date =
+    override suspend fun getLastConsumptionDate(): Date =
         dashboardLocalDataSource.getLastRelapsedDate()
 
     override suspend fun saveInterests(interests: Set<String>) = withContext(Dispatchers.IO) {

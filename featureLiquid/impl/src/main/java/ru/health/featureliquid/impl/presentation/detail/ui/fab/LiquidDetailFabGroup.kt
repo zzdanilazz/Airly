@@ -42,8 +42,8 @@ internal fun LiquidDetailFabGroup(
             containerColor = LightRed,
             contentColor = Color.White,
             painter = addPainter,
-            textResId = R.string.puff,
-            onClick = { onAction(LiquidDetailAction.AddPuffsApprove) }
+            textResId = R.string.smoking,
+            onClick = { onAction(LiquidDetailAction.AddConsumptionApprove) }
         )
         if (isPodSelected) {
             LiquidDetailFab(

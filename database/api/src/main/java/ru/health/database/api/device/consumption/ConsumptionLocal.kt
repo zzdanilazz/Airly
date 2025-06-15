@@ -1,9 +1,10 @@
-package ru.health.database.api.device.vape_action
+package ru.health.database.api.device.consumption
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import ru.health.database.api.device.DeviceLocal
+import java.util.Date
 
 @Entity(
     foreignKeys = [
@@ -15,10 +16,12 @@ import ru.health.database.api.device.DeviceLocal
         )
     ]
 )
-data class VapeActionLocal(
+data class ConsumptionLocal(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val puffs: Int,
+    val frequency: Float,
+    val durationInDays: Float,
+    val isMeasured: Boolean,
     val deviceId: Int,
-    val date: String
+    val date: Date
 )

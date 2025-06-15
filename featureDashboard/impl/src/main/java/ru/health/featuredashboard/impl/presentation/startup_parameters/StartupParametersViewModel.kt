@@ -44,8 +44,10 @@ internal class StartupParametersViewModel @AssistedInject constructor(
         when (action) {
             is StartupParametersAction.SelectDeviceType -> selectDeviceType(action.deviceType)
             is StartupParametersAction.ChangeDeviceBuyPeriod -> changeBuyPeriod(action.buyPeriod)
+            is StartupParametersAction.ChangeDisposablePeriod -> changeDisposablePeriod(action.period)
             is StartupParametersAction.ChangeDevicePrice -> changePrice(action.price)
             is StartupParametersAction.ChangeVaporizerBuyPeriod -> changeVaporizerBuyPeriod(action.buyPeriod)
+            is StartupParametersAction.ChangeVaporizerPeriod -> changeVaporizerPeriod(action.period)
             is StartupParametersAction.ChangeVaporizerPrice -> changeVaporizerPrice(action.price)
             is StartupParametersAction.SelectBottleType -> selectFlaconType(action.flaconType)
             is StartupParametersAction.SelectInterest -> selectInterest(action.interestIndex)
@@ -67,6 +69,10 @@ internal class StartupParametersViewModel @AssistedInject constructor(
         _state.update { uiState -> uiState.copy(deviceBuyPeriod = buyPeriod) }
     }
 
+    private fun changeDisposablePeriod(period: String) {
+        _state.update { uiState -> uiState.copy(disposablePeriod = period) }
+    }
+
     private fun changeVaporizerPrice(price: String) {
         _state.update { uiState -> uiState.copy(pricePerVaporizer = price) }
     }
@@ -84,6 +90,10 @@ internal class StartupParametersViewModel @AssistedInject constructor(
 
     private fun changeVaporizerBuyPeriod(buyPeriod: String) {
         _state.update { uiState -> uiState.copy(vaporizerBuyPeriod = buyPeriod) }
+    }
+
+    private fun changeVaporizerPeriod(period: String) {
+        _state.update { uiState -> uiState.copy(vaporizerPeriod = period) }
     }
 
     private fun selectInterest(interestIndex: Int) {
@@ -136,18 +146,35 @@ internal class StartupParametersViewModel @AssistedInject constructor(
                 .map { it.name }
                 .toSet()
 
+            val pricePerPrimaryDevice = pricePerDevice.toInt()
+            val primaryDeviceBuyPeriod = deviceBuyPeriod.toInt()
+
+            val pricePerSecondaryDevice = pricePerVaporizer
+                .ifEmpty { null }
+                ?.toInt()
+
+            val secondaryDeviceBuyPeriod = vaporizerBuyPeriod
+                .ifEmpty { null }
+                ?.toInt()
+
+            val disposablePeriod = if (deviceType == DeviceType.DISPOSABLE) {
+                disposablePeriod.toInt()
+            } else null
+
+            val vaporizerPeriod = if (deviceType == DeviceType.POD) {
+                vaporizerPeriod.toInt()
+            } else null
+
             val startupParameters = StartupParameters(
                 interests = selectedInterests,
                 primaryDevice = primaryDevice,
                 secondaryDevice = secondaryDevice,
-                pricePerPrimaryDevice = pricePerDevice.toInt(),
-                primaryDeviceBuyPeriod = deviceBuyPeriod.toInt(),
-                pricePerSecondaryDevice = pricePerVaporizer
-                    .ifEmpty { null }
-                    ?.toInt(),
-                secondaryDeviceBuyPeriod = vaporizerBuyPeriod
-                    .ifEmpty { null }
-                    ?.toInt()
+                pricePerPrimaryDevice = pricePerPrimaryDevice,
+                primaryDeviceBuyPeriod = primaryDeviceBuyPeriod,
+                primaryPeriod = disposablePeriod,
+                pricePerSecondaryDevice = pricePerSecondaryDevice,
+                secondaryDeviceBuyPeriod = secondaryDeviceBuyPeriod,
+                secondaryPeriod = vaporizerPeriod
             )
 
             saveStartupParametersUseCase(startupParameters).onSuccess {

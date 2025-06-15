@@ -35,12 +35,14 @@ import ru.health.core.impl.presentation.ui.theme.LocalHazeState
 import ru.health.core.impl.presentation.ui.theme.RubikOneFamily
 import ru.health.featuredashboard.impl.R
 import ru.health.featuredashboard.impl.presentation.dashboard.ui.dashboardUiStatePreview
+import kotlin.math.abs
+import ru.health.core.impl.R as CoreR
 
 @Composable
 internal fun SavedMoneyCard(
     modifier: Modifier = Modifier,
     hazeState: HazeState = LocalHazeState.current,
-    value: Float,
+    value: Double,
     topSpacerHeight: Dp = 0.dp,
     onClick: () -> Unit = {}
 ) {
@@ -69,13 +71,15 @@ internal fun SavedMoneyCard(
             Spacer(modifier = Modifier.height(topSpacerHeight))
             TextContainer(isSticky = isSticky) {
                 Text(
-                    text = stringResource(R.string.saved_money_title).uppercase(),
+                    text = stringResource(
+                        if (value >= 0) R.string.saved_money_title else R.string.lost_money_title
+                    ).uppercase(),
                     fontSize = 16.sp,
                     color = Color.White
                 )
                 Spacer(modifier = Modifier.size(8.dp))
                 Text(
-                    text = "$value ₽",
+                    text = stringResource(CoreR.string.roubles, abs(value)),
                     color = Color.White,
                     fontSize = 24.sp,
                     fontFamily = RubikOneFamily
@@ -106,7 +110,8 @@ private fun TextContainer(
         }
     } else {
         Column(
-            modifier = modifier
+            modifier = modifier,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             content()
         }

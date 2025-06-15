@@ -5,9 +5,9 @@ import kotlinx.coroutines.withContext
 import ru.health.core.api.data.date.DateFormatter
 import ru.health.featureliquid.api.data.LiquidLocalDataSource
 import ru.health.featureliquid.api.domain.LiquidRepository
-import ru.health.featureliquid.api.domain.model.ConsumptionFrequency
+import ru.health.featureliquid.api.domain.model.Consumption
 import ru.health.featureliquid.api.domain.model.Device
-import ru.health.featureliquid.api.domain.model.VapeAction
+import java.util.Date
 import javax.inject.Inject
 
 internal class DefaultLiquidRepository @Inject constructor(
@@ -24,16 +24,24 @@ internal class DefaultLiquidRepository @Inject constructor(
         liquidLocalDataSource.getLatestDevice(isPrimary)?.toDomain(dateFormatter)
     }
 
+    override suspend fun getAllDevices(): List<Device> = withContext(Dispatchers.IO) {
+        liquidLocalDataSource.getAllDevices().map { it.toDomain(dateFormatter) }
+    }
+
     override suspend fun saveDevice(device: Device): Int = withContext(Dispatchers.IO) {
         liquidLocalDataSource.saveDevice(device.toData(dateFormatter))
     }
 
-    override suspend fun saveConsumptionFrequency(consumptionFrequency: ConsumptionFrequency) =
+    override suspend fun saveConsumptionFrequency(consumption: Consumption) =
         withContext(Dispatchers.IO) {
-            liquidLocalDataSource.saveConsumptionFrequency(consumptionFrequency.toData())
+            liquidLocalDataSource.saveConsumptionFrequency(consumption.toData(dateFormatter))
         }
 
-    override suspend fun saveVapeAction(vapeAction: VapeAction) = withContext(Dispatchers.IO) {
-        liquidLocalDataSource.saveVapeAction(vapeAction.toData(dateFormatter))
+    override suspend fun getLastConsumptionDate(deviceId: Int): Date = withContext(Dispatchers.IO) {
+        liquidLocalDataSource.getLastConsumptionDate(deviceId)
+    }
+
+    override suspend fun getFirstConsumptionDate(deviceId: Int): Date = withContext(Dispatchers.IO) {
+        liquidLocalDataSource.getFirstConsumptionDate(deviceId)
     }
 }

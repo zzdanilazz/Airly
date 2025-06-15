@@ -10,6 +10,8 @@ data class StartupParameters(
     val secondaryDevice: Device? = null,
     val pricePerPrimaryDevice: Int,
     val primaryDeviceBuyPeriod: Int,
+    val primaryPeriod: Int? = null,
     val pricePerSecondaryDevice: Int? = null,
-    val secondaryDeviceBuyPeriod: Int? = null
+    val secondaryDeviceBuyPeriod: Int? = null,
+    val secondaryPeriod: Int? = null
 )

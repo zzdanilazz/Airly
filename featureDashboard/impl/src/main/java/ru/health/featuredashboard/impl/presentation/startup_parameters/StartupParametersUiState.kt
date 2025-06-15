@@ -2,8 +2,8 @@ package ru.health.featuredashboard.impl.presentation.startup_parameters
 
 import androidx.compose.runtime.Immutable
 import ru.health.core.api.domain.DeviceType
-import ru.health.featureliquid.api.domain.model.FlaconParams
 import ru.health.featuredashboard.impl.presentation.startup_parameters.model.Interest
+import ru.health.featureliquid.api.domain.model.FlaconParams
 
 @Immutable
 internal data class StartupParametersUiState(
@@ -11,9 +11,11 @@ internal data class StartupParametersUiState(
 
     val pricePerDevice: String = "",
     val deviceBuyPeriod: String = "",
+    val disposablePeriod: String = "",
 
     val pricePerVaporizer: String = "",
     val vaporizerBuyPeriod: String = "",
+    val vaporizerPeriod: String = "",
 
     val flaconParams: FlaconParams? = null,
 

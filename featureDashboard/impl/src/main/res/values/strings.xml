@@ -4,6 +4,7 @@
     <string name="notifications">Уведомления</string>
     <string name="abstinence_title">Вы не парите уже</string>
     <string name="saved_money_title">Сэкономлено</string>
+    <string name="lost_money_title">Потрачено</string>
     <string name="dashboard_banner">Баннер на главной</string>
     <string name="dashboard_banner_unit_id">demo-feed-yandex</string>
 
@@ -17,10 +18,12 @@
     <string name="flacon_buy_period">На сколько ее хватает</string>
 
     <string name="price_per_vaporizer">Стоимость испарителя</string>
-    <string name="vaporizer_buy_period">Сколько \"живет\" испаритель</string>
+    <string name="vaporizer_buy_period">На сколько его хватает</string>
+    <string name="vaporizer_period">Как давно он установлен</string>
 
     <string name="price_per_disposable">Стоимость одноразки</string>
     <string name="disposable_buy_period">На сколько ее хватает</string>
+    <string name="disposable_period">Как давно она куплена</string>
 
     <string name="current_volume">Текущий объем: %1$s</string>
     <string name="edit_current_volume">Изменить текущий объем</string>

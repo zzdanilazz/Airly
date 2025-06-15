@@ -16,8 +16,8 @@ data class AbstinencePeriod(
 
             if (days > 0) units.add(days to formatTimeUnit(days, "день", "дня", "дней"))
             if (hours > 0) units.add(hours to formatTimeUnit(hours, "час", "часа", "часов"))
-            if (minutes > 0) units.add(minutes to formatTimeUnit(minutes, "минута", "минуты", "минут"))
-            units.add(seconds to formatTimeUnit(seconds, "секунда", "секунды", "секунд"))
+            if (minutes > 0) units.add(minutes to formatTimeUnit(minutes, "минуту", "минуты", "минут"))
+            units.add(seconds to formatTimeUnit(seconds, "секунду", "секунды", "секунд"))
 
             return units
         }

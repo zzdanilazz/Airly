@@ -1,8 +1,8 @@
 package ru.health.featureliquid.api.domain
 
-import ru.health.featureliquid.api.domain.model.ConsumptionFrequency
+import ru.health.featureliquid.api.domain.model.Consumption
 import ru.health.featureliquid.api.domain.model.Device
-import ru.health.featureliquid.api.domain.model.VapeAction
+import java.util.Date
 
 interface LiquidRepository {
 
@@ -10,10 +10,13 @@ interface LiquidRepository {
 
     suspend fun getLatestDevice(isPrimary: Boolean = true): Device?
 
+    suspend fun getAllDevices(): List<Device>
+
     suspend fun saveDevice(device: Device): Int
 
-    suspend fun saveConsumptionFrequency(consumptionFrequency: ConsumptionFrequency)
+    suspend fun saveConsumptionFrequency(consumption: Consumption)
 
-    suspend fun saveVapeAction(vapeAction: VapeAction)
+    suspend fun getLastConsumptionDate(deviceId: Int): Date
 
+    suspend fun getFirstConsumptionDate(deviceId: Int): Date
 }

@@ -44,7 +44,7 @@ class DefaultGetAchievementMapUseCase @Inject constructor(
         )
 
     private suspend fun mapAbstinenceDurationList(achievements: List<Achievement>): Flow<List<Achievement>> {
-        val daysFlow = getDurationFlow(dashboardRepository.getLastRelapsedDate()).map {
+        val daysFlow = getDurationFlow(dashboardRepository.getLastConsumptionDate()).map {
             it.inWholeDays
         }
         return daysFlow.map { days ->

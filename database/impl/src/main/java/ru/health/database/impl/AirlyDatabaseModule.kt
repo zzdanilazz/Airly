@@ -6,8 +6,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import ru.health.database.api.device.DeviceDao
-import ru.health.database.api.device.consumption_frequency.ConsumptionFrequencyDao
-import ru.health.database.api.device.vape_action.VapeActionDao
+import ru.health.database.api.device.consumption.ConsumptionDao
 import javax.inject.Singleton
 
 @Module
@@ -25,11 +24,7 @@ class AirlyDatabaseModule {
 
         @Provides
         @Singleton
-        fun provideConsumptionFrequencyDaoDao(database: AirlyDatabase): ConsumptionFrequencyDao =
+        fun provideConsumptionFrequencyDaoDao(database: AirlyDatabase): ConsumptionDao =
             database.consumptionFrequencyDao()
-
-        @Provides
-        @Singleton
-        fun provideVapeActionDaoDao(database: AirlyDatabase): VapeActionDao = database.vapeActionDao()
     }
 }

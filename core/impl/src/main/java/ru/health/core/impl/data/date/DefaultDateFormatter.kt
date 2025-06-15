@@ -53,12 +53,14 @@ class DefaultDateFormatter @Inject constructor() : DateFormatter {
     }
 
     override fun formatDate(date: Date, format: String): String {
-        return SimpleDateFormat(format, Locale("ru")).format(date)
+        return SimpleDateFormat(format, Locale("ru")).apply {
+            timeZone = TimeZone.getDefault()
+        }.format(date)
     }
 
     override fun formatToDate(date: String, format: String): Date? {
         val dateFromFormat = SimpleDateFormat(format, Locale("ru")).apply {
-            timeZone = TimeZone.getTimeZone("GMT")
+            timeZone = TimeZone.getDefault()
         }.parse(date)
         return dateFromFormat
     }

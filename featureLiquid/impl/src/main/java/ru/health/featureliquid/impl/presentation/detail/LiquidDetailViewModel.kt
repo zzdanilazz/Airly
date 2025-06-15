@@ -28,10 +28,10 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
         when (action) {
             LiquidDetailAction.Init -> init()
             LiquidDetailAction.EditLiquidLevelApprove -> editLiquidLevelApprove()
-            LiquidDetailAction.AddLiquidBottle -> addLiquidBottle()
+            LiquidDetailAction.AddLiquidFlacon -> addLiquidBottle()
             LiquidDetailAction.AddAtomizer -> addAtomizer()
             LiquidDetailAction.AddDisposableApprove -> addDisposableApprove()
-            LiquidDetailAction.AddPuffsApprove -> addPuffsApprove()
+            LiquidDetailAction.AddConsumptionApprove -> addConsumptionApprove()
             is LiquidDetailAction.SwitchDeviceType -> switchDevice(action.deviceType)
             is LiquidDetailAction.EditLiquidLevel -> editLiquidLevel(action.flaconParams)
         }
@@ -70,7 +70,7 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
 
     }
 
-    private suspend fun addPuffsApprove() {
+    private suspend fun addConsumptionApprove() {
 
     }
 

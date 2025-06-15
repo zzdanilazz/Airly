@@ -25,9 +25,13 @@ interface DeviceDao {
         """
         SELECT * FROM DeviceLocal
         WHERE isPrimary = :isPrimary
-        ORDER BY deviceId DESC
+        ORDER BY date DESC
         LIMIT 1
     """
     )
     suspend fun latestDevice(isPrimary: Boolean): DeviceWithDetails?
+
+    @Transaction
+    @Query("SELECT * FROM DeviceLocal")
+    suspend fun allDevices(): List<DeviceWithDetails>
 }

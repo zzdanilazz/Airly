@@ -4,7 +4,7 @@ import java.util.Date
 
 interface DashboardRepository {
 
-    suspend fun getLastRelapsedDate(): Date
+    suspend fun getLastConsumptionDate(): Date
 
     suspend fun saveInterests(interests: Set<String>)
 

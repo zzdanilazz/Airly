@@ -10,6 +10,5 @@ data class Device(
     val date: String,
     val price: Int,
     val flaconParams: FlaconParams? = null,
-    val consumptionFrequencies: List<ConsumptionFrequency> = emptyList(),
-    val vapeActions: List<VapeAction> = emptyList()
+    val consumptions: List<Consumption> = emptyList()
 )

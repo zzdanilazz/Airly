@@ -13,11 +13,11 @@ internal sealed interface LiquidDetailAction {
 
     data class EditLiquidLevel(val flaconParams: FlaconParams): LiquidDetailAction
 
-    data object AddLiquidBottle: LiquidDetailAction
+    data object AddLiquidFlacon: LiquidDetailAction
 
     data object AddAtomizer: LiquidDetailAction
 
-    data object AddPuffsApprove: LiquidDetailAction
+    data object AddConsumptionApprove: LiquidDetailAction
 
     data object AddDisposableApprove: LiquidDetailAction
 

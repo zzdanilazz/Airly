@@ -31,7 +31,6 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.health.core.api.domain.DeviceType
-import ru.health.core.impl.presentation.scroll.scrollToItemOnFocusChange
 import ru.health.core.impl.presentation.ui.button.PrimaryButton
 import ru.health.core.impl.presentation.ui.field.DefaultTextField
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
@@ -92,7 +91,6 @@ internal fun FillConsumption(
                 )
 
                 NumberTextFieldWithTitle(
-                    modifier = Modifier.scrollToItemOnFocusChange(listState, 0),
                     titleRes = devicePriceTitleRes,
                     imeAction = ImeAction.Next,
                     value = state.pricePerDevice,
@@ -105,16 +103,9 @@ internal fun FillConsumption(
             }
 
             item {
-                val deviceBuyPeriodImeAction = when (state.deviceType) {
-                    DeviceType.POD -> ImeAction.Next
-                    DeviceType.DISPOSABLE -> ImeAction.Done
-                    else -> return@item
-                }
-
                 NumberTextFieldWithTitle(
-                    modifier = Modifier.scrollToItemOnFocusChange(listState, 1),
                     titleRes = deviceBuyPeriodTitleRes,
-                    imeAction = deviceBuyPeriodImeAction,
+                    imeAction = ImeAction.Next,
                     value = state.deviceBuyPeriod,
                     placeholder = "14",
                     trailingText = "сут.",
@@ -127,7 +118,6 @@ internal fun FillConsumption(
             if (state.deviceType == DeviceType.POD) {
                 item {
                     NumberTextFieldWithTitle(
-                        modifier = Modifier.scrollToItemOnFocusChange(listState, 2),
                         titleRes = R.string.price_per_vaporizer,
                         imeAction = ImeAction.Next,
                         value = state.pricePerVaporizer,
@@ -141,9 +131,8 @@ internal fun FillConsumption(
 
                 item {
                     NumberTextFieldWithTitle(
-                        modifier = Modifier.scrollToItemOnFocusChange(listState, 3),
                         titleRes = R.string.vaporizer_buy_period,
-                        imeAction = ImeAction.Done,
+                        imeAction = ImeAction.Next,
                         value = state.vaporizerBuyPeriod,
                         placeholder = "21",
                         trailingText = "сут.",
@@ -151,8 +140,36 @@ internal fun FillConsumption(
                             onAction(StartupParametersAction.ChangeVaporizerBuyPeriod(it))
                         }
                     )
-                    Spacer(modifier = Modifier.height(86.dp))
                 }
+
+                item {
+                    NumberTextFieldWithTitle(
+                        titleRes = R.string.vaporizer_period,
+                        imeAction = ImeAction.Done,
+                        value = state.vaporizerPeriod,
+                        placeholder = "7",
+                        trailingText = "сут.",
+                        onValueChange = {
+                            onAction(StartupParametersAction.ChangeVaporizerPeriod(it))
+                        }
+                    )
+                }
+            } else {
+                item {
+                    NumberTextFieldWithTitle(
+                        titleRes = R.string.disposable_period,
+                        imeAction = ImeAction.Done,
+                        value = state.disposablePeriod,
+                        placeholder = "7",
+                        trailingText = "сут.",
+                        onValueChange = {
+                            onAction(StartupParametersAction.ChangeDisposablePeriod(it))
+                        }
+                    )
+                }
+            }
+            item {
+                Spacer(modifier = Modifier.height(86.dp))
             }
         }
 

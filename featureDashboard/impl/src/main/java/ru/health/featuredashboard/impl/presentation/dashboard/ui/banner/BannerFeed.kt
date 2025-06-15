@@ -24,7 +24,7 @@ import kotlin.math.roundToInt
 @Composable
 internal fun BannerFeed(
     modifier: Modifier = Modifier,
-    maxPrice: Float
+    maxPrice: Double
 ) {
     val windowInfo = LocalWindowInfo.current
     val density = LocalDensity.current

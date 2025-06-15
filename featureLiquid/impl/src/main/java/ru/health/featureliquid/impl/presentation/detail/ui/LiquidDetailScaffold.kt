@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import ru.health.core.api.domain.DeviceType
+import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailAction
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailUiState
@@ -61,6 +62,7 @@ internal fun LiquidDetailScaffold(
 @Composable
 private fun LiquidDetailScaffoldPreview() {
     AirlyTheme {
+        GradientBox()
         LiquidDetailScaffold(state = liquidDetailUiStatePreview)
     }
 }
@@ -69,6 +71,7 @@ private fun LiquidDetailScaffoldPreview() {
 @Composable
 private fun LiquidDetailDisposableScaffoldPreview() {
     AirlyTheme {
+        GradientBox()
         LiquidDetailScaffold(state = liquidDetailUiStatePreview.copy(
             device = disposablePreview
         ))

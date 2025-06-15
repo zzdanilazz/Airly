@@ -33,14 +33,20 @@ internal class DashboardViewModel @AssistedInject constructor(
 
     private suspend fun init() {
         getDashboardInfoUseCase().onSuccess { dashboardInfo ->
-            dashboardInfo.abstinenceDuration.collect { abstinenceDuration ->
-                _state.update { uiState ->
-                    uiState.copy(
-                        hasNotifications = dashboardInfo.hasNotifications,
-                        health = dashboardInfo.health,
-                        abstinenceDuration = abstinenceDuration,
-                        savedMoney = dashboardInfo.savedMoney
-                    )
+            launch {
+                dashboardInfo.abstinenceDuration.collect { abstinenceDuration ->
+                    _state.update { uiState ->
+                        uiState.copy(
+                            hasNotifications = dashboardInfo.hasNotifications,
+                            health = dashboardInfo.health,
+                            abstinenceDuration = abstinenceDuration
+                        )
+                    }
+                }
+            }
+            launch {
+                dashboardInfo.savedMoneyFlow.collect {
+                    _state.update { uiState -> uiState.copy(savedMoney = it) }
                 }
             }
         }

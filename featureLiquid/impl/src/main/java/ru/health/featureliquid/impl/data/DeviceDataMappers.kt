@@ -5,15 +5,12 @@ import ru.health.core.api.domain.DeviceType
 import ru.health.core.api.domain.FlaconType
 import ru.health.database.api.device.DeviceLocal
 import ru.health.database.api.device.DeviceWithDetails
-import ru.health.database.api.device.consumption_frequency.ConsumptionFrequencyLocal
-import ru.health.database.api.device.vape_action.VapeActionLocal
-import ru.health.featureliquid.api.data.ConsumptionFrequencyData
+import ru.health.database.api.device.consumption.ConsumptionLocal
+import ru.health.featureliquid.api.data.ConsumptionData
 import ru.health.featureliquid.api.data.DeviceData
-import ru.health.featureliquid.api.data.VapeActionData
-import ru.health.featureliquid.api.domain.model.ConsumptionFrequency
+import ru.health.featureliquid.api.domain.model.Consumption
 import ru.health.featureliquid.api.domain.model.Device
 import ru.health.featureliquid.api.domain.model.FlaconParams
-import ru.health.featureliquid.api.domain.model.VapeAction
 import java.util.Date
 
 internal fun Device.toData(dateFormatter: DateFormatter) = DeviceData(
@@ -35,80 +32,62 @@ internal fun DeviceData.toDomain(dateFormatter: DateFormatter) = Device(
         volume = volume ?: 0f,
         flaconType = FlaconType.entries.find { it.id == flaconTypeId } ?: FlaconType.SMALL
     ),
-    consumptionFrequencies = consumptionFrequencies.map { it.toDomain() },
-    vapeActions = vapeActions.map { it.toDomain(dateFormatter) }
+    consumptions = consumptionFrequencies.map { it.toDomain(dateFormatter) }
 )
 
-internal fun DeviceData.toLocal(dateFormatter: DateFormatter) = DeviceLocal(
+internal fun DeviceData.toLocal() = DeviceLocal(
     deviceId = id,
     deviceTypeId = deviceTypeId,
     isPrimary = isPrimary,
-    date = dateFormatter.formatDate(date),
+    date = date,
     price = price,
     volume = volume,
     flaconTypeId = flaconTypeId
 )
 
-internal fun DeviceWithDetails.toData(dateFormatter: DateFormatter) = DeviceData(
+internal fun DeviceWithDetails.toData() = DeviceData(
     id = device.deviceId,
     deviceTypeId = device.deviceTypeId,
     isPrimary = device.isPrimary,
-    date = dateFormatter.formatToDate(device.date) ?: Date(),
+    date = device.date,
     price = device.price,
     volume = device.volume,
     flaconTypeId = device.flaconTypeId,
-    consumptionFrequencies = consumptionFrequencies.map { it.toData() },
-    vapeActions = vapeActions.map { it.toData(dateFormatter) }
+    consumptionFrequencies = consumptions.map { it.toData() }
 )
 
-internal fun ConsumptionFrequency.toData() = ConsumptionFrequencyData(
+internal fun Consumption.toData(dateFormatter: DateFormatter) = ConsumptionData(
     id = id,
-    value = value,
-    deviceId = deviceId
-)
-
-internal fun ConsumptionFrequencyData.toDomain() = ConsumptionFrequency(
-    id = id,
-    value = value,
-    deviceId = deviceId
-)
-
-internal fun ConsumptionFrequencyData.toLocal() = ConsumptionFrequencyLocal(
-    id = id,
-    value = value,
-    deviceId = deviceId
-)
-
-internal fun ConsumptionFrequencyLocal.toData() = ConsumptionFrequencyData(
-    id = id,
-    value = value,
-    deviceId = deviceId
-)
-
-internal fun VapeAction.toData(dateFormatter: DateFormatter) = VapeActionData(
-    id = id,
-    puffs = puffs,
+    frequency = frequency,
+    durationInDays = durationInDays,
+    isMeasured = isMeasured,
     deviceId = deviceId,
-    date = dateFormatter.formatToDate(date) ?: Date(),
+    date = dateFormatter.formatToDate(date) ?: Date()
 )
 
-internal fun VapeActionData.toDomain(dateFormatter: DateFormatter) = VapeAction(
+internal fun ConsumptionData.toDomain(dateFormatter: DateFormatter) = Consumption(
     id = id,
-    puffs = puffs,
+    frequency = frequency,
+    durationInDays = durationInDays,
+    isMeasured = isMeasured,
     deviceId = deviceId,
-    date = dateFormatter.formatDate(date),
+    date = dateFormatter.formatDate(date)
 )
 
-internal fun VapeActionData.toLocal(dateFormatter: DateFormatter) = VapeActionLocal(
+internal fun ConsumptionData.toLocal() = ConsumptionLocal(
     id = id,
-    puffs = puffs,
+    frequency = frequency,
+    durationInDays = durationInDays,
+    isMeasured = isMeasured,
     deviceId = deviceId,
-    date = dateFormatter.formatDate(date),
+    date = date
 )
 
-internal fun VapeActionLocal.toData(dateFormatter: DateFormatter) = VapeActionData(
+internal fun ConsumptionLocal.toData() = ConsumptionData(
     id = id,
-    puffs = puffs,
+    frequency = frequency,
+    durationInDays = durationInDays,
+    isMeasured = isMeasured,
     deviceId = deviceId,
-    date = dateFormatter.formatToDate(date) ?: Date(),
+    date = date
 )

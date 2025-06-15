@@ -126,7 +126,7 @@ internal val dashboardUiStatePreview by lazy {
     DashboardUiState(
         hasNotifications = true,
         health = 86,
-        savedMoney = 3_398.08f
+        savedMoney = 3_398.08
     )
 }
 

@@ -1,34 +1,36 @@
 package ru.health.featureliquid.impl.data
 
-import ru.health.core.api.data.date.DateFormatter
 import ru.health.database.api.device.DeviceDao
-import ru.health.database.api.device.consumption_frequency.ConsumptionFrequencyDao
-import ru.health.database.api.device.vape_action.VapeActionDao
-import ru.health.featureliquid.api.data.ConsumptionFrequencyData
+import ru.health.database.api.device.consumption.ConsumptionDao
+import ru.health.featureliquid.api.data.ConsumptionData
 import ru.health.featureliquid.api.data.DeviceData
 import ru.health.featureliquid.api.data.LiquidLocalDataSource
-import ru.health.featureliquid.api.data.VapeActionData
+import java.util.Date
 import javax.inject.Inject
 
 internal class DefaultLiquidLocalDataSource @Inject constructor(
     private val deviceDao: DeviceDao,
-    private val consumptionFrequencyDao: ConsumptionFrequencyDao,
-    private val vapeActionDao: VapeActionDao,
-    private val dateFormatter: DateFormatter
+    private val consumptionDao: ConsumptionDao
 ) : LiquidLocalDataSource {
 
     override suspend fun getDeviceByTypeId(deviceTypeId: Int) =
-        deviceDao.deviceByDeviceTypeId(deviceTypeId)?.toData(dateFormatter)
+        deviceDao.deviceByDeviceTypeId(deviceTypeId)?.toData()
 
     override suspend fun getLatestDevice(isPrimary: Boolean) =
-        deviceDao.latestDevice(isPrimary)?.toData(dateFormatter)
+        deviceDao.latestDevice(isPrimary)?.toData()
+
+    override suspend fun getAllDevices(): List<DeviceData> =
+        deviceDao.allDevices().map { it.toData() }
 
     override suspend fun saveDevice(device: DeviceData) =
-        deviceDao.insert(device.toLocal(dateFormatter)).toInt()
+        deviceDao.insert(device.toLocal()).toInt()
 
-    override suspend fun saveConsumptionFrequency(consumptionFrequency: ConsumptionFrequencyData) =
-        consumptionFrequencyDao.insert(consumptionFrequency.toLocal())
+    override suspend fun saveConsumptionFrequency(consumptionFrequency: ConsumptionData) =
+        consumptionDao.insert(consumptionFrequency.toLocal())
 
-    override suspend fun saveVapeAction(vapeAction: VapeActionData) =
-        vapeActionDao.insert(vapeAction.toLocal(dateFormatter))
+    override suspend fun getLastConsumptionDate(deviceId: Int): Date =
+        consumptionDao.getLastConsumptionDate(deviceId)
+
+    override suspend fun getFirstConsumptionDate(deviceId: Int): Date =
+        consumptionDao.getFirstConsumptionDate(deviceId)
 }

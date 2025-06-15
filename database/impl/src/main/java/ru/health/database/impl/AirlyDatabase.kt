@@ -7,18 +7,14 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import ru.health.database.api.device.DeviceDao
 import ru.health.database.api.device.DeviceLocal
-import ru.health.database.api.device.consumption_frequency.ConsumptionFrequencyDao
-import ru.health.database.api.device.consumption_frequency.ConsumptionFrequencyLocal
-import ru.health.database.api.device.vape_action.VapeActionDao
-import ru.health.database.api.device.vape_action.VapeActionLocal
+import ru.health.database.api.device.consumption.ConsumptionDao
+import ru.health.database.api.device.consumption.ConsumptionLocal
 
 internal interface AirlyDatabase {
 
     fun deviceDao(): DeviceDao
 
-    fun consumptionFrequencyDao(): ConsumptionFrequencyDao
-
-    fun vapeActionDao(): VapeActionDao
+    fun consumptionFrequencyDao(): ConsumptionDao
 }
 
 internal abstract class AbstractAirlyDatabase(
@@ -29,8 +25,7 @@ internal abstract class AbstractAirlyDatabase(
     @Database(
         entities = [
             DeviceLocal::class,
-            ConsumptionFrequencyLocal::class,
-            VapeActionLocal::class,
+            ConsumptionLocal::class
         ],
         version = 1,
         exportSchema = false
@@ -38,8 +33,7 @@ internal abstract class AbstractAirlyDatabase(
     @TypeConverters(DateConverter::class)
     internal abstract class ContentRoom : RoomDatabase() {
         abstract fun deviceDao(): DeviceDao
-        abstract fun consumptionFrequencyDao(): ConsumptionFrequencyDao
-        abstract fun vapeActionDao(): VapeActionDao
+        abstract fun consumptionFrequencyDao(): ConsumptionDao
     }
 
     private var db: ContentRoom? = null
@@ -50,9 +44,7 @@ internal abstract class AbstractAirlyDatabase(
 
     override fun deviceDao(): DeviceDao = database.deviceDao()
 
-    override fun consumptionFrequencyDao(): ConsumptionFrequencyDao = database.consumptionFrequencyDao()
-
-    override fun vapeActionDao(): VapeActionDao = database.vapeActionDao()
+    override fun consumptionFrequencyDao(): ConsumptionDao = database.consumptionFrequencyDao()
 
     private fun createDatabase(): ContentRoom {
         val newDatabaseBuilder = Room
