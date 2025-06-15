@@ -89,6 +89,9 @@ internal fun Dashboard(
                 if (isSticky) statusBarHeight else 0.dp
             )
             Spacer(modifier = Modifier.height(spacerHeight))
+            val scrollOffset by remember {
+                derivedStateOf { listState.layoutInfo.visibleItemsInfo[1].size }
+            }
             SavedMoneyCard(
                 modifier = modifier.padding(horizontal = cardPadding),
                 hazeState = hazeState,
@@ -97,7 +100,8 @@ internal fun Dashboard(
             ) {
                 coroutineScope.launch {
                     listState.animateScrollToItem(
-                        if (isSticky) FIRST_ITEM_INDEX else LAST_ITEM_INDEX
+                        index = if (isSticky) FIRST_ITEM_INDEX else LAST_ITEM_INDEX,
+                        scrollOffset = -scrollOffset
                     )
                 }
             }
