@@ -18,6 +18,7 @@ import com.arkivanov.decompose.router.stack.active
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.pushNew
+import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.decompose.value.Value
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -109,7 +110,7 @@ class DefaultAppComponent @AssistedInject internal constructor(
     private fun startupParameters(context: ComponentContext) = startupParametersFactory(
         componentContext = context,
         onApp = {
-            navigation.pushNew(Config.Tab)
+            navigation.replaceAll(Config.Tab)
         },
         onInputLiquid = {
             navigation.pushNew(

@@ -1,6 +1,8 @@
 [versions]
 agp = "8.9.3"
 all = "3.0.0"
+charty = "2.0.1"
+composeCharts = "0.1.7"
 datastorePreferencesCore = "1.1.7"
 decompose = "3.3.0"
 firebaseBom = "33.13.0"
@@ -62,6 +64,8 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 
+charty = { module = "com.himanshoe:charty", version.ref = "charty" }
+compose-charts = { module = "io.github.ehsannarmani:compose-charts", version.ref = "composeCharts" }
 dagger = { module = "com.google.dagger:dagger", version.ref = "googleDagger" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "googleDagger" }
 

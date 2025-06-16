@@ -13,7 +13,7 @@ interface LiquidLocalDataSource {
 
     suspend fun getLatestDeviceFlow(isPrimary: Boolean): Flow<DeviceData?>
 
-    suspend fun getAllDevices(): List<DeviceData>
+    suspend fun getAllDevices(startDate: Date?, endDate: Date?): List<DeviceData>
 
     suspend fun saveDevice(device: DeviceData): Int
 

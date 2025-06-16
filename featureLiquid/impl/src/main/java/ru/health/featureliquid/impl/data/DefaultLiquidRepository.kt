@@ -34,8 +34,11 @@ internal class DefaultLiquidRepository @Inject constructor(
         liquidLocalDataSource.getLatestDeviceFlow(isPrimary).map { it?.toDomain(dateFormatter) }
     }
 
-    override suspend fun getAllDevices(): List<Device> = withContext(Dispatchers.IO) {
-        liquidLocalDataSource.getAllDevices().map { it.toDomain(dateFormatter) }
+    override suspend fun getAllDevices(
+        startDate: Date?,
+        endDate: Date?
+    ): List<Device> = withContext(Dispatchers.IO) {
+        liquidLocalDataSource.getAllDevices(startDate, endDate).map { it.toDomain(dateFormatter) }
     }
 
     override suspend fun updateDevice(device: Device) = withContext(Dispatchers.IO) {

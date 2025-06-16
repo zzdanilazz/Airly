@@ -27,8 +27,16 @@ internal class DefaultLiquidLocalDataSource @Inject constructor(
     override suspend fun getLatestDeviceFlow(isPrimary: Boolean): Flow<DeviceData?> =
         deviceDao.latestDeviceFlow(isPrimary).map { it?.toData() }
 
-    override suspend fun getAllDevices(): List<DeviceData> =
-        deviceDao.allDevices().map { it.toData() }
+    override suspend fun getAllDevices(startDate: Date?, endDate: Date?): List<DeviceData> =
+        when {
+            startDate != null && endDate != null -> {
+                deviceDao.allDevices(startDate, endDate).map { it.toData() }
+            }
+            endDate != null -> {
+                deviceDao.allDevices(endDate).map { it.toData() }
+            }
+            else -> deviceDao.allDevices().map { it.toData() }
+        }
 
     override suspend fun saveDevice(device: DeviceData) =
         deviceDao.insert(device.toLocal()).toInt()

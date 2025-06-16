@@ -38,6 +38,7 @@ dependencies {
     implementation(project(":featureStatistics:api"))
     implementation(project(":core:api"))
     implementation(project(":core:impl"))
+    implementation(project(":featureLiquid:api"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -55,6 +56,8 @@ dependencies {
     implementation(libs.decompose)
 
     implementation(libs.haze)
+
+    implementation(libs.compose.charts)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

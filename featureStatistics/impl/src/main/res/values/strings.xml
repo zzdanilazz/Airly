@@ -1,6 +1,5 @@
 <resources>
     <string name="statistics">Статистика</string>
-    <string name="liquid_consumption">Жидкости не сожжено:</string>
-    <string name="nicotine_consumption">Не впитано никотина:</string>
-    <string name="money_consumption">Денег сэкономлено:</string>
+    <string name="money_lost">Сумма потраченных средств:</string>
+    <string name="frequency_lost">Средний период покупку одного флакона:</string>
 </resources>

@@ -7,6 +7,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
+import java.util.Date
 
 @Dao
 interface DeviceDao {
@@ -50,4 +51,12 @@ interface DeviceDao {
     @Transaction
     @Query("SELECT * FROM DeviceLocal")
     suspend fun allDevices(): List<DeviceWithDetails>
+
+    @Transaction
+    @Query("SELECT * FROM DeviceLocal WHERE date BETWEEN :startDate AND :endDate")
+    suspend fun allDevices(startDate: Date, endDate: Date): List<DeviceWithDetails>
+
+    @Transaction
+    @Query("SELECT * FROM DeviceLocal WHERE date <= :endDate")
+    suspend fun allDevices(endDate: Date): List<DeviceWithDetails>
 }

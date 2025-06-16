@@ -27,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.haze.hazeSource
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
@@ -58,7 +59,7 @@ internal fun Dashboard(
     val contentModifier = Modifier.padding(horizontal = defaultContentPadding)
 
     val shareText = stringResource(R.string.share_progress_text)
-    var isShareContentCapturing by remember { mutableStateOf(true) }
+    var isShareContentCapturing by remember { mutableStateOf(false) }
 
     GradientBox(
         modifier = Modifier
@@ -76,9 +77,10 @@ internal fun Dashboard(
             DashboardTopBar(
                 onUpload = {
                     coroutineScope.launch {
-                        isShareContentCapturing = false
-                        val bitmap = graphicsLayer.toImageBitmap()
                         isShareContentCapturing = true
+                        delay(200)
+                        val bitmap = graphicsLayer.toImageBitmap()
+                        isShareContentCapturing = false
                         onAction(DashboardAction.OnShareClick(context, bitmap, shareText))
                     }
                 }

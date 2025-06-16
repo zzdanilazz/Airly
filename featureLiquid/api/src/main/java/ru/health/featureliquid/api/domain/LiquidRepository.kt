@@ -15,7 +15,10 @@ interface LiquidRepository {
 
     suspend fun getLatestDeviceFlow(isPrimary: Boolean = true): Flow<Device?>
 
-    suspend fun getAllDevices(): List<Device>
+    suspend fun getAllDevices(
+        startDate: Date? = null,
+        endDate: Date? = null
+    ): List<Device>
 
     suspend fun updateDevice(device: Device)
 
