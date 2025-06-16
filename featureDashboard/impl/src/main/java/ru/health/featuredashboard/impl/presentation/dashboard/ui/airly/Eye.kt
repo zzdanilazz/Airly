@@ -15,6 +15,9 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Clear
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -29,43 +32,52 @@ internal fun Eye(
     modifier: Modifier = Modifier,
     health: Int = 100
 ) {
-    val shape = CircleShape
-    val infinite = rememberInfiniteTransition()
-    val offsetX by infinite.animateFloat(
-        initialValue = 1f,
-        targetValue = 4f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = health * 10, easing = FastOutSlowInEasing),
-            repeatMode = RepeatMode.Reverse
+    if (health > 0) {
+        val shape = CircleShape
+        val infinite = rememberInfiniteTransition()
+        val offsetX by infinite.animateFloat(
+            initialValue = 1f,
+            targetValue = 4f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(durationMillis = health * 10, easing = FastOutSlowInEasing),
+                repeatMode = RepeatMode.Reverse
+            )
         )
-    )
-    val blinkDuration = 3000
-    val pupilHeight by infinite.animateFloat(
-        initialValue = 22f,
-        targetValue = 0f,
-        animationSpec = infiniteRepeatable(
-            animation = keyframes {
-                durationMillis = blinkDuration
-                22f at (blinkDuration * 80 / 100)
-                0f at (blinkDuration * 85 / 100)
-                22f at (blinkDuration * 90 / 100)
-            },
-            repeatMode = RepeatMode.Restart
+        val blinkDuration = 3000
+        val pupilHeight by infinite.animateFloat(
+            initialValue = 22f,
+            targetValue = 0f,
+            animationSpec = infiniteRepeatable(
+                animation = keyframes {
+                    durationMillis = blinkDuration
+                    22f at (blinkDuration * 80 / 100)
+                    0f at (blinkDuration * 85 / 100)
+                    22f at (blinkDuration * 90 / 100)
+                },
+                repeatMode = RepeatMode.Restart
+            )
         )
-    )
-    Box(
-        modifier = modifier
-        .width(22.dp)
-        .height(pupilHeight.dp)
-        .clip(shape)
-        .background(Color.Black)
-    ) {
-        Spacer(
-            modifier = Modifier
-                .offset(x = offsetX.dp, y = 2.dp)
-                .size(16.dp)
+        Box(
+            modifier = modifier
+                .width(22.dp)
+                .height(pupilHeight.dp)
                 .clip(shape)
-                .background(Color.White)
+                .background(Color.Black)
+        ) {
+            Spacer(
+                modifier = Modifier
+                    .offset(x = offsetX.dp, y = 2.dp)
+                    .size(16.dp)
+                    .clip(shape)
+                    .background(Color.White)
+            )
+        }
+    } else {
+        Icon(
+            modifier = modifier.size(22.dp),
+            imageVector = Icons.Rounded.Clear,
+            tint = Color.Black,
+            contentDescription = null
         )
     }
 }
@@ -75,5 +87,13 @@ internal fun Eye(
 private fun EyePreview() {
     AirlyTheme {
         Eye()
+    }
+}
+
+@Composable
+@Preview
+private fun EyeDeadPreview() {
+    AirlyTheme {
+        Eye(health = 0)
     }
 }

@@ -17,8 +17,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.featuredashboard.impl.R
@@ -32,11 +35,15 @@ internal fun Airly(
 
     val animateFloat by infinite.animateFloat(
         initialValue = 0f,
-        targetValue = 6f,
+        targetValue = if (health > 0) 6f else 0f,
         animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = health * 12, easing = FastOutSlowInEasing),
             repeatMode = RepeatMode.Reverse
         )
+    )
+    val colorFilter = ColorFilter.tint(
+        color = Color.DarkGray.copy(alpha = 1 - health / 100f),
+        blendMode = BlendMode.SrcAtop
     )
 
     Box(modifier = modifier) {
@@ -45,6 +52,7 @@ internal fun Airly(
                 .align(Alignment.CenterStart)
                 .rotate(animateFloat)
                 .offset(y = (65).dp),
+            colorFilter = colorFilter,
             painter = painterResource(R.drawable.illustration_left_hand),
             contentDescription = null
         )
@@ -53,6 +61,7 @@ internal fun Airly(
                 .align(Alignment.CenterEnd)
                 .rotate(-animateFloat)
                 .offset(x= 5.dp,y = (65).dp),
+            colorFilter = colorFilter,
             painter = painterResource(R.drawable.illustration_right_hand),
             contentDescription = null
         )
@@ -60,6 +69,7 @@ internal fun Airly(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .offset(y = (50).dp),
+            colorFilter = colorFilter,
             painter = painterResource(R.drawable.illustration_legs),
             contentDescription = null
         )
@@ -67,6 +77,7 @@ internal fun Airly(
             modifier = Modifier.offset(y = animateFloat.dp)
         ) {
             Image(
+                colorFilter = colorFilter,
                 painter = painterResource(R.drawable.illustration_body),
                 contentDescription = null
             )
@@ -82,7 +93,7 @@ internal fun Airly(
     }
 }
 
-@PreviewLightDark
+@Preview
 @Composable
 private fun AirlyFullPreview() {
     AirlyTheme {
@@ -95,7 +106,7 @@ private fun AirlyFullPreview() {
     }
 }
 
-@PreviewLightDark
+@Preview
 @Composable
 private fun AirlyStrongPreview() {
     AirlyTheme {
@@ -103,7 +114,7 @@ private fun AirlyStrongPreview() {
     }
 }
 
-@PreviewLightDark
+@Preview
 @Composable
 private fun AirlyHalfPreview() {
     AirlyTheme {
@@ -111,7 +122,7 @@ private fun AirlyHalfPreview() {
     }
 }
 
-@PreviewLightDark
+@Preview
 @Composable
 private fun AirlyLowPreview() {
     AirlyTheme {
@@ -119,7 +130,7 @@ private fun AirlyLowPreview() {
     }
 }
 
-@PreviewLightDark
+@Preview
 @Composable
 private fun AirlyDeadPreview() {
     AirlyTheme {
