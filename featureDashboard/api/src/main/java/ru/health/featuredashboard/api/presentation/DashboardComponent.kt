@@ -10,7 +10,6 @@ interface DashboardComponent : RenderComponent, HandleApproveEvent {
     fun interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
-            onNotifications: () -> Unit,
             onUploadDetail: () -> Unit,
         ) : DashboardComponent
     }

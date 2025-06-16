@@ -14,6 +14,12 @@ interface ConsumptionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(consumptionFrequency: ConsumptionLocal)
 
+    @Query("SELECT COUNT(*) FROM ConsumptionLocal")
+    fun consumptionCountFlow(): Flow<Int>
+
+    @Query("SELECT COUNT(*) FROM ConsumptionLocal WHERE id != 0")
+    fun consumptionCountFlowWithoutInitial(): Flow<Int>
+
     @Query("SELECT date FROM ConsumptionLocal WHERE deviceId = :deviceId ORDER BY date DESC LIMIT 1")
     fun getLatestConsumptionDate(deviceId: Int): Flow<Date?>
 

@@ -5,7 +5,7 @@ import kotlin.time.Duration
 
 data class DashboardInfo(
     val hasNotifications: Boolean,
-    val health: Int,
+    val health: Flow<Int>,
     val abstinenceDuration: Flow<Duration>,
     val savedMoneyFlow: Flow<Double>
 )

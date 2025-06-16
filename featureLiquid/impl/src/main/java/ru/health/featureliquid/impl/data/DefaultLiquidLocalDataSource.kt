@@ -39,6 +39,10 @@ internal class DefaultLiquidLocalDataSource @Inject constructor(
     override suspend fun saveConsumption(consumption: ConsumptionData) =
         consumptionDao.insert(consumption.toLocal())
 
+    override suspend fun getConsumptionCountFlow(includeInitial: Boolean): Flow<Int> =
+        if (includeInitial) consumptionDao.consumptionCountFlow()
+        else consumptionDao.consumptionCountFlowWithoutInitial()
+
     override suspend fun getLatestConsumptionDateFlow(deviceId: Int, hasDuration: Boolean): Flow<Date?> =
         if (hasDuration) {
             consumptionDao.getLatestConsumptionDateWithPositiveDuration(deviceId)

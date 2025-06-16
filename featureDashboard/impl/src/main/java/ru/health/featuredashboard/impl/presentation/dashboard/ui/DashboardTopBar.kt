@@ -2,10 +2,7 @@ package ru.health.featuredashboard.impl.presentation.dashboard.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Badge
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -15,23 +12,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import ru.health.core.impl.presentation.ui.button.TransparentIconButton
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
-import ru.health.core.impl.presentation.ui.theme.LightRed
 import ru.health.featuredashboard.impl.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun DashboardTopBar(
     modifier: Modifier = Modifier,
-    name: String = "",
-    onProfile: () -> Unit = {},
-    onUpload: () -> Unit = {},
-    onNotifications: () -> Unit = {}
+    onUpload: () -> Unit = {}
 ) {
     TopAppBar(
         modifier = modifier,
@@ -50,28 +43,16 @@ internal fun DashboardTopBar(
                     contentDescription = stringResource(R.string.upload),
                     onClick = onUpload
                 )
-                Spacer(modifier = Modifier.width(10.dp))
-                TransparentIconButton(
-                    painter = painterResource(R.drawable.ic_notification),
-                    contentDescription = stringResource(R.string.notifications),
-                    onClick = onNotifications
-                ) {
-                    if (true) {
-                        Badge(containerColor = LightRed)
-                    }
-                }
             }
         }
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@PreviewLightDark
+@Preview
 @Composable
 private fun DashboardTopBarPreview(@PreviewParameter(LoremIpsum::class) text: String) {
     AirlyTheme {
-        DashboardTopBar(
-            name = text.take(11)
-        )
+        DashboardTopBar()
     }
 }

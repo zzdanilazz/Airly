@@ -85,7 +85,6 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
     private fun dashboardComponent(context: ComponentContext): DashboardComponent =
         dashboardFactory(
             componentContext = context,
-            onNotifications = onNotifications,
             onUploadDetail = onUploadDetail,
         )
 

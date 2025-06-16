@@ -62,8 +62,7 @@ internal fun Dashboard(
     ) {
         item {
             DashboardTopBar(
-                onUpload = { onAction(DashboardAction.OnUploadClick) },
-                onNotifications = { onAction(DashboardAction.OnNotificationsClick) }
+                onUpload = { onAction(DashboardAction.OnUploadClick) }
             )
             Health(
                 modifier = contentModifier,

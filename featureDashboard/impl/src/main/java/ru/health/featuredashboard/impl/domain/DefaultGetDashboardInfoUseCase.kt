@@ -12,6 +12,7 @@ import ru.health.core.api.domain.result.RootResult
 import ru.health.core.impl.domain.getDurationFlow
 import ru.health.featuredashboard.api.domain.model.DashboardInfo
 import ru.health.featuredashboard.api.domain.usecase.GetDashboardInfoUseCase
+import ru.health.featuredashboard.api.domain.usecase.GetHealthFlowUseCase
 import ru.health.featureliquid.api.domain.LiquidRepository
 import javax.inject.Inject
 import kotlin.time.ExperimentalTime
@@ -19,6 +20,7 @@ import kotlin.time.ExperimentalTime
 class DefaultGetDashboardInfoUseCase @Inject constructor(
     private val liquidRepository: LiquidRepository,
     private val getSavedMoneyFlowUseCase: DefaultGetSavedMoneyFlowUseCase,
+    private val getHealthFlowUseCase: GetHealthFlowUseCase
 ) : GetDashboardInfoUseCase {
 
     @OptIn(ExperimentalTime::class, ExperimentalCoroutinesApi::class)
@@ -54,7 +56,8 @@ class DefaultGetDashboardInfoUseCase @Inject constructor(
             RootResult.Success(
                 DashboardInfo(
                     hasNotifications = true,
-                    health = 86,
+                    health = getHealthFlowUseCase(currentAbstinenceDuration)
+                        .dataOrDefault(emptyFlow()),
                     abstinenceDuration = currentAbstinenceDuration,
                     savedMoneyFlow = getSavedMoneyFlowUseCase(totalAbstinenceDuration)
                         .dataOrDefault(emptyFlow())

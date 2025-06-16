@@ -26,7 +26,6 @@ internal class DashboardViewModel @AssistedInject constructor(
         when (action) {
             DashboardAction.Init -> init()
             DashboardAction.OnAddActionClick -> onAddActionClick()
-            DashboardAction.OnNotificationsClick -> onNotificationsClick()
             DashboardAction.OnUploadClick -> onUploadClick()
         }
     }
@@ -38,7 +37,6 @@ internal class DashboardViewModel @AssistedInject constructor(
                     _state.update { uiState ->
                         uiState.copy(
                             hasNotifications = dashboardInfo.hasNotifications,
-                            health = dashboardInfo.health,
                             abstinenceDuration = abstinenceDuration
                         )
                     }
@@ -47,6 +45,11 @@ internal class DashboardViewModel @AssistedInject constructor(
             launch {
                 dashboardInfo.savedMoneyFlow.collect {
                     _state.update { uiState -> uiState.copy(savedMoney = it) }
+                }
+            }
+            launch {
+                dashboardInfo.health.collect {
+                    _state.update { uiState -> uiState.copy(health = it) }
                 }
             }
         }
@@ -58,10 +61,6 @@ internal class DashboardViewModel @AssistedInject constructor(
 
     private suspend fun onAddActionClick() {
 
-    }
-
-    private suspend fun onNotificationsClick() {
-        _navEvent.send(DashboardNavEvent.OpenNotifications)
     }
 
     private suspend fun onUploadClick() {

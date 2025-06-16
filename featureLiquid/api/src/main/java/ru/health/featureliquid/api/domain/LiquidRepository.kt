@@ -23,6 +23,8 @@ interface LiquidRepository {
 
     suspend fun saveConsumption(consumption: Consumption)
 
+    suspend fun getConsumptionCountFlow(includeInitial: Boolean = false): Flow<Int>
+
     suspend fun getLatestConsumptionDateFlow(deviceId: Int, hasDuration: Boolean = true): Flow<Date?>
 
     suspend fun getFirstConsumptionDate(deviceId: Int): Date

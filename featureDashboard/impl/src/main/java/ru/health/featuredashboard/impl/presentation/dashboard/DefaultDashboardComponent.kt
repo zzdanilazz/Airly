@@ -13,7 +13,6 @@ import ru.health.featuredashboard.impl.presentation.dashboard.ui.DashboardConten
 
 internal class DefaultDashboardComponent @AssistedInject internal constructor(
     @Assisted componentContext: ComponentContext,
-    @Assisted(ON_NOTIFICATIONS) private val onNotifications: () -> Unit,
     @Assisted(ON_UPLOAD_DETAIL) private val onUploadDetail: () -> Unit,
     private val dashboardViewModel: DashboardViewModel.Factory,
 ) : DashboardComponent, ComponentContext by componentContext {
@@ -24,7 +23,6 @@ internal class DefaultDashboardComponent @AssistedInject internal constructor(
     override fun Render(modifier: Modifier) {
         EventEffect(viewModel.navEvent) { event ->
             when (event) {
-                DashboardNavEvent.OpenNotifications -> onNotifications()
                 DashboardNavEvent.OpenUploadDetail -> onUploadDetail()
             }
         }
@@ -39,7 +37,6 @@ internal class DefaultDashboardComponent @AssistedInject internal constructor(
     interface Factory : DashboardComponent.Factory {
         override fun invoke(
             componentContext: ComponentContext,
-            @Assisted(ON_NOTIFICATIONS) onNotifications: () -> Unit,
             @Assisted(ON_UPLOAD_DETAIL) onUploadDetail: () -> Unit,
         ): DefaultDashboardComponent
     }

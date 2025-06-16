@@ -9,11 +9,9 @@ import java.util.Date
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 
-fun getDurationFlow(date: Date) : Flow<Duration> = flow {
+fun getDurationFlow(startDate: Date) : Flow<Duration> = flow {
     while (currentCoroutineContext().isActive) {
-        emit((Date().time - date.time).milliseconds)
+        emit((Date().time - startDate.time).milliseconds)
         delay(1_000)
     }
 }
-
-fun getDuration(date: Date) : Duration = (Date().time - date.time).milliseconds
