@@ -116,7 +116,8 @@ internal fun Dashboard(
         item {
             BannerFeed(
                 modifier = Modifier.hazeSource(hazeState),
-                maxPrice = state.savedMoney
+                maxPrice = state.savedMoney,
+                interests = state.interests
             )
         }
     }

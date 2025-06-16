@@ -19,12 +19,14 @@ import com.yandex.mobile.ads.feed.FeedAdAppearance
 import com.yandex.mobile.ads.feed.FeedAdLoadListener
 import com.yandex.mobile.ads.feed.FeedAdRequestConfiguration
 import ru.health.featuredashboard.impl.R
+import ru.health.featuredashboard.impl.presentation.startup_parameters.model.Interest
 import kotlin.math.roundToInt
 
 @Composable
 internal fun BannerFeed(
     modifier: Modifier = Modifier,
-    maxPrice: Double
+    maxPrice: Double,
+    interests: List<String>
 ) {
     val windowInfo = LocalWindowInfo.current
     val density = LocalDensity.current
@@ -44,6 +46,7 @@ internal fun BannerFeed(
     )
     val feedAdRequestConfiguration = FeedAdRequestConfiguration.Builder(adUnitId)
         .setParameters(parameters)
+        .setContextTags(interests)
         .build()
 
     val feedAdLoadListener = object : FeedAdLoadListener {

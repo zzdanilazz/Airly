@@ -8,6 +8,7 @@ internal data class DashboardUiState(
     val hasNotifications: Boolean = false,
     val health: Int = 100,
     val abstinenceDuration: Duration = Duration.ZERO,
-    val savedMoney: Double = 0.0
+    val savedMoney: Double = 0.0,
+    val interests: List<String> = emptyList()
 )
 

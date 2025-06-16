@@ -6,6 +6,7 @@ import dagger.Binds
 import dagger.Module
 import ru.health.featuredashboard.api.domain.usecase.GetDashboardInfoUseCase
 import ru.health.featuredashboard.api.domain.usecase.GetHealthFlowUseCase
+import ru.health.featuredashboard.api.domain.usecase.GetInterestsUseCase
 import ru.health.featuredashboard.api.domain.usecase.GetIsStartupParametersSavedUseCase
 import ru.health.featuredashboard.api.domain.usecase.GetSavedMoneyFlowUseCase
 import ru.health.featuredashboard.api.domain.usecase.SaveStartupParametersUseCase
@@ -27,4 +28,7 @@ internal interface DashboardDomainModule {
 
     @Binds
     fun bindGetHealthFlowUseCase(useCase: DefaultGetHealthFlowUseCase): GetHealthFlowUseCase
+
+    @Binds
+    fun bindGetInterestsUseCase(useCase: DefaultGetInterestsUseCase): GetInterestsUseCase
 }

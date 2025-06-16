@@ -36,7 +36,7 @@ class DefaultGetHealthFlowUseCase @Inject constructor(
     }
 
     companion object {
-        private const val INITIAL_VALUE = 50
+        private const val INITIAL_VALUE = 100
         private const val ONE_TIME_VAPING_DEBUFF = 3
         private const val ONE_HOUR_ABSTINENCE_BUFF = 1
         private const val SIX_HOUR_ABSTINENCE_BUFF = 9

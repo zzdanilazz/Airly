@@ -11,9 +11,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.health.core.api.presentation.component.ComponentViewModel
 import ru.health.featuredashboard.api.domain.usecase.GetDashboardInfoUseCase
+import ru.health.featuredashboard.api.domain.usecase.GetInterestsUseCase
 
 internal class DashboardViewModel @AssistedInject constructor(
-    private val getDashboardInfoUseCase: GetDashboardInfoUseCase
+    private val getDashboardInfoUseCase: GetDashboardInfoUseCase,
+    private val getInterestsUseCase: GetInterestsUseCase
 ) : ComponentViewModel() {
 
     private val _state = MutableStateFlow(DashboardUiState())
@@ -29,7 +31,12 @@ internal class DashboardViewModel @AssistedInject constructor(
         }
     }
 
-    private suspend fun init() {
+    private fun init() {
+        loadDashboard()
+        loadInterests()
+    }
+
+    private fun loadDashboard() = launch {
         getDashboardInfoUseCase().onSuccess { dashboardInfo ->
             launch {
                 dashboardInfo.abstinenceDuration.collect { abstinenceDuration ->
@@ -54,8 +61,10 @@ internal class DashboardViewModel @AssistedInject constructor(
         }
     }
 
-    private suspend fun loadDashboard() {
-
+    private fun loadInterests() = launch {
+        getInterestsUseCase().onSuccess {
+            _state.update { uiState -> uiState.copy(interests = it) }
+        }
     }
 
     private suspend fun onUploadClick() {
