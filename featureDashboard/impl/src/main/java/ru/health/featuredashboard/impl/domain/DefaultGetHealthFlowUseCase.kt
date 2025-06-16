@@ -27,7 +27,8 @@ class DefaultGetHealthFlowUseCase @Inject constructor(
                     in 6 until 12 -> SIX_HOUR_ABSTINENCE_BUFF
                     else -> TWELVE_HOUR_ABSTINENCE_BUFF
                 }
-                INITIAL_VALUE - vapeCount * ONE_TIME_VAPING_DEBUFF + durationBuff
+                (INITIAL_VALUE - vapeCount * ONE_TIME_VAPING_DEBUFF + durationBuff)
+                    .coerceAtMost(INITIAL_VALUE)
             }
             .distinctUntilChanged()
         RootResult.Success(healthFlow)
