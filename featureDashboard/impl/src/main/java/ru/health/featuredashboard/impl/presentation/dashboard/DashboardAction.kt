@@ -5,6 +5,4 @@ internal sealed interface DashboardAction {
     data object Init : DashboardAction
 
     data object OnUploadClick : DashboardAction
-
-    data object OnAddActionClick : DashboardAction
 }

@@ -25,7 +25,6 @@ internal class DashboardViewModel @AssistedInject constructor(
     fun onAction(action: DashboardAction) = launch {
         when (action) {
             DashboardAction.Init -> init()
-            DashboardAction.OnAddActionClick -> onAddActionClick()
             DashboardAction.OnUploadClick -> onUploadClick()
         }
     }
@@ -56,10 +55,6 @@ internal class DashboardViewModel @AssistedInject constructor(
     }
 
     private suspend fun loadDashboard() {
-
-    }
-
-    private suspend fun onAddActionClick() {
 
     }
 
