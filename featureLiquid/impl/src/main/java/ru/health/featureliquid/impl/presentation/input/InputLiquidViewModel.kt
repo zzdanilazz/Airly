@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ru.health.featureliquid.api.domain.model.FlaconParams
 import ru.health.core.api.presentation.component.ComponentViewModel
+import ru.health.featureliquid.api.domain.model.FlaconParams
 
 internal class InputLiquidViewModel @AssistedInject constructor(
     @Assisted isPositiveVolume: Boolean,
@@ -32,8 +32,7 @@ internal class InputLiquidViewModel @AssistedInject constructor(
         when (action) {
             InputLiquidAction.Init -> init()
             InputLiquidAction.Back -> back()
-            InputLiquidAction.OnSaveApprove -> onSaveApprove()
-            is InputLiquidAction.OnSave -> onSave(action.volume)
+            is InputLiquidAction.OnSave -> onSave()
             is InputLiquidAction.OnVolumeChange -> onVolumeChange(action.volume)
         }
     }
@@ -46,14 +45,8 @@ internal class InputLiquidViewModel @AssistedInject constructor(
         _navEvent.send(InputLiquidNavEvent.Back)
     }
 
-    private suspend fun onSaveApprove() {
-        //todo
+    private suspend fun onSave() {
         _navEvent.send(InputLiquidNavEvent.OnLiquidEdited(_state.value.editedVolume))
-    }
-
-    private suspend fun onSave(volume: Int) {
-        //todo save
-        back()
     }
 
     private fun onVolumeChange(volume: Float) {

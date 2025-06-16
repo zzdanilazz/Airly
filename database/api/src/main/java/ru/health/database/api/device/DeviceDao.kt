@@ -5,12 +5,17 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DeviceDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(device: DeviceLocal): Long
+
+    @Update
+    suspend fun update(device: DeviceLocal)
 
     @Transaction
     @Query("SELECT * FROM DeviceLocal WHERE deviceId =:id")
@@ -25,11 +30,22 @@ interface DeviceDao {
         """
         SELECT * FROM DeviceLocal
         WHERE isPrimary = :isPrimary
+        ORDER BY date ASC
+        LIMIT 1
+    """
+    )
+    suspend fun earliestDevice(isPrimary: Boolean): DeviceWithDetails?
+
+    @Transaction
+    @Query(
+        """
+        SELECT * FROM DeviceLocal
+        WHERE isPrimary = :isPrimary
         ORDER BY date DESC
         LIMIT 1
     """
     )
-    suspend fun latestDevice(isPrimary: Boolean): DeviceWithDetails?
+    fun latestDeviceFlow(isPrimary: Boolean): Flow<DeviceWithDetails?>
 
     @Transaction
     @Query("SELECT * FROM DeviceLocal")

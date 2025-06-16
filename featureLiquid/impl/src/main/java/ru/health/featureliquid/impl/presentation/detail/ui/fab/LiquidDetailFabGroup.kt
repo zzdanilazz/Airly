@@ -51,22 +51,14 @@ internal fun LiquidDetailFabGroup(
                 contentColor = Color.White,
                 painter = painterResource(CoreR.drawable.ic_level),
                 textResId = R.string.liquid_fab,
-                onClick = { onAction(LiquidDetailAction.EditLiquidLevelApprove) }
+                onClick = { onAction(LiquidDetailAction.EditLiquidLevel) }
             )
             LiquidDetailFab(
                 containerColor = Color.White,
                 contentColor = LightRed,
                 painter = addPainter,
                 textResId = R.string.atomizer_fab,
-                onClick = { onAction(LiquidDetailAction.AddAtomizer) }
-            )
-        } else {
-            LiquidDetailFab(
-                containerColor = Color.White,
-                contentColor = LightRed,
-                painter = addPainter,
-                textResId = CoreR.string.disposable,
-                onClick = { onAction(LiquidDetailAction.AddDisposableApprove) }
+                onClick = { onAction(LiquidDetailAction.AddVaporizerApprove) }
             )
         }
     }

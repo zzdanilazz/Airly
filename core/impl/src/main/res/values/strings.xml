@@ -3,7 +3,13 @@
     <string name="pod">POD-система</string>
     <string name="disposable">Одноразка</string>
     <string name="vaporizer">Испаритель</string>
-    <string name="bottle_volume">Объем флакона</string>
+    <string name="flacon_volume">Объем флакона</string>
     <string name="ml">%1$.1f мл</string>
     <string name="ml_int">%1s мл</string>
+
+    <string name="ok">Ок</string>
+    <string name="proceed">Продолжить</string>
+    <string name="add">Добавить</string>
+    <string name="back">Назад</string>
+    <string name="cancel">Отмена</string>
 </resources>

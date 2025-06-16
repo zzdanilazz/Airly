@@ -15,3 +15,5 @@ fun getDurationFlow(date: Date) : Flow<Duration> = flow {
         delay(1_000)
     }
 }
+
+fun getDuration(date: Date) : Duration = (Date().time - date.time).milliseconds

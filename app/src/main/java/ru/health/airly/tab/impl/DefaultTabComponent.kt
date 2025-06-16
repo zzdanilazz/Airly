@@ -2,6 +2,7 @@ package ru.health.airly.tab.impl
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
+import com.arkivanov.decompose.router.stack.active
 import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
@@ -17,6 +18,9 @@ import ru.health.airly.tab.api.TabComponent
 import ru.health.airly.tab.impl.config.TabConfig
 import ru.health.core.api.presentation.component.RootComponent
 import ru.health.featureachievement.api.presentation.AchievementListComponent
+import ru.health.featureachievement.api.presentation.ApproveEventType
+import ru.health.featureachievement.api.presentation.ApproveParams
+import ru.health.featureachievement.api.presentation.ApproveValues
 import ru.health.featuredashboard.api.presentation.DashboardComponent
 import ru.health.featureliquid.api.domain.model.FlaconParams
 import ru.health.featureliquid.api.presentation.root.LiquidComponent
@@ -31,6 +35,7 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
     @Assisted(ON_NOTIFICATIONS) private val onNotifications: () -> Unit,
     @Assisted(ON_UPLOAD_DETAIL) private val onUploadDetail: () -> Unit,
     @Assisted(ON_INPUT_LIQUID) private val onInputLiquid: (flaconParams: FlaconParams) -> Unit,
+    @Assisted(ON_APPROVE) private val onApprove: (approveParams: ApproveParams, approveTypeId: Int) -> Unit,
 ) : TabComponent, RootComponent<TabConfig, TabChild>(componentContext) {
 
     override val stack: Value<ChildStack<*, TabChild>> =
@@ -65,6 +70,18 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
         navigation.bringToFront(TabConfig.StatisticsTab)
     }
 
+    override fun onLiquidEdited(editedVolume: Float) {
+        stack.active.instance.onLiquidEdited(editedVolume)
+    }
+
+    override fun onApproveEvent(
+        approveTypeId: Int,
+        approveEventType: ApproveEventType,
+        approveValues: ApproveValues
+    ) {
+        stack.active.instance.onApproveEvent(approveTypeId, approveEventType, approveValues)
+    }
+
     private fun dashboardComponent(context: ComponentContext): DashboardComponent =
         dashboardFactory(
             componentContext = context,
@@ -75,7 +92,8 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
     private fun liquidComponent(context: ComponentContext): LiquidComponent =
         liquidFactory(
             componentContext = context,
-            onInputLiquid = onInputLiquid
+            onInputLiquid = onInputLiquid,
+            onApprove = onApprove
         )
 
     private fun achievementListComponent(context: ComponentContext): AchievementListComponent =
@@ -95,6 +113,7 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
             @Assisted(ON_NOTIFICATIONS) onNotifications: () -> Unit,
             @Assisted(ON_UPLOAD_DETAIL) onUploadDetail: () -> Unit,
             @Assisted(ON_INPUT_LIQUID) onInputLiquid: (flaconParams: FlaconParams) -> Unit,
+            @Assisted(ON_APPROVE) onApprove: (approveParams: ApproveParams, approveTypeId: Int) -> Unit,
         ): DefaultTabComponent
     }
 
@@ -102,5 +121,6 @@ internal class DefaultTabComponent @AssistedInject internal constructor(
         private const val ON_NOTIFICATIONS = "ON_NOTIFICATIONS"
         private const val ON_UPLOAD_DETAIL = "ON_UPLOAD_DETAIL"
         private const val ON_INPUT_LIQUID = "ON_INPUT_LIQUID"
+        private const val ON_APPROVE = "ON_APPROVE"
     }
 }

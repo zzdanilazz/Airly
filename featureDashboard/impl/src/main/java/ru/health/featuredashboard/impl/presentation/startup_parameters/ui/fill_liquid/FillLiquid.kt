@@ -63,7 +63,7 @@ internal fun FillLiquid(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = stringResource(CoreR.string.bottle_volume),
+                text = stringResource(CoreR.string.flacon_volume),
                 fontSize = 24.sp,
                 fontFamily = RubikOneFamily,
                 color = Color.White

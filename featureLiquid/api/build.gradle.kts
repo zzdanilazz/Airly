@@ -34,6 +34,7 @@ android {
 
 dependencies {
     implementation(project(":core:api"))
+    implementation(project(":featureApprove:api"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

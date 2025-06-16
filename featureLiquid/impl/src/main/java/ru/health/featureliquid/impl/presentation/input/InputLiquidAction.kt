@@ -6,9 +6,7 @@ internal sealed interface InputLiquidAction {
 
     data class OnVolumeChange(val volume: Float) : InputLiquidAction
 
-    data object OnSaveApprove : InputLiquidAction
-
-    data class OnSave(val volume: Int) : InputLiquidAction
+    data object OnSave : InputLiquidAction
 
     data object Back : InputLiquidAction
 }

@@ -5,4 +5,18 @@
     <string name="smoking">Курение</string>
     <string name="ml_with_prefix">-%1$.1f\n мл</string>
     <string name="lean_the_flacon_against">Прислоните флакон к экрану</string>
+
+    <string name="add_flacon_title">Вы действительно хотите добавить флакон?</string>
+    <string name="add_flacon_desc">Текущая жидкость будет считаться потраченной</string>
+
+    <string name="add_vaporizer_title">Введите стоимость нового испарителя</string>
+
+    <string name="add_disposable_title">Вы действительно хотите добавить одноразку?</string>
+    <string name="add_disposable_desc">Текущая одноразка будет считаться потраченной</string>
+
+    <string name="fill_flacon_title">Введите объем и стоимость жидкости</string>
+
+    <string name="fill_disposable_title">Введите стоимость новой одноразки</string>
+
+    <string name="add_consumption_title">Введите примерное время курения</string>
 </resources>

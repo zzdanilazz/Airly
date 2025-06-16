@@ -9,7 +9,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import ru.health.core.api.domain.DeviceType
 import ru.health.core.impl.presentation.iconResId
-import ru.health.core.impl.presentation.ui._switch.SemitransparentSwitch
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,11 +32,11 @@ internal fun LiquidDetailTopBar(
             containerColor = Color.Transparent
         ),
         title = {
-            SemitransparentSwitch(
-                items = targetItems,
-                selectedIndex = selectedIndex,
-                onSwitch = onSwitch
-            )
+//            SemitransparentSwitch(
+//                items = targetItems,
+//                selectedIndex = selectedIndex,
+//                onSwitch = onSwitch
+//            )
         }
     )
 }

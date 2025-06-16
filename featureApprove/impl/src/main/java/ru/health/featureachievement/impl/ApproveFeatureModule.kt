@@ -1,9 +1,9 @@
 @file:Suppress("unused")
 
-package ru.health.featurenotifications.impl
+package ru.health.featureachievement.impl
 
 import dagger.Module
-import ru.health.featurenotifications.impl.presentation.ApprovePresentationModule
+import ru.health.featureachievement.impl.presentation.ApprovePresentationModule
 
 @Module(includes = [ApprovePresentationModule::class])
 interface ApproveFeatureModule

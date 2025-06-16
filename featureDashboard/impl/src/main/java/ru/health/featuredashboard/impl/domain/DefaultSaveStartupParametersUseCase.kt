@@ -31,7 +31,9 @@ class DefaultSaveStartupParametersUseCase @Inject constructor(
             val primaryDeviceConsumeFrequency = 1f / primaryDeviceBuyPeriod
             val primaryDeviceDuration = primaryDevice.flaconParams?.let {
                 (1 - it.volume / it.flaconType.volume) / primaryDeviceConsumeFrequency
-            } ?: primaryPeriod?.toFloat() ?: 0f
+            } ?: run {
+                (1 - (primaryPeriod?.toFloat() ?: 0f) / primaryDeviceBuyPeriod) / primaryDeviceConsumeFrequency
+            }
 
             val primaryConsumption = Consumption(
                 frequency = primaryDeviceConsumeFrequency,
@@ -55,9 +57,9 @@ class DefaultSaveStartupParametersUseCase @Inject constructor(
                 }
             }
 
-            liquidRepository.saveConsumptionFrequency(primaryConsumption)
+            liquidRepository.saveConsumption(primaryConsumption)
             secondaryConsumption?.let {
-                liquidRepository.saveConsumptionFrequency(it)
+                liquidRepository.saveConsumption(it)
             }
 
             dashboardRepository.saveInterests(startupParameters.interests)

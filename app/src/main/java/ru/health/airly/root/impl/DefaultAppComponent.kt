@@ -10,6 +10,7 @@ import com.arkivanov.decompose.extensions.compose.experimental.stack.animation.f
 import com.arkivanov.decompose.extensions.compose.experimental.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.arkivanov.decompose.router.slot.ChildSlot
+import com.arkivanov.decompose.router.slot.activate
 import com.arkivanov.decompose.router.slot.childSlot
 import com.arkivanov.decompose.router.slot.dismiss
 import com.arkivanov.decompose.router.stack.ChildStack
@@ -29,11 +30,12 @@ import ru.health.airly.root.impl.config.SlotConfig
 import ru.health.airly.root.impl.ui.SlotContent
 import ru.health.airly.root.impl.ui.StackContent
 import ru.health.airly.tab.api.TabComponent
-import ru.health.featureliquid.api.domain.model.FlaconParams
 import ru.health.core.api.presentation.component.SlotRootComponent
+import ru.health.featureachievement.api.presentation.ApproveComponent
+import ru.health.featureachievement.api.presentation.ApproveParams
 import ru.health.featuredashboard.api.presentation.StartupParametersComponent
+import ru.health.featureliquid.api.domain.model.FlaconParams
 import ru.health.featureliquid.api.presentation.input.InputLiquidComponent
-import ru.health.featurenotifications.api.presentation.ApproveComponent
 
 class DefaultAppComponent @AssistedInject internal constructor(
     private val tabFactory: TabComponent.Factory,
@@ -71,7 +73,9 @@ class DefaultAppComponent @AssistedInject internal constructor(
 
     override fun slotChild(slotConfig: SlotConfig, context: ComponentContext): SlotChild =
         when(slotConfig) {
-            is SlotConfig.Approve -> SlotChild.Approve(approve(context))
+            is SlotConfig.Approve -> SlotChild.Approve(
+                approve(context, slotConfig.params, slotConfig.approveTypeId)
+            )
         }
 
     private fun tab(context: ComponentContext) = tabFactory(
@@ -80,12 +84,26 @@ class DefaultAppComponent @AssistedInject internal constructor(
         onUploadDetail = {},
         onInputLiquid = {
             navigation.pushNew(Config.InputLiquid(it))
+        },
+        onApprove = { approveParams, approveTypeId ->
+            slotNavigation.activate(SlotConfig.Approve(approveParams, approveTypeId))
         }
     )
 
-    private fun approve(context: ComponentContext) = approveFactory(
+    private fun approve(
+        context: ComponentContext,
+        approveParams: ApproveParams,
+        approveTypeId: Int
+    ): ApproveComponent = approveFactory(
         componentContext = context,
-        onDismiss = { slotNavigation.dismiss() }
+        onDismiss = { slotNavigation.dismiss() },
+        params = approveParams,
+        approveTypeId = approveTypeId,
+        onApproveEvent = { typeId, approveEvent, approveValues ->
+            slotNavigation.dismiss {
+                stack.active.instance.onApproveEvent(typeId, approveEvent, approveValues)
+            }
+        }
     )
 
     private fun startupParameters(context: ComponentContext) = startupParametersFactory(

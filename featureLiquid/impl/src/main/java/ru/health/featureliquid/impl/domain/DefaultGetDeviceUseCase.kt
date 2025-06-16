@@ -1,5 +1,6 @@
 package ru.health.featureliquid.impl.domain
 
+import kotlinx.coroutines.flow.firstOrNull
 import ru.health.core.api.RequestError
 import ru.health.core.api.ResultError
 import ru.health.core.api.domain.DeviceType
@@ -16,7 +17,7 @@ class DefaultGetDeviceUseCase @Inject constructor(
     override suspend fun invoke(deviceType: DeviceType?): RootResult<Device, ResultError> = try {
         val device = deviceType?.let {
             liquidRepository.getDeviceByTypeId(it.id)
-        } ?: liquidRepository.getLatestDevice()
+        } ?: liquidRepository.getLatestDeviceFlow().firstOrNull()
 
         device?.let { RootResult.Success(it) } ?: RootResult.Failure(RequestError.GENERIC)
     } catch (_: Exception) {

@@ -1,6 +1,8 @@
 package ru.health.featureliquid.impl.data
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import ru.health.core.api.data.date.DateFormatter
 import ru.health.featureliquid.api.data.LiquidLocalDataSource
@@ -20,28 +22,45 @@ internal class DefaultLiquidRepository @Inject constructor(
             liquidLocalDataSource.getDeviceByTypeId(deviceTypeId)?.toDomain(dateFormatter)
         }
 
-    override suspend fun getLatestDevice(isPrimary: Boolean): Device? = withContext(Dispatchers.IO) {
-        liquidLocalDataSource.getLatestDevice(isPrimary)?.toDomain(dateFormatter)
+    override suspend fun getDeviceById(deviceId: Int): Device? = withContext(Dispatchers.IO) {
+        liquidLocalDataSource.getDeviceById(deviceId)?.toDomain(dateFormatter)
+    }
+
+    override suspend fun getEarliestDevice(isPrimary: Boolean): Device? = withContext(Dispatchers.IO) {
+        liquidLocalDataSource.getEarliestDevice(isPrimary)?.toDomain(dateFormatter)
+    }
+
+    override suspend fun getLatestDeviceFlow(isPrimary: Boolean): Flow<Device?> = withContext(Dispatchers.IO) {
+        liquidLocalDataSource.getLatestDeviceFlow(isPrimary).map { it?.toDomain(dateFormatter) }
     }
 
     override suspend fun getAllDevices(): List<Device> = withContext(Dispatchers.IO) {
         liquidLocalDataSource.getAllDevices().map { it.toDomain(dateFormatter) }
     }
 
+    override suspend fun updateDevice(device: Device) = withContext(Dispatchers.IO) {
+        liquidLocalDataSource.updateDevice(device.toData(dateFormatter))
+    }
+
     override suspend fun saveDevice(device: Device): Int = withContext(Dispatchers.IO) {
         liquidLocalDataSource.saveDevice(device.toData(dateFormatter))
     }
 
-    override suspend fun saveConsumptionFrequency(consumption: Consumption) =
+    override suspend fun saveConsumption(consumption: Consumption) =
         withContext(Dispatchers.IO) {
-            liquidLocalDataSource.saveConsumptionFrequency(consumption.toData(dateFormatter))
+            liquidLocalDataSource.saveConsumption(consumption.toData(dateFormatter))
         }
 
-    override suspend fun getLastConsumptionDate(deviceId: Int): Date = withContext(Dispatchers.IO) {
-        liquidLocalDataSource.getLastConsumptionDate(deviceId)
+    override suspend fun getLatestConsumptionDateFlow(deviceId: Int, hasDuration: Boolean): Flow<Date?> = withContext(Dispatchers.IO) {
+        liquidLocalDataSource.getLatestConsumptionDateFlow(deviceId, hasDuration)
     }
 
     override suspend fun getFirstConsumptionDate(deviceId: Int): Date = withContext(Dispatchers.IO) {
         liquidLocalDataSource.getFirstConsumptionDate(deviceId)
     }
+
+    override suspend fun updateConsumptions(consumptions: List<Consumption>) =
+        withContext(Dispatchers.IO) {
+            liquidLocalDataSource.updateConsumptions(consumptions.map { it.toData(dateFormatter) })
+        }
 }

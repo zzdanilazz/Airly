@@ -10,12 +10,19 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.health.core.api.domain.DeviceType
+import ru.health.core.api.domain.FlaconType
 import ru.health.core.api.presentation.component.ComponentViewModel
 import ru.health.featureliquid.api.domain.model.FlaconParams
+import ru.health.featureliquid.api.domain.usecase.AddDeviceUseCase
+import ru.health.featureliquid.api.domain.usecase.EditLiquidUseCase
 import ru.health.featureliquid.api.domain.usecase.GetDeviceUseCase
+import ru.health.featureliquid.api.domain.usecase.SaveConsumptionUseCase
 
 internal class LiquidDetailViewModel @AssistedInject constructor(
-    private val getDeviceUseCase: GetDeviceUseCase
+    private val getDeviceUseCase: GetDeviceUseCase,
+    private val addDeviceUseCase: AddDeviceUseCase,
+    private val saveConsumptionUseCase: SaveConsumptionUseCase,
+    private val editLiquidUseCase: EditLiquidUseCase
 ) : ComponentViewModel() {
 
     private val _state = MutableStateFlow(LiquidDetailUiState())
@@ -24,59 +31,134 @@ internal class LiquidDetailViewModel @AssistedInject constructor(
     private val _navEvent = Channel<LiquidDetailNavEvent>()
     val navEvent = _navEvent.receiveAsFlow()
 
+    init {
+        launch { init() }
+    }
+
     fun onAction(action: LiquidDetailAction) = launch {
         when (action) {
-            LiquidDetailAction.Init -> init()
-            LiquidDetailAction.EditLiquidLevelApprove -> editLiquidLevelApprove()
-            LiquidDetailAction.AddLiquidFlacon -> addLiquidBottle()
-            LiquidDetailAction.AddAtomizer -> addAtomizer()
-            LiquidDetailAction.AddDisposableApprove -> addDisposableApprove()
+            LiquidDetailAction.AddVaporizerApprove -> addVaporizerApprove()
             LiquidDetailAction.AddConsumptionApprove -> addConsumptionApprove()
+            LiquidDetailAction.EditLiquidLevel -> editLiquidLevel()
+            is LiquidDetailAction.AddConsumption -> addConsumption(vapeDuration = action.vapeDurationDays)
             is LiquidDetailAction.SwitchDeviceType -> switchDevice(action.deviceType)
-            is LiquidDetailAction.EditLiquidLevel -> editLiquidLevel(action.flaconParams)
+            is LiquidDetailAction.AddPrimaryDeviceApprove -> addPrimaryDeviceApprove(action.deviceType)
+            is LiquidDetailAction.OnLiquidEdited -> onLiquidEdited(action.editedVolume)
+            is LiquidDetailAction.AddFlacon -> addFlacon(action.price, action.switchIndex)
+            is LiquidDetailAction.AddVaporizer -> addVaporizer(action.price)
+            is LiquidDetailAction.AddDisposable -> addDisposable(action.price)
+        }
+    }
+
+    private suspend fun init() {
+        getDeviceUseCase().onSuccess {
+            _state.update { uiState -> uiState.copy(primaryDevice = it) }
         }
     }
 
     private suspend fun switchDevice(deviceType: DeviceType) {
         getDeviceUseCase(deviceType)
             .onSuccess {
-                _state.update { uiState -> uiState.copy(device = it) }
+                _state.update { uiState -> uiState.copy(primaryDevice = it) }
             }
             .onFailure {
                 //todo approve
             }
-
     }
 
-    private suspend fun editLiquidLevelApprove() {
-        state.value.device?.flaconParams?.let {
-            editLiquidLevel(it)
+    private suspend fun editLiquidLevel() {
+        state.value.primaryDevice?.flaconParams?.let {
+            _navEvent.send(LiquidDetailNavEvent.EditLiquidLevel(it))
         }
     }
 
-    private suspend fun addLiquidBottle() {
-
+    private suspend fun addPrimaryDeviceApprove(deviceType: DeviceType) {
+        _navEvent.send(LiquidDetailNavEvent.AddPrimaryDevice(deviceType))
     }
 
-    private suspend fun addAtomizer() {
-
+    private suspend fun addVaporizerApprove() {
+        _navEvent.send(LiquidDetailNavEvent.AddVaporizerApprove)
     }
 
-    private suspend fun editLiquidLevel(flaconParams: FlaconParams) {
-        _navEvent.send(LiquidDetailNavEvent.EditLiquidLevel(flaconParams))
+    private suspend fun onLiquidEdited(editedVolume: Float) {
+        addConsumption(
+            isMeasured = true,
+            liquidDelta = _state.value.primaryDevice?.flaconParams?.let {
+                (it.volume  - editedVolume) / it.flaconType.volume
+            }
+        )
+        editLiquidUseCase(editedVolume).onSuccess {
+            _state.update { uiState ->
+                val device = uiState.primaryDevice
+                val flacon = device?.flaconParams
+
+                uiState.copy(
+                    primaryDevice = device?.copy(
+                        flaconParams = flacon?.copy(volume = editedVolume)
+                    )
+                )
+            }
+        }
     }
 
-    private suspend fun addDisposableApprove() {
+    private suspend fun addFlacon(price: String, switchIndex: Int) {
+        with (_state.value) {
+            val flaconType = FlaconType.entries[switchIndex]
+            val flaconParams = FlaconParams(
+                volume = flaconType.volume,
+                flaconType = flaconType
+            )
+            primaryDevice?.flaconParams?.let { flaconParams ->
+                editLiquidUseCase(0f).onSuccess {
+                    addConsumption(
+                        isMeasured = true,
+                        liquidDelta = flaconParams.volume / flaconParams.flaconType.volume
+                    )
+                }
+            }
+            addDeviceUseCase(
+                deviceType = DeviceType.POD,
+                flaconParams = flaconParams,
+                price = price.toInt()
+            ).onSuccess {
+                init()
+            }
+        }
+    }
 
+    private suspend fun addVaporizer(price: Int) {
+        addDeviceUseCase(
+            deviceType = DeviceType.VAPORIZER,
+            price = price
+        )
+    }
+
+    private suspend fun addDisposable(price: Int) {
+        addConsumption(isMeasured = true)
+        addDeviceUseCase(
+            deviceType = DeviceType.DISPOSABLE,
+            price = price
+        ).onSuccess {
+            init()
+        }
     }
 
     private suspend fun addConsumptionApprove() {
-
+        _navEvent.send(LiquidDetailNavEvent.AddConsumptionApprove)
     }
 
-    private suspend fun init() {
-        getDeviceUseCase().onSuccess {
-            _state.update { uiState -> uiState.copy(device = it) }
+    private suspend fun addConsumption(
+        isMeasured: Boolean = false,
+        vapeDuration: Float? = null,
+        liquidDelta: Float? = null
+    ) = with(_state.value) {
+        primaryDevice?.let {
+            saveConsumptionUseCase(
+                deviceId = primaryDevice.id,
+                isMeasured = isMeasured,
+                vapeDuration = vapeDuration,
+                liquidDelta = liquidDelta
+            )
         }
     }
 

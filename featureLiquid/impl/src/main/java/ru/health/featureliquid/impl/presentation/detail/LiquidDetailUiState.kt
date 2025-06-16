@@ -5,5 +5,6 @@ import ru.health.featureliquid.api.domain.model.Device
 
 @Immutable
 internal data class LiquidDetailUiState(
-    val device: Device? = null
+    val primaryDevice: Device? = null,
+    val secondaryDevice: Device? = null
 )

@@ -79,7 +79,7 @@ internal fun InputLiquid(
                 ) {
                     FloatingActionButton(
                         modifier = Modifier.navigationBarsPadding(),
-                        onClick = { onAction(InputLiquidAction.OnSaveApprove) },
+                        onClick = { onAction(InputLiquidAction.OnSave) },
                         containerColor = LightRed,
                         contentColor = Color.White,
                     ) {

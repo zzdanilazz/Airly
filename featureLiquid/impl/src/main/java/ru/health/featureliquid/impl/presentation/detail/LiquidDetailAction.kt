@@ -1,24 +1,27 @@
 package ru.health.featureliquid.impl.presentation.detail
 
 import ru.health.core.api.domain.DeviceType
-import ru.health.featureliquid.api.domain.model.FlaconParams
 
 internal sealed interface LiquidDetailAction {
 
-    data object Init : LiquidDetailAction
-
     data class SwitchDeviceType(val deviceType: DeviceType): LiquidDetailAction
 
-    data object EditLiquidLevelApprove: LiquidDetailAction
+    data object EditLiquidLevel: LiquidDetailAction
 
-    data class EditLiquidLevel(val flaconParams: FlaconParams): LiquidDetailAction
-
-    data object AddLiquidFlacon: LiquidDetailAction
-
-    data object AddAtomizer: LiquidDetailAction
+    data object AddVaporizerApprove: LiquidDetailAction
 
     data object AddConsumptionApprove: LiquidDetailAction
 
-    data object AddDisposableApprove: LiquidDetailAction
+    data class AddConsumption(val vapeDurationDays: Float): LiquidDetailAction
+
+    data class AddPrimaryDeviceApprove(val deviceType: DeviceType): LiquidDetailAction
+
+    data class OnLiquidEdited(val editedVolume: Float): LiquidDetailAction
+
+    data class AddFlacon(val price: String, val switchIndex: Int): LiquidDetailAction
+
+    data class AddVaporizer(val price: Int): LiquidDetailAction
+
+    data class AddDisposable(val price: Int): LiquidDetailAction
 
 }

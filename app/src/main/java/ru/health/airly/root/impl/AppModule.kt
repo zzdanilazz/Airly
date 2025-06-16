@@ -19,7 +19,7 @@ import ru.health.database.impl.AirlyDatabaseModule
 import ru.health.featureachievement.impl.AchievementFeatureModule
 import ru.health.featuredashboard.impl.DashboardFeatureModule
 import ru.health.featureliquid.impl.LiquidFeatureModule
-import ru.health.featurenotifications.impl.ApproveFeatureModule
+import ru.health.featureachievement.impl.ApproveFeatureModule
 import ru.health.featurestatistics.impl.StatisticsFeatureModule
 
 @Module(

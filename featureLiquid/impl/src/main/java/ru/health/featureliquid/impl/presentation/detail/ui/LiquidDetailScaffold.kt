@@ -28,7 +28,7 @@ internal fun LiquidDetailScaffold(
     Scaffold(
         modifier = modifier,
         topBar = {
-            state.device?.let { device ->
+            state.primaryDevice?.let { device ->
                 LiquidDetailTopBar(
                     selectedDeviceType = device.deviceType,
                     onSwitch = {
@@ -38,7 +38,7 @@ internal fun LiquidDetailScaffold(
             }
         },
         floatingActionButton = {
-            state.device?.let { device ->
+            state.primaryDevice?.let { device ->
                 LiquidDetailFabGroup(
                     isPodSelected = device.deviceType == DeviceType.POD,
                     onAction = onAction
@@ -73,7 +73,7 @@ private fun LiquidDetailDisposableScaffoldPreview() {
     AirlyTheme {
         GradientBox()
         LiquidDetailScaffold(state = liquidDetailUiStatePreview.copy(
-            device = disposablePreview
+            primaryDevice = disposablePreview
         ))
     }
 }

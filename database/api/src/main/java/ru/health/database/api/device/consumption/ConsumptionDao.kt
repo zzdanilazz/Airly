@@ -4,6 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
 import java.util.Date
 
 @Dao
@@ -13,9 +15,19 @@ interface ConsumptionDao {
     suspend fun insert(consumptionFrequency: ConsumptionLocal)
 
     @Query("SELECT date FROM ConsumptionLocal WHERE deviceId = :deviceId ORDER BY date DESC LIMIT 1")
-    suspend fun getLastConsumptionDate(deviceId: Int): Date
+    fun getLatestConsumptionDate(deviceId: Int): Flow<Date?>
+
+    @Query("""
+        SELECT date FROM ConsumptionLocal
+        WHERE deviceId = :deviceId AND durationInDays > 0
+        ORDER BY date DESC LIMIT 1
+    """)
+    fun getLatestConsumptionDateWithPositiveDuration(deviceId: Int): Flow<Date?>
 
     @Query("SELECT date FROM ConsumptionLocal WHERE deviceId = :deviceId ORDER BY date ASC LIMIT 1")
     suspend fun getFirstConsumptionDate(deviceId: Int): Date
+
+    @Update
+    suspend fun updateConsumptions(consumptions: List<ConsumptionLocal>)
 
 }
