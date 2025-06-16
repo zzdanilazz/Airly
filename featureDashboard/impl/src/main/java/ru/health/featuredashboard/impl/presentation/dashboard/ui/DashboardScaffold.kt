@@ -1,9 +1,6 @@
 package ru.health.featuredashboard.impl.presentation.dashboard.ui
 
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -11,7 +8,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.layer.drawLayer
+import androidx.compose.ui.graphics.rememberGraphicsLayer
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.featuredashboard.impl.presentation.dashboard.DashboardAction
@@ -24,9 +24,15 @@ internal fun DashboardScaffold(
     state: DashboardUiState,
     onAction: (action: DashboardAction) -> Unit = {}
 ) {
-    val systemBarHeight = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+    val graphicsLayer = rememberGraphicsLayer()
+
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.drawWithContent {
+            graphicsLayer.record {
+                this@drawWithContent.drawContent()
+            }
+            drawLayer(graphicsLayer)
+        },
         contentWindowInsets = ScaffoldDefaults.contentWindowInsets.only(
             WindowInsetsSides.Horizontal
         ),
@@ -35,7 +41,8 @@ internal fun DashboardScaffold(
         Dashboard(
             modifier = Modifier.padding(padding),
             state = state,
-            onAction = onAction
+            onAction = onAction,
+            graphicsLayer = graphicsLayer
         )
     }
 }

@@ -14,10 +14,16 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.layer.GraphicsLayer
+import androidx.compose.ui.graphics.rememberGraphicsLayer
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.haze.hazeSource
@@ -25,6 +31,7 @@ import kotlinx.coroutines.launch
 import ru.health.core.impl.presentation.ui.gradient.GradientBox
 import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.core.impl.presentation.ui.theme.LocalHazeState
+import ru.health.featuredashboard.impl.R
 import ru.health.featuredashboard.impl.presentation.dashboard.DashboardAction
 import ru.health.featuredashboard.impl.presentation.dashboard.DashboardUiState
 import ru.health.featuredashboard.impl.presentation.dashboard.ui.abstinence.AbstinencePeriodCard
@@ -37,16 +44,21 @@ import ru.health.featuredashboard.impl.presentation.dashboard.ui.saved_money.Sav
 internal fun Dashboard(
     modifier: Modifier = Modifier,
     state: DashboardUiState,
-    onAction: (action: DashboardAction) -> Unit = {}
+    onAction: (action: DashboardAction) -> Unit = {},
+    graphicsLayer: GraphicsLayer = rememberGraphicsLayer()
 ) {
     val hazeState = LocalHazeState.current
 
     val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     val defaultContentPadding = 16.dp
     val contentModifier = Modifier.padding(horizontal = defaultContentPadding)
+
+    val shareText = stringResource(R.string.share_progress_text)
+    var isShareContentCapturing by remember { mutableStateOf(true) }
 
     GradientBox(
         modifier = Modifier
@@ -62,7 +74,14 @@ internal fun Dashboard(
     ) {
         item {
             DashboardTopBar(
-                onUpload = { onAction(DashboardAction.OnUploadClick) }
+                onUpload = {
+                    coroutineScope.launch {
+                        isShareContentCapturing = false
+                        val bitmap = graphicsLayer.toImageBitmap()
+                        isShareContentCapturing = true
+                        onAction(DashboardAction.OnShareClick(context, bitmap, shareText))
+                    }
+                }
             )
             Health(
                 modifier = contentModifier,
@@ -113,12 +132,14 @@ internal fun Dashboard(
             )
             Spacer(modifier = Modifier.fillParentMaxHeight(0.1f))
         }
-        item {
-            BannerFeed(
-                modifier = Modifier.hazeSource(hazeState),
-                maxPrice = state.savedMoney,
-                interests = state.interests
-            )
+        if (!isShareContentCapturing) {
+            item {
+                BannerFeed(
+                    modifier = Modifier.hazeSource(hazeState),
+                    maxPrice = state.savedMoney,
+                    interests = state.interests
+                )
+            }
         }
     }
 }

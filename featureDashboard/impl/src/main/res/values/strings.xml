@@ -28,4 +28,6 @@
     <string name="current_volume">Текущий объем: %1$s</string>
     <string name="edit_current_volume">Изменить текущий объем</string>
 
+    <string name="share_progress_text">Зацени мой прогресс в Airly</string>
+
 </resources>
