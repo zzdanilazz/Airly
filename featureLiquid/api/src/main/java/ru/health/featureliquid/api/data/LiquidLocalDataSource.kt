@@ -25,7 +25,11 @@ interface LiquidLocalDataSource {
 
     suspend fun getLatestConsumptionDateFlow(deviceId: Int, hasDuration: Boolean): Flow<Date?>
 
-    suspend fun getFirstConsumptionDate(deviceId: Int): Date
+    suspend fun getFirstConsumptionDate(deviceId: Int?): Date?
 
     suspend fun updateConsumptions(consumptions: List<ConsumptionData>)
+
+    suspend fun isConsumptionAdded(): Boolean
+
+    suspend fun isMeasureConsumptionAdded(): Boolean
 }

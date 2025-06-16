@@ -19,12 +19,14 @@ import kotlinx.coroutines.launch
 import ru.health.core.api.presentation.component.ComponentViewModel
 import ru.health.featuredashboard.api.domain.usecase.GetDashboardInfoUseCase
 import ru.health.featuredashboard.api.domain.usecase.GetInterestsUseCase
+import ru.health.featuredashboard.api.domain.usecase.SaveIsProgressSharedUseCase
 import java.io.File
 import java.io.FileOutputStream
 
 internal class DashboardViewModel @AssistedInject constructor(
     private val getDashboardInfoUseCase: GetDashboardInfoUseCase,
-    private val getInterestsUseCase: GetInterestsUseCase
+    private val getInterestsUseCase: GetInterestsUseCase,
+    private val saveIsProgressSharedUseCase: SaveIsProgressSharedUseCase
 ) : ComponentViewModel() {
 
     private val _state = MutableStateFlow(DashboardUiState())
@@ -76,7 +78,7 @@ internal class DashboardViewModel @AssistedInject constructor(
         }
     }
 
-    private fun onShareClick(context: Context, bitmap: ImageBitmap, text: String) {
+    private suspend fun onShareClick(context: Context, bitmap: ImageBitmap, text: String) {
         val uri = saveBitmapAndGetUri(context, bitmap.asAndroidBitmap())
         val shareIntent = Intent.createChooser(
             Intent().apply {
@@ -89,6 +91,7 @@ internal class DashboardViewModel @AssistedInject constructor(
             null
         )
         context.startActivity(shareIntent)
+        saveIsProgressSharedUseCase()
     }
 
     private fun saveBitmapAndGetUri(context: Context, bitmap: Bitmap): Uri {

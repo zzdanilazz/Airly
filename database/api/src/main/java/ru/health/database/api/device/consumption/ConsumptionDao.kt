@@ -31,9 +31,18 @@ interface ConsumptionDao {
     fun getLatestConsumptionDateWithPositiveDuration(deviceId: Int): Flow<Date?>
 
     @Query("SELECT date FROM ConsumptionLocal WHERE deviceId = :deviceId ORDER BY date ASC LIMIT 1")
-    suspend fun getFirstConsumptionDate(deviceId: Int): Date
+    suspend fun getFirstConsumptionDateById(deviceId: Int): Date
+
+    @Query("SELECT date FROM ConsumptionLocal ORDER BY date ASC LIMIT 1")
+    suspend fun getFirstConsumptionDate(): Date?
 
     @Update
     suspend fun updateConsumptions(consumptions: List<ConsumptionLocal>)
+
+    @Query("SELECT EXISTS(SELECT * FROM ConsumptionLocal WHERE id != 0)")
+    suspend fun isConsumptionAdded(): Boolean
+
+    @Query("SELECT EXISTS(SELECT * FROM ConsumptionLocal WHERE id != 0 AND isMeasured=1)")
+    suspend fun isMeasureConsumptionAdded(): Boolean
 
 }

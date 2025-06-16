@@ -27,7 +27,11 @@ interface LiquidRepository {
 
     suspend fun getLatestConsumptionDateFlow(deviceId: Int, hasDuration: Boolean = true): Flow<Date?>
 
-    suspend fun getFirstConsumptionDate(deviceId: Int): Date
+    suspend fun getFirstConsumptionDate(deviceId: Int? = null): Date?
 
     suspend fun updateConsumptions(consumptions: List<Consumption>)
+
+    suspend fun isConsumptionAdded(): Boolean
+
+    suspend fun isMeasureConsumptionAdded(): Boolean
 }

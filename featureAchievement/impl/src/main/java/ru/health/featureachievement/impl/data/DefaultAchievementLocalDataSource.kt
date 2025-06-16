@@ -117,45 +117,45 @@ internal class DefaultAchievementLocalDataSource @Inject constructor(
         listOf(
             Achievement(
                 id = 13,
-                name = savedMoney(1_000),
+                name = savedMoney(1000),
                 imageResId = R.drawable.illustration_saved_money,
                 level = 0,
-                thresholdValue = 1_000
+                thresholdValue = 100
             ),
             Achievement(
                 id = 14,
-                name = savedMoney(2_000),
+                name = savedMoney(5000),
                 imageResId = R.drawable.illustration_saved_money,
                 level = 1,
-                thresholdValue = 2_000
+                thresholdValue = 5000
             ),
             Achievement(
                 id = 15,
-                name = savedMoney(3_000),
+                name = savedMoney(1_000),
                 imageResId = R.drawable.illustration_saved_money,
                 level = 2,
-                thresholdValue = 3_000
+                thresholdValue = 1_000
             ),
             Achievement(
                 id = 16,
-                name = savedMoney(5_000),
+                name = savedMoney(2_000),
                 imageResId = R.drawable.illustration_saved_money,
                 level = 3,
-                thresholdValue = 5_000
+                thresholdValue = 2_000
             ),
             Achievement(
                 id = 17,
-                name = savedMoney(10_000),
+                name = savedMoney(3_000),
                 imageResId = R.drawable.illustration_saved_money,
                 level = 4,
-                thresholdValue = 10_000
+                thresholdValue = 3_000
             ),
             Achievement(
                 id = 18,
-                name = savedMoney(20_000),
+                name = savedMoney(10_000),
                 imageResId = R.drawable.illustration_saved_money,
                 level = 5,
-                thresholdValue = 20_000
+                thresholdValue = 10_000
             )
         )
     }

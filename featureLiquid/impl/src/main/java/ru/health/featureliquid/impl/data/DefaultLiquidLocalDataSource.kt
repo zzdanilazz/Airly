@@ -48,10 +48,16 @@ internal class DefaultLiquidLocalDataSource @Inject constructor(
             consumptionDao.getLatestConsumptionDateWithPositiveDuration(deviceId)
         } else consumptionDao.getLatestConsumptionDate(deviceId)
 
-    override suspend fun getFirstConsumptionDate(deviceId: Int): Date =
-        consumptionDao.getFirstConsumptionDate(deviceId)
+    override suspend fun getFirstConsumptionDate(deviceId: Int?): Date? = deviceId?.let {
+        consumptionDao.getFirstConsumptionDateById(it)
+    } ?: consumptionDao.getFirstConsumptionDate()
+
 
     override suspend fun updateConsumptions(consumptions: List<ConsumptionData>) {
         consumptionDao.updateConsumptions(consumptions.map { it.toLocal() })
     }
+
+    override suspend fun isConsumptionAdded(): Boolean = consumptionDao.isConsumptionAdded()
+
+    override suspend fun isMeasureConsumptionAdded(): Boolean = consumptionDao.isMeasureConsumptionAdded()
 }

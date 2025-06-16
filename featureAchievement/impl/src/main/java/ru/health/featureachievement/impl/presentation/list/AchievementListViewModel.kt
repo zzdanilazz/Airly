@@ -6,6 +6,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -30,17 +31,12 @@ internal class AchievementListViewModel @AssistedInject constructor(
 
     private suspend fun init() {
         getAchievementMapUseCase().onSuccess { map ->
-            val currentMap = _state.value.achievementMap.toMutableMap()
+            val flows = map.mapValues { (_, flowList) -> flowList }
 
-            map.forEach { (type, flowList) ->
-                launch {
-                    flowList.collect { list ->
-                        currentMap.put(type, list)
-                        _state.update { uiState ->
-                            uiState.copy(achievementMap = currentMap)
-                        }
-                    }
-                }
+            combine(flows.values) { arrays ->
+                flows.keys.zip(arrays).toMap()
+            }.collect { updatedMap ->
+                _state.update { it.copy(achievementMap = updatedMap) }
             }
         }
     }

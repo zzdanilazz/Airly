@@ -39,6 +39,7 @@ dependencies {
     implementation(project(":core:api"))
     implementation(project(":core:impl"))
     implementation(project(":featureDashboard:api"))
+    implementation(project(":featureLiquid:api"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

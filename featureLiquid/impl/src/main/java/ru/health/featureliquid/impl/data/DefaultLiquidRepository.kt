@@ -61,7 +61,7 @@ internal class DefaultLiquidRepository @Inject constructor(
             liquidLocalDataSource.getLatestConsumptionDateFlow(deviceId, hasDuration)
         }
 
-    override suspend fun getFirstConsumptionDate(deviceId: Int): Date = withContext(Dispatchers.IO) {
+    override suspend fun getFirstConsumptionDate(deviceId: Int?): Date? = withContext(Dispatchers.IO) {
         liquidLocalDataSource.getFirstConsumptionDate(deviceId)
     }
 
@@ -69,4 +69,12 @@ internal class DefaultLiquidRepository @Inject constructor(
         withContext(Dispatchers.IO) {
             liquidLocalDataSource.updateConsumptions(consumptions.map { it.toData(dateFormatter) })
         }
+
+    override suspend fun isConsumptionAdded(): Boolean = withContext(Dispatchers.IO) {
+        liquidLocalDataSource.isConsumptionAdded()
+    }
+
+    override suspend fun isMeasureConsumptionAdded(): Boolean = withContext(Dispatchers.IO) {
+        liquidLocalDataSource.isMeasureConsumptionAdded()
+    }
 }

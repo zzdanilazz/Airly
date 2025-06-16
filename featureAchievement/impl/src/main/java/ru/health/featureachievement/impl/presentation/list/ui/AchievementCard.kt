@@ -41,7 +41,7 @@ internal fun AchievementCard(
     achievement: Achievement,
     isHidden: Boolean = false
 ) {
-    val targetValue = min(achievement.value, achievement.thresholdValue)
+    val targetValue = min(achievement.value, achievement.thresholdValue).coerceAtLeast(0)
 
     GlassmorphismCard(modifier = modifier.size(190.dp)) {
         Box(

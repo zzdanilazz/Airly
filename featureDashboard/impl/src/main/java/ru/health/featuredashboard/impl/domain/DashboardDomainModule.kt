@@ -9,6 +9,7 @@ import ru.health.featuredashboard.api.domain.usecase.GetHealthFlowUseCase
 import ru.health.featuredashboard.api.domain.usecase.GetInterestsUseCase
 import ru.health.featuredashboard.api.domain.usecase.GetIsStartupParametersSavedUseCase
 import ru.health.featuredashboard.api.domain.usecase.GetSavedMoneyFlowUseCase
+import ru.health.featuredashboard.api.domain.usecase.SaveIsProgressSharedUseCase
 import ru.health.featuredashboard.api.domain.usecase.SaveStartupParametersUseCase
 
 @Module
@@ -31,4 +32,7 @@ internal interface DashboardDomainModule {
 
     @Binds
     fun bindGetInterestsUseCase(useCase: DefaultGetInterestsUseCase): GetInterestsUseCase
+
+    @Binds
+    fun bindSaveIsProgressSharedUseCase(useCase: DefaultSaveIsProgressSharedUseCase): SaveIsProgressSharedUseCase
 }

@@ -46,7 +46,7 @@ class DefaultGetDashboardInfoUseCase @Inject constructor(
             val deviceId = liquidRepository.getEarliestDevice()?.id
             deviceId?.let {
                 val firstDate = liquidRepository.getFirstConsumptionDate(it)
-                getDurationFlow(firstDate)
+                firstDate?.let {  getDurationFlow(firstDate) }
             } ?: emptyFlow()
         }
 
