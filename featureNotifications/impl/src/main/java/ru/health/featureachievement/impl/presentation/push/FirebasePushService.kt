@@ -1,6 +1,5 @@
 package ru.health.featurenotifications.impl.presentation.push
 
-import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlinx.coroutines.CoroutineScope
@@ -41,18 +40,20 @@ class FirebasePushService : FirebaseMessagingService() {
             var title = message.data["title"] ?: ""
             var body = message.data["body"] ?: ""
 
-            Log.d("TAG", "messageReceived $title")
-
             if (title.isBlank()) {
-                title = message.data["gcm.notification.title"] ?: message.notification?.title ?: ""
-                body = message.data["gcm.notification.body"] ?: message.notification?.body ?: ""
+                title = message.data["gcm.notification.title"]
+                    ?: message.notification?.title ?: ""
+                body = message.data["gcm.notification.body"]
+                    ?: message.notification?.body ?: ""
             }
 
             val push = PushEntity(
                 pushId = Date().time.toInt(),
                 title = title,
                 message = body,
-                date = dateFormatter.formatDate(Date(), DateFormatter.FULL_DATE_FORMAT)
+                date = dateFormatter.formatDate(
+                    Date(),
+                    DateFormatter.FULL_DATE_FORMAT)
             )
 
             if (!AppLifecycleObserver.isAppInForeground) {

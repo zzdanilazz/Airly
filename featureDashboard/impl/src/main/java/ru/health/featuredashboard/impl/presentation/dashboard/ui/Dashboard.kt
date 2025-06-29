@@ -61,6 +61,19 @@ internal fun Dashboard(
     val shareText = stringResource(R.string.share_progress_text)
     var isShareContentCapturing by remember { mutableStateOf(false) }
 
+    val isSticky by remember {
+        derivedStateOf { listState.firstVisibleItemIndex > 0 }
+    }
+    val spacerHeight by animateDpAsState(
+        if (isSticky) 0.dp else 6.dp
+    )
+    val cardPadding by animateDpAsState(
+        if (isSticky) 0.dp else defaultContentPadding
+    )
+    val cardSpacerHeight by animateDpAsState(
+        if (isSticky) statusBarHeight else 0.dp
+    )
+
     GradientBox(
         modifier = Modifier
             .fillMaxSize()
@@ -96,18 +109,6 @@ internal fun Dashboard(
             )
         }
         stickyHeader {
-            val isSticky by remember {
-                derivedStateOf { listState.firstVisibleItemIndex > 0 }
-            }
-            val spacerHeight by animateDpAsState(
-                if (isSticky) 0.dp else 6.dp
-            )
-            val cardPadding by animateDpAsState(
-                if (isSticky) 0.dp else defaultContentPadding
-            )
-            val cardSpacerHeight by animateDpAsState(
-                if (isSticky) statusBarHeight else 0.dp
-            )
             Spacer(modifier = Modifier.height(spacerHeight))
             val scrollOffset by remember {
                 derivedStateOf { listState.layoutInfo.visibleItemsInfo[1].size }

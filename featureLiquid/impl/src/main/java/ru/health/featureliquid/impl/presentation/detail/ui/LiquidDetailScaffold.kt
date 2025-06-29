@@ -16,7 +16,6 @@ import ru.health.core.impl.presentation.ui.theme.AirlyTheme
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailAction
 import ru.health.featureliquid.impl.presentation.detail.LiquidDetailUiState
 import ru.health.featureliquid.impl.presentation.detail.ui.fab.LiquidDetailFabGroup
-import ru.health.featureliquid.impl.presentation.detail.ui.top.LiquidDetailTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,16 +26,6 @@ internal fun LiquidDetailScaffold(
 ) {
     Scaffold(
         modifier = modifier,
-        topBar = {
-            state.primaryDevice?.let { device ->
-                LiquidDetailTopBar(
-                    selectedDeviceType = device.deviceType,
-                    onSwitch = {
-                        onAction(LiquidDetailAction.SwitchDeviceType(it))
-                    }
-                )
-            }
-        },
         floatingActionButton = {
             state.primaryDevice?.let { device ->
                 LiquidDetailFabGroup(

@@ -103,4 +103,12 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    androidTestImplementation("com.atiurin:ultron-compose:2.5.6")
+    androidTestImplementation("com.atiurin:ultron-android:2.5.6")
+    androidTestImplementation("com.atiurin:ultron-allure:2.5.6")
+    androidTestImplementation("io.mockk:mockk-android:1.12.3")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
 }

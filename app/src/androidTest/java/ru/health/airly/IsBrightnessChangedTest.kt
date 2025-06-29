@@ -8,30 +8,31 @@ import org.junit.Rule
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class DashboardGetDashboardInfoTest {
+class IsBrightnessChangedTest {
     @get:Rule
     val composeRule = createDefaultUltronComposeRule()
-
     @Test
-    fun shouldUpdateTextAfterUserLoad() {
+    fun shouldUpdateBrightnessToMax() {
+        lateinit var activity: Activity
         composeRule.setContent {
             val context = LocalContext.current
+            activity = context as Activity
             DisposableEffect(Unit) {
-                val window = (context as Activity).window
-                val originalBrightness = window?.attributes?.screenBrightness ?: -1f
-
-                window?.attributes = window.attributes?.apply {
+                val window = activity.window
+                val originalBrightness = window.attributes.screenBrightness
+                window.attributes = window.attributes.apply {
                     screenBrightness = 1f
                 }
-
                 onDispose {
-                    window?.attributes = window.attributes?.apply {
+                    window.attributes = window.attributes.apply {
                         screenBrightness = originalBrightness
                     }
                 }
             }
-            val updatedBrightness = (context as Activity).window.attributes.screenBrightness
-            assertEquals(1f, updatedBrightness)
         }
+        composeRule.waitUntil(timeoutMillis = 2000) {
+            activity.window.attributes.screenBrightness == 1f
+        }
+        assertEquals(1f, activity.window.attributes.screenBrightness)
     }
 }

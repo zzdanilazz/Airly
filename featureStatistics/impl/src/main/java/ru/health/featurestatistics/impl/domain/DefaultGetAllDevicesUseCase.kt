@@ -9,7 +9,7 @@ import ru.health.featurestatistics.api.domain.GetAllDevicesUseCase
 import java.util.Date
 import javax.inject.Inject
 
-internal class DefaultGetAllDevicesUseCase @Inject constructor(
+class DefaultGetAllDevicesUseCase @Inject constructor(
     private val liquidRepository: LiquidRepository
 ) : GetAllDevicesUseCase {
 
